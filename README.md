@@ -14,7 +14,7 @@ The NoviCode evaluation dataset is hosted on HuggingFace Datasets. You can downl
 ```python
 from datasets import load_dataset
 
-dataset = load_dataset("asafam/NoviCode")
+dataset = load_dataset("biu-nlp/NoviCode")
 ```
 
 This dataset contains 150 examples of natural language descriptions and their corresponding unit tests. 
