@@ -62,7 +62,7 @@ program_code += test[:code_insert_idx]
 program_code += code
 program_code += "\n"
 program_code += test[code_insert_idx:]
-exec(program_code, context)
+exec(program_code)
 ```
 
 ## Citing
