@@ -1,0 +1,502 @@
+events_query:
+  - text: ${calendar_query_meetings}
+    code: ${calendar_query_meetings}
+    var: ${calendar_query_meetings:var}
+    type: query
+  - text: ${calendar_query_events}
+    code: ${calendar_query_events}
+    var: ${calendar_query_events:var}
+    type: query
+  - text: ${calendar_query_command}
+    code: ${calendar_query_command}
+    var: ${calendar_query_command:var}
+    type: query
+    weight: 0.25
+
+calendar_query_meetings:
+  - text: I have a meeting ${event_date_time}
+    code: |
+      ${event_date_time}
+      meetings = Calendar.find_events(date_time=${event_date_time:var})
+      ${calendar_query_meetings:var} = bool(meetings)
+    var: test_meetings
+    type: query
+  - text: I have a meeting on ${event_calendar} ${event_date_time}
+    code: |
+      ${event_calendar}
+      ${event_date_time}
+      meetings = Calendar.find_events(date_time=${event_date_time:var}, event_calendar=${event_calendar:var})
+      ${calendar_query_meetings:var} = bool(meetings)
+    var: test_meetings
+    type: query
+  - text: I have a meeting ${event_date_time} on ${event_calendar}
+    code: |
+      ${event_calendar}
+      ${event_date_time}
+      meetings = Calendar.find_events(date_time=${event_date_time:var}, event_calendar=${event_calendar:var})
+      ${calendar_query_meetings:var} = bool(meetings)
+    var: test_meetings
+    type: query
+
+calendar_query_events:
+  - text: ${calendar_query_event_names}
+    code: ${calendar_query_event_names}
+    var: ${calendar_query_event_names:var}
+
+calendar_query_event_names:
+  - text: there ${is|are} ${event_name}
+    code: |
+      ${event_name}
+      events = Calendar.find_events(event_name=${event_name:var})
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: there ${is|are} ${event_name} ${event_location}
+    code: |
+      ${event_name}
+      ${event_location}
+      events = Calendar.find_events(location=${event_location:var}, event_name=${event_name:var})
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: there ${is|are} ${event_name} ${event_date_time}
+    code: |
+      ${event_name}
+      ${event_date_time}
+      events = Calendar.find_events(date_time=${event_date_time:var}, event_name=${event_name:var})
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: there ${is|are} ${event_name} ${event_date_times}
+    code: |
+      ${event_name}
+      ${event_date_times}
+      events = []
+      for date_time in ${event_date_times:var}:
+        events += Calendar.find_events(date_time=date_time, event_name=${event_name:var})
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: there ${is|are} ${event_name} ${event_date_time} ${event_location}
+    code: |
+      ${event_name}
+      ${event_date_time}
+      ${event_location}
+      events = Calendar.find_events(date_time=${event_date_time:var}, location=${event_location:var}, event_name=${event_name:var})
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: there ${is|are} ${event_name} ${event_date_times} ${event_location}
+    code: |
+      ${event_name}
+      ${event_date_times}
+      ${event_location}
+      events = []
+      for date_time in ${event_date_times:var}:
+        events += Calendar.find_events(date_time=date_time, location=${event_location:var}, event_name=${event_name:var})
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: there are ${event_names} ${event_location}
+    code: |
+      ${event_names}
+      ${event_location}
+      events = []
+      for event_name in ${event_names:var}:
+        events += Calendar.find_events(location=${event_location:var}, event_name=event_name)
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: there are ${event_names} ${event_date_time} ${event_location}
+    code: |
+      ${event_names}
+      ${event_date_time}
+      ${event_location}
+      events = []
+      for event_name in ${event_names:var}:
+        events += Calendar.find_events(date_time=${event_date_time:var}, location=${event_location:var}, event_name=event_name)
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: there are ${event_names} ${event_date_times} ${event_location}
+    code: |
+      ${event_names}
+      ${event_date_times}
+      ${event_location}
+      events = []
+      for event_name in ${event_names:var}:
+        for date_time in ${event_date_times:var}:
+          events += Calendar.find_events(date_time=date_time, location=${event_location:var}, event_name=event_name)
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: there ${is|are} ${event_name} ${event_locations}
+    code: |
+      ${event_name}
+      ${event_locations}
+      events = []
+      for location in ${event_locations:var}:
+        events += Calendar.find_events(location=location, event_name=${event_name:var})
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: there ${is|are} ${event_name} ${event_date_time} ${event_locations}
+    code: |
+      ${event_name}
+      ${event_date_time}
+      ${event_locations}
+      events = []
+      for location in ${event_locations:var}:
+        events += Calendar.find_events(date_time=${event_date_time:var}, location=location, event_name=${event_name:var})
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: there ${is|are} ${event_name} ${event_date_times} ${event_locations}
+    code: |
+      ${event_name}
+      ${event_date_times}
+      ${event_locations}
+      events = []
+      for date_time in ${event_date_times:var}:
+        for location in ${event_locations:var}:
+          events += Calendar.find_events(date_time=date_time, location=location, event_name=${event_name:var})
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: there are ${event_names} ${event_locations}
+    code: |
+      ${event_names}
+      ${event_locations}
+      events = []
+      for event_name in ${event_names:var}:
+        for location in ${event_locations:var}:
+          events += Calendar.find_events(location=location, event_name=event_name)
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: there are ${event_names} ${event_date_time} ${event_locations}
+    code: |
+      ${event_names}
+      ${event_date_time}
+      ${event_locations}
+      events = []
+      for event_name in ${event_names:var}:
+        for location in ${event_locations:var}:
+          events += Calendar.find_events(date_time=${event_date_time:var}, location=location, event_name=event_name)
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: there are ${event_names} ${event_date_times} ${event_locations}
+    code: |
+      ${event_names}
+      ${event_date_times}
+      ${event_locations}
+      events = []
+      for event_name in ${event_names:var}:
+        for date_time in ${event_date_times:var}:
+          for location in ${event_locations:var}:
+            events += Calendar.find_events(date_time=date_time, location=location, event_name=event_name)
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_location} there ${is|are} ${event_name}
+    code: |
+      ${event_location}
+      ${event_name}
+      events = Calendar.find_events(location=${event_location:var}, event_name=${event_name:var})
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_date_time} there ${is|are} ${event_name}
+    code: |
+      ${event_date_time}
+      ${event_name}
+      events = Calendar.find_events(date_time=${event_date_time:var}, event_name=${event_name:var})
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_date_times}there ${is|are} ${event_name}
+    code: |
+      ${event_date_times}
+      ${event_name}
+      events = []
+      for date_time in ${event_date_times:var}:
+        events += Calendar.find_events(date_time=date_time, event_name=${event_name:var})
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_date_time} there ${is|are} ${event_name} ${event_location}
+    code: |
+      ${event_date_time}
+      ${event_name}
+      ${event_location}
+      events = Calendar.find_events(date_time=${event_date_time:var}, location=${event_location:var}, event_name=${event_name:var})
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_date_time} ${event_location} there ${is|are} ${event_name}
+    code: |
+      ${event_date_time}
+      ${event_location}
+      ${event_name}
+      events = Calendar.find_events(date_time=${event_date_time:var}, location=${event_location:var}, event_name=${event_name:var})
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_location} ${event_date_time} there ${is|are} ${event_name}
+    code: |
+      ${event_location}
+      ${event_date_time}
+      ${event_name}
+      events = Calendar.find_events(date_time=${event_date_time:var}, location=${event_location:var}, event_name=${event_name:var})
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_location} there ${is|are} ${event_name} ${event_date_time}
+    code: |
+      ${event_location}
+      ${event_name}
+      ${event_date_time}
+      events = Calendar.find_events(date_time=${event_date_time:var}, location=${event_location:var}, event_name=${event_name:var})
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_date_times} there ${is|are} ${event_name} ${event_location}
+    code: |
+      ${event_name}
+      ${event_date_times}
+      ${event_location}
+      events = []
+      for date_time in ${event_date_times:var}:
+        events += Calendar.find_events(date_time=date_time, location=${event_location:var}, event_name=${event_name:var})
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_location} there are ${event_names}
+    code: |
+      ${event_names}
+      ${event_location}
+      events = []
+      for event_name in ${event_names:var}:
+        events += Calendar.find_events(location=${event_location:var}, event_name=event_name)
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_date_time} ${event_location} there are ${event_names}
+    code: |
+      ${event_names}
+      ${event_date_time}
+      ${event_location}
+      events = []
+      for event_name in ${event_names:var}:
+        events += Calendar.find_events(date_time=${event_date_time:var}, location=${event_location:var}, event_name=event_name)
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_location} ${event_date_time} there are ${event_names}
+    code: |
+      ${event_names}
+      ${event_date_time}
+      ${event_location}
+      events = []
+      for event_name in ${event_names:var}:
+        events += Calendar.find_events(date_time=${event_date_time:var}, location=${event_location:var}, event_name=event_name)
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_date_times} ${event_location} there are ${event_names}
+    code: |
+      ${event_names}
+      ${event_date_times}
+      ${event_location}
+      events = []
+      for event_name in ${event_names:var}:
+        for date_time in ${event_date_times:var}:
+          events += Calendar.find_events(date_time=date_time, location=${event_location:var}, event_name=event_name)
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_location} ${event_date_times} there are ${event_names}
+    code: |
+      ${event_names}
+      ${event_date_times}
+      ${event_location}
+      events = []
+      for event_name in ${event_names:var}:
+        for date_time in ${event_date_times:var}:
+          events += Calendar.find_events(date_time=date_time, location=${event_location:var}, event_name=event_name)
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_location} there are ${event_names} ${event_date_times}
+    code: |
+      ${event_names}
+      ${event_date_times}
+      ${event_location}
+      events = []
+      for event_name in ${event_names:var}:
+        for date_time in ${event_date_times:var}:
+          events += Calendar.find_events(date_time=date_time, location=${event_location:var}, event_name=event_name)
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_date_times} there are ${event_names} ${event_location}
+    code: |
+      ${event_names}
+      ${event_date_times}
+      ${event_location}
+      events = []
+      for event_name in ${event_names:var}:
+        for date_time in ${event_date_times:var}:
+          events += Calendar.find_events(date_time=date_time, location=${event_location:var}, event_name=event_name)
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_locations} there ${is|are} ${event_name}
+    code: |
+      ${event_name}
+      ${event_locations}
+      events = []
+      for location in ${event_locations:var}:
+        events += Calendar.find_events(location=location, event_name=${event_name:var})
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_date_time} there ${is|are} ${event_name} ${event_locations}
+    code: |
+      ${event_name}
+      ${event_date_time}
+      ${event_locations}
+      events = []
+      for location in ${event_locations:var}:
+        events += Calendar.find_events(date_time=${event_date_time:var}, location=location, event_name=${event_name:var})
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_date_times} there ${is|are} ${event_name} ${event_locations}
+    code: |
+      ${event_name}
+      ${event_date_times}
+      ${event_locations}
+      events = []
+      for date_time in ${event_date_times:var}:
+        for location in ${event_locations:var}:
+          events += Calendar.find_events(date_time=date_time, location=location, event_name=${event_name:var})
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_locations} there are ${event_names}
+    code: |
+      ${event_names}
+      ${event_locations}
+      events = []
+      for event_name in ${event_names:var}:
+        for location in ${event_locations:var}:
+          events += Calendar.find_events(location=location, event_name=event_name)
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_date_time} there are ${event_names} ${event_locations}
+    code: |
+      ${event_names}
+      ${event_date_time}
+      ${event_locations}
+      events = []
+      for event_name in ${event_names:var}:
+        for location in ${event_locations:var}:
+          events += Calendar.find_events(date_time=${event_date_time:var}, location=location, event_name=event_name)
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_date_time} ${event_locations} there are ${event_names}
+    code: |
+      ${event_names}
+      ${event_date_time}
+      ${event_locations}
+      events = []
+      for event_name in ${event_names:var}:
+        for location in ${event_locations:var}:
+          events += Calendar.find_events(date_time=${event_date_time:var}, location=location, event_name=event_name)
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_date_times} there are ${event_names} ${event_locations}
+    code: |
+      ${event_names}
+      ${event_date_times}
+      ${event_locations}
+      events = []
+      for event_name in ${event_names:var}:
+        for date_time in ${event_date_times:var}:
+          for location in ${event_locations:var}:
+            events += Calendar.find_events(date_time=date_time, location=location, event_name=event_name)
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_locations} there are ${event_names} ${event_date_times}
+    code: |
+      ${event_names}
+      ${event_date_times}
+      ${event_locations}
+      events = []
+      for event_name in ${event_names:var}:
+        for date_time in ${event_date_times:var}:
+          for location in ${event_locations:var}:
+            events += Calendar.find_events(date_time=date_time, location=location, event_name=event_name)
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_date_times} ${event_locations} there are ${event_names}
+    code: |
+      ${event_names}
+      ${event_date_times}
+      ${event_locations}
+      events = []
+      for event_name in ${event_names:var}:
+        for date_time in ${event_date_times:var}:
+          for location in ${event_locations:var}:
+            events += Calendar.find_events(date_time=date_time, location=location, event_name=event_name)
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+  - text: ${event_locations} ${event_date_times} there are ${event_names}
+    code: |
+      ${event_names}
+      ${event_date_times}
+      ${event_locations}
+      events = []
+      for event_name in ${event_names:var}:
+        for date_time in ${event_date_times:var}:
+          for location in ${event_locations:var}:
+            events += Calendar.find_events(date_time=date_time, location=location, event_name=event_name)
+      ${calendar_query_event_names:var} = bool(events)
+    var: test_events
+    type: query
+
+calendar_query_tickets:
+  - text: ${calendar_command_query_tickets_item}
+    code: |
+      ${calendar_command_query_tickets_item}
+      ${calendar_query_tickets:var} = bool(${calendar_command_query_tickets_item:var})
+    var: test_tickets
+
+calendar_query_command:
+  - text: ${calendar_command_event_find} and if there are
+    code: |
+      ${calendar_command_event_find}
+      ${calendar_query_command:var} = bool(${calendar_command_event_find:var})
+    var: test_event
+  - text: ${calendar_command_event_find} and if there are any ${event_date_time}
+    code: |
+      ${calendar_command_event_find}
+      ${event_date_time}
+      ${calendar_command_event_find:var} = utils.filter(${calendar_command_event_find:var}, date_time=${event_date_time:var})
+      ${calendar_query_command:var} = bool(${calendar_command_event_find:var})
+    var: test_event
+  - text: ${calendar_command_event_find} and if there are any ${event_location}
+    code: |
+      ${calendar_command_event_find}
+      ${event_location}
+      ${calendar_command_event_find:var} = utils.filter(${calendar_command_event_find:var}, location=${event_location:var})
+      ${calendar_query_command:var} = bool(${calendar_command_event_find:var})
+    var: test_event

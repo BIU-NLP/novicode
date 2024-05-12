@@ -1,0 +1,113 @@
+directions_action:
+  - ${get|show|show me|tell me|display} ${the|} ${directions|route}
+
+distance:
+  - text: ${faker_random_int} ${miles|kilometers}
+    code: ${distance:var} = NavigationDistanceEntity.resolve_from_text("${faker_random_int} ${miles|kilometers}")
+    var: distance
+
+duration:
+  - text: ${faker_random_int} ${minutes|hours}
+    code: ${duration:var} = NavigationDurationEntity.resolve_from_text("${faker_random_int} ${minutes|hours}")
+    var: duration
+
+destination:
+  - text: ${to_location}
+    code: ${to_location}
+    var: destination
+    coreference_value:
+      - value: to there
+
+origin:
+  - text: ${from_location}
+    code: ${from_location}
+    var: origin
+    coreference_value:
+      - value: from there
+
+traffic_location:
+  - text: ${location_proximity}
+    code: ${location_proximity}
+    var: location
+    coreference_value:
+      - value: there
+  - text: ${near_location}
+    code: ${near_location}
+    var: location
+    coreference_value:
+      - value: there
+  - text: in ${location_path}
+    code: ${location_path}
+    var: location
+    coreference_value:
+      - value: there
+
+nav_road_condition:
+  - text: ${nav_road_condition_term}
+    code: |
+      ${nav_road_condition:var} = NavigationRoadCondition.resolve_from_text("${nav_road_condition_term}")
+    var: nav_road_condition
+    type: nav_road_condition
+
+nav_road_conditions:
+  - text: ${nav_road_condition_term.1} or ${nav_road_condition_term.2}
+    code: |
+      ${nav_road_conditions:var} = NavigationRoadCondition.resolve_many_from_text("${nav_road_condition_term.1} or ${nav_road_condition_term.2}")
+    var: nav_road_conditions
+    type: nav_road_conditions
+
+nav_road_condition_term:
+  - traffic
+  - traffic jam
+  - construction
+
+time_duration:
+  - text: ${time_duration_value}
+    code: |
+      ${time_duration:var} = TimeDuration.resolve_from_text("${time_duration_value}")
+    var: time_duration
+
+time_duration_value:
+  - over an hour
+  - 15 minutes
+  - 30 minutes
+  - 45 minutes
+  - half an hour
+  - an hour and a half
+
+arrival_date_time:
+  - text: ${navigation_date_time}
+    code: ${navigation_date_time}
+    var: arrival_date_time
+
+departure_date_time:
+  - text: ${navigation_date_time}
+    code: ${navigation_date_time}
+    var: departure_date_time
+
+departure_date_times:
+  - text: ${navigation_date_times}
+    code: ${navigation_date_times}
+    var: departure_date_times
+
+navigation_date_time:
+  - text: ${before_date_time}
+    code: ${before_date_time}
+    var: date_time
+  - text: ${after_date_time}
+    code: ${after_date_time}
+    var: date_time
+  - text: ${at_date_time}
+    code: ${at_date_time}
+    var: date_time
+
+navigation_date_times:
+  - text: ${before_date_times}
+    code: ${before_date_times}
+    var: date_times
+  - text: ${after_date_times}
+    code: ${after_date_times}
+    var: date_times
+  - text: ${at_date_times}
+    code: ${at_date_times}
+    var: date_times

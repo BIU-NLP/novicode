@@ -1,0 +1,41 @@
+home_query:
+  - text: ${home_query_device}
+    code: ${home_query_device}
+    var: ${home_query_device:var}
+    type: query
+
+home_query_device:
+  - text: ${home_device_temperature_name} is ${home_device_temperature_action} to ${home_device_temperature_value}
+    code: |
+      ${home_device_temperature_name}
+      ${home_device_temperature_action}
+      ${home_device_temperature_value}
+      home_devices = SmartHome.find_home_devices(device_action=${home_device_temperature_action:var}, device_name=${home_device_temperature_name:var}, device_value=${home_device_temperature_value:var})
+      ${home_query_device:var} = bool(home_devices)
+    var: test_home_device
+  - text: ${home_device_temperature_name} is ${home_device_temperature_action} to ${home_device_temperature_value} ${home_device_date_time}
+    code: |
+      ${home_device_temperature_name}
+      ${home_device_temperature_action}
+      ${home_device_temperature_value}
+      ${home_device_date_time}
+      home_devices = SmartHome.find_home_devices(device_action=${home_device_temperature_action:var}, device_name=${home_device_temperature_name:var}, device_value=${home_device_temperature_value:var}, date_time=${home_device_date_time:var})
+      ${home_query_device:var} = bool(home_devices)
+    var: test_home_device
+  - text: ${home_device_states_name} is ${home_device_states_action} to ${home_device_states_value}
+    code: |
+      ${home_device_states_name}
+      ${home_device_states_action}
+      ${home_device_states_value}
+      home_devices = SmartHome.find_home_devices(device_action=${home_device_states_action:var}, device_name=${home_device_states_name:var}, device_value=${home_device_states_value:var})
+      ${home_query_device:var} = bool(home_devices)
+    var: test_home_device
+  - text: ${home_device_states_name} is ${home_device_states_action} to ${home_device_states_value} ${home_device_date_time}
+    code: |
+      ${home_device_states_name}
+      ${home_device_states_action}
+      ${home_device_states_value}
+      ${home_device_date_time}
+      home_devices = SmartHome.find_home_devices(device_action=${home_device_states_action:var}, device_name=${home_device_states_name:var}, device_value=${home_device_states_value:var}, date_time=${home_device_date_time:var})
+      ${home_query_device:var} = bool(home_devices)
+    var: test_home_device

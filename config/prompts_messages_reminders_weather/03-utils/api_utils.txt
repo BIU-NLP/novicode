@@ -1,0 +1,19 @@
+"""
+utils.api_utils
+"""
+
+
+def first(a: Iterable[T], n: Optional[int] = 1) -> Union[T, List[T]]:
+    pass
+
+
+def last(a: Iterable[T], n: Optional[int] = 1) -> Union[T, List[T]]:
+    pass
+
+
+def sort(a: Iterable[T], text: str) -> Iterable[T]:
+    pass
+
+
+def filter(a: Iterable[T], **kwargs) -> Iterable[T]:
+    pass

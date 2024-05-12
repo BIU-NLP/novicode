@@ -1,0 +1,48 @@
+cc:
+  - text: and
+    code: and
+    format: False
+  - text: or
+    code: or
+    format: False
+
+neg:
+  - text: not
+    code: not
+    weight: 0.1
+
+quantifier\((.+)\):
+  # quantifier:
+  - text: all $nmod_poss $obj
+    code: $var
+  - text: $nmod_poss $det first $obj
+    code: first($var)
+    syn:
+      num: "sg"
+  - text: $nmod_poss $det first ${numbers} $var
+    code: first($var, ${numbers})
+  - text: $nmod_poss $det last $obj
+    code: last($var)
+    syn:
+      num: "sg"
+  - text: $nmod_poss $det last ${numbers} $obj
+    code: last($var, ${numbers})
+  - text: any of $det ${numbers} $modifier $obj
+    code: list(sorted($var, Modifier.resolve_from_text("$modifier"))))[:${numbers}]
+    weight: 0
+
+numbers:
+  - text: two
+    code: 2
+  - text: three
+    code: 3
+
+query_command_verb:
+  - check
+  - confirm
+  - find
+  - let me know
+  - tell me
+  - see
+  - show
+  - show me

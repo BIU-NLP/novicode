@@ -1,0 +1,37 @@
+class Weather(Action):
+    """
+    The Weather class contains all the methods of a virtual assistant agent in the weather domain.
+    """
+    
+    @classmethod
+    def find_weather_forecasts(
+        cls,
+        date_time: Optional[Union[DateTime, List[DateTime]]] = None,
+        location: Optional[Location] = None,
+        weather_attribute: Optional[WeatherAttribute] = None,
+        weather_temperature: Optional[WeatherTemperature] = None,
+    ) -> List[WeatherForecastEntity]:
+        """
+        This class method find weather forecasts based on the given parameters.
+
+
+        Parameters
+        ----------
+        date_time : DateTime, optional
+            The date and time to forecast the weather at
+        location : Location, optional
+            The location to forecast the weather at
+        weather_attribute : WeatherAttribute, optional
+            This parameter can be used to filter the weather forecast on a specific weather attribute
+        weather_temperature : WeatherTemperature, optional
+            The weather temperature to forecast (e.g., less than 80 degrees)
+            This parameter can be used to filter the weather forecast on a specific weather termperature
+            
+        Returns
+        -------
+        List[WeatherForecastEntity]
+            The list of weather forecasts that were found
+        """
+        pass
+
+

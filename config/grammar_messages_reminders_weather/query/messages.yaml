@@ -1,0 +1,135 @@
+messages_query:
+  - text: ${messages_query_simple}
+    code: ${messages_query_simple}
+    var: ${messages_query_simple:var}
+    type: query
+  - text: ${messages_query_command}
+    code: ${messages_query_command}
+    var: ${messages_query_command:var}
+    type: query
+    weight: 0.25
+
+messages_query_simple:
+  - text: ${contact_i} ${messages_possession_verb} ${a message|an email} from ${sender}
+    code: |
+      ${contact_i}
+      ${sender}
+      messages = Messages.find_messages(recipient=${contact_i:var}, sender=${sender:var})
+      ${messages_query_simple:var} = bool(messages)
+    var: test_messages
+    type: query
+  - text: ${contact_i} ${messages_possession_verb} ${a message|an email} from ${sender} ${past_date_time}
+    code: |
+      ${contact_i}
+      ${sender}
+      ${past_date_time}
+      messages = Messages.find_messages(recipient=${contact_i:var}, sender=${sender:var}, date_time=${past_date_time:var})
+      ${messages_query_simple:var} = bool(messages)
+    var: test_messages
+    type: quer
+  - text: ${contact_i} ${messages_possession_verb} ${a message|an email} from ${senders}
+    code: |
+      ${contact_i}
+      ${senders}
+      messages = []
+      for sender in ${senders:var}:
+        messages += Messages.find_messages(recipient=${contact_i:var}, sender=sender)
+      ${messages_query_simple:var} = bool(messages)
+    var: test_messages
+    type: query
+  - text: ${contact_i} ${messages_possession_verb} ${a message|an email} from ${senders} ${past_date_time}
+    code: |
+      ${contact_i}
+      ${senders}
+      ${past_date_time}
+      messages = []
+      for sender in ${senders:var}:
+        messages += Messages.find_messages(date_time=${past_date_time:var}, recipient=${contact_i:var}, sender=sender)
+      ${messages_query_simple:var} = bool(messages)
+    var: test_messages
+    type: query
+  - text: ${contact_i} ${messages_possession_verb} ${a message|an email} from ${sender} ${past_date_times}
+    code: |
+      ${contact_i}
+      ${sender}
+      ${past_date_times}
+      messages = []
+      for date_time in ${past_date_times:var}:
+        messages += Messages.find_messages(date_time=date_time, recipient=${contact_i:var}, sender=${sender:var})
+      ${messages_query_simple:var} = bool(messages)
+    var: test_messages
+    type: query
+  - text: ${contact_i} ${messages_possession_verb} ${a message|an email} from ${senders} ${past_date_times}
+    code: |
+      ${contact_i}
+      ${senders}
+      ${past_date_times}
+      messages = []
+      for sender in ${senders:var}:
+        for date_time in ${past_date_times:var}:
+          messages += Messages.find_messages(date_time=date_time, recipient=${contact_i:var}, sender=sender)
+      ${messages_query_simple:var} = bool(messages)
+    var: test_messages
+    type: query
+  - text: ${contact_i} ${messages_possession_verb} ${a message|an email} from ${sender} ${that|which} includes ${message_content_attachment}
+    code: |
+      ${contact_i}
+      ${sender}
+      ${message_content_attachment}
+      messages = Messages.find_messages(recipient=${contact_i:var}, sender=${sender:var}, content=${message_content_attachment:var})
+      ${messages_query_simple:var} = bool(messages)
+    var: test_messages
+    type: query
+  - text: ${contact_i} ${messages_possession_verb} ${a message|an email} ${that|which} includes ${message_content_attachment}
+    code: |
+      ${contact_i}
+      ${message_content_attachment}
+      messages = Messages.find_messages(recipient=${contact_i:var}, content=${message_content_attachment:var})
+      ${messages_query_simple:var} = bool(messages)
+    var: test_messages
+    type: query
+  - text: ${contact_i} ${messages_possession_verb} ${message_content_attachment} from ${sender}
+    code: |
+      ${contact_i}
+      ${message_content_attachment}
+      ${sender}
+      messages = Messages.find_messages(recipient=${contact_i:var}, sender=${sender:var}, content=${message_content_attachment:var})
+      ${messages_query_simple:var} = bool(messages)
+    var: test_messages
+    type: query
+  - text: ${contact_i} ${messages_possession_verb} ${message_content_attachment}
+    code: |
+      ${contact_i}
+      ${message_content_attachment}
+      messages = Messages.find_messages(recipient=${contact_i:var}, content=${message_content_attachment:var})
+      ${messages_query_simple:var} = bool(messages)
+    var: test_messages
+    type: query
+
+messages_query_command:
+  - text: ${reminders_command_find} and there are
+    code: |
+      ${reminders_command_find}
+      ${messages_query_command:var} = bool(reminders)
+    var: test_reminders
+  - text: ${reminders_command_find} and any is saying ${reminder_content}
+    code: |
+      ${reminders_command_find}
+      ${reminder_content}
+      ${reminders_command_find:var} = utils.filter(${reminders_command_find:var}, content=${reminder_content:var})
+      ${messages_query_command:var} = bool(reminders)
+    var: test_reminders
+  - text: ${reminders_command_find} and any is from ${sender}
+    code: |
+      ${reminders_command_find}
+      ${sender}
+      ${reminders_command_find:var} = utils.filter(${reminders_command_find:var}, sender=${sender:var})
+      ${messages_query_command:var} = bool(reminders)
+    var: test_reminders
+  - text: ${reminders_command_find} and any is to ${recipient}
+    code: |
+      ${reminders_command_find}
+      ${recipient}
+      ${reminders_command_find:var} = utils.filter(${reminders_command_find:var}, recipient=${recipient:var})
+      ${messages_query_command:var} = bool(reminders)
+    var: test_reminders

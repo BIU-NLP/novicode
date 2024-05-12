@@ -1,0 +1,16 @@
+from typing import Optional, List
+from entities.entity import Entity
+
+
+class MapEntity(Entity):
+    """
+    The MapEntity class is used to represent a place on a map. A typical map entity
+    is a place on the map, such as a restaurant, a hotel, a museum, etc. It can also include
+    additional information like the open times, the phone number, the website, etc.
+    It should not be confused with the Location class, which is used to represent the physical attributes of a location.
+    Location in face is an attribute of the MapEntity class.
+    The MapEntity is returned by the find_on_map method in the Map action class.
+    It inherits from the Entity class.
+    """
+
+    pass

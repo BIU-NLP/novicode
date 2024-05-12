@@ -1,0 +1,37 @@
+class EventName(Entity, Resolvable):
+    """
+    This class is used to represent an event name. An event name can be a specific name or a generic name.
+    It can also be a private event name. For example, "my birthday party" or "the meeting". It can be a 
+    public domain event like "the super bowl".
+    It inherits from the Entity class and the Resolvable class.
+    """
+
+    pass
+
+
+class EventCalendar(Entity, Resolvable):
+    """
+    This class is used to represent an event calendar. For example, "my personal calendar" or "my work calendar".
+    An event calendar can be a specific calendar to schedule an event on, or to find events in.
+    It inherits from the Entity class and the Resolvable class.
+    """
+
+    pass
+
+
+class EventEntity(Entity):
+    """
+    This class is used to represent an event. It is returned by the find_events method.
+    
+    """
+
+    pass
+
+
+class EventTicketEntity(Entity):
+    """
+    This class is used to represent an event ticket. It is returned by the find_event_tickets method.
+    
+    """
+
+    pass

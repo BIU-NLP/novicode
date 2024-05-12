@@ -1,0 +1,146 @@
+contact:
+  - text: ${name}
+    code: |
+      ${contact:var} = Contact.resolve_from_text("${name}")
+    var: contact
+    type: contact
+    coreference_value:
+      - value: him
+        gend: masc
+        num: sg
+        form: poss
+      - value: he
+        gend: masc
+        num: sg
+        form: subj
+      - value: her
+        gend: fem
+        num: sg
+        form: poss
+      - value: she
+        gend: fem
+        num: sg
+        form: subj
+      - value: them
+        num: pl
+        form: poss
+      - value: they
+        num: pl
+        form: subj
+
+contacts:
+  - text: ${group}
+    code: |
+      ${contacts:var} = Contact.resolve_many_from_text("${group}")
+    var: contacts
+    type: contact
+    syn:
+      num: pl
+    coreference_value:
+      - value: him
+        gend: masc
+        num: sg
+        form: poss
+      - value: he
+        gend: masc
+        num: sg
+        form: subj
+      - value: her
+        gend: fem
+        num: sg
+        form: poss
+      - value: she
+        gend: fem
+        num: sg
+        form: subj
+      - value: them
+        num: pl
+        form: poss
+      - value: they
+        num: pl
+        form: subj
+
+contact_me:
+  - text: me
+    code: |
+      ${contact_me:var} = Contact.resolve_from_text("me")
+    var: contact
+    type: contact
+    coreference_value: 
+      - value: me
+
+
+contact_my:
+  - text: my
+    code: |
+      ${contact_my:var} = Contact.resolve_from_text("my")
+    var: contact
+    type: contact
+
+contact_i:
+  - text: I
+    code: |
+      ${contact_i:var} = Contact.resolve_from_text("I")
+    var: contact
+    type: contact
+
+name:
+  - ${full_name_male}
+  - ${first_name_male}
+  - ${full_name_female}
+  - ${first_name_female}
+
+full_name_male:
+  - text: ${faker_first_name_male} ${faker_last_name}
+    code: ${faker_first_name_male} ${faker_last_name}
+    syn:
+      gend: masc
+      num: sg
+
+full_name_female:
+  - text: ${faker_first_name_female} ${faker_last_name}
+    code: ${faker_first_name_female} ${faker_last_name}
+    syn:
+      gend: fem
+      num: sg
+
+first_name_male:
+  - text: ${faker_first_name_male}
+    code: ${faker_first_name_male}
+    syn:
+      gend: masc
+      num: sg
+
+first_name_female:
+  - text: ${faker_first_name_female}
+    code: ${faker_first_name_female}
+    syn:
+      gend: fem
+      num: sg
+
+group:
+  - everyone in my family
+  - my ${family}
+  - ${all|both} my ${family}
+  - my ${team}
+  - ${everyone|everybody} in my ${team}
+  - ${everyone|everybody} in ${geo_team}
+  - ${everyone|everybody} in my book club
+  - ${everyone|everybody} in my chess club
+  - ${everyone|everybody} in my building
+  - my softball team
+
+family:
+  - parents
+  - sisters
+  - brothers
+
+team:
+  - team
+  - softball team
+  - chess club
+  - book club
+
+geo_team:
+  - office
+  - building

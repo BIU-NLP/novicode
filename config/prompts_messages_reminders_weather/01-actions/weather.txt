@@ -1,0 +1,18 @@
+"""
+actions.weather
+"""
+
+
+class Weather(Action):
+    
+    @classmethod
+    def find_weather_forecasts(
+        cls,
+        date_time: Optional[Union[DateTime, List[DateTime]]] = None,
+        location: Optional[Location] = None,
+        weather_attribute: Optional[WeatherAttribute] = None,
+        weather_temperature: Optional[WeatherTemperature] = None,
+    ) -> List[WeatherForecastEntity]:
+        pass
+
+

@@ -1,0 +1,129 @@
+query:
+  # messages
+  - text: ${messages_query}
+    code: ${messages_query}
+    var: ${messages_query:var}
+  # reminders
+  - text: ${reminders_query}
+    code: ${reminders_query}
+    var: ${reminders_query:var}
+  # weather
+  - text: ${weather_query}
+    code: ${weather_query}
+    var: ${weather_query:var}
+
+command_query:
+  # messages
+  - text: ${messages_command_query}
+    code: ${messages_command_query}
+    var: ${messages_command_query:var}
+  # reminders
+  - text: ${reminders_command_query}
+    code: ${reminders_command_query}
+    var: ${reminders_command_query:var}
+  # weather
+  - text: ${weather_command_query}
+    code: ${weather_command_query}
+    var: ${weather_command_query:var}
+
+condition:
+  - text: ${condition_query} ${command}
+    code: |
+      ${condition_query}
+        ${command}
+  - text: ${condition_negative_query}, ${command}
+    code: |
+      ${condition_negative_query}
+        ${command}
+  - text: ${command}, ${condition_query}
+    code: |
+      ${condition_query}
+        ${command}
+  - text: ${command}, ${condition_negative_query}
+    code: |
+      ${condition_negative_query}
+        ${command}
+  - text: ${condition_command_query}, ${command} if so
+    code: |
+      ${condition_command_query}
+        ${command}
+  - text: ${condition_query.1} ${command}, ${condition_query.2}
+    code: |
+      ${condition_query.1}
+        ${condition_query.2}
+          ${command}
+    weight: 0.1
+  - text: ${condition_query} ${command},${condition_negative_query}
+    code: |
+      ${condition_query}
+        ${condition_negative_query}
+          ${command}
+    weight: 0.1
+  - text: ${condition_negative_query} ${command}, ${condition_query}
+    code: |
+      ${condition_negative_query}
+        ${condition_query}
+          ${command}
+    weight: 0.1
+  - text: ${condition_negative_query.1} ${command}, ${condition_negative_query.2}
+    code: |
+      ${condition_negative_query.1}
+        ${condition_negative_query.2}
+          ${command}
+    weight: 0.1
+
+condition_query:
+  - text: ${condition_term} ${query}
+    code: |
+      ${query}
+
+      if ${condition_query:var}:
+    var: ${query:var}
+    type: query
+  - text: ${condition_term} ${query.1} ${cc} ${query.2}
+    code: |
+      ${query.1}
+      ${query.2}
+      ${condition_query:var} = ${query.1:var} ${cc} ${query.2:var}
+      if ${condition_query:var}:
+    var: test
+    type: query
+    weight: 0.25
+
+condition_negative_query:
+  - text: ${condition_negative_term} ${query}
+    code: |
+      ${query}
+
+      if not ${condition_negative_query:var}:
+    var: ${query:var}
+    type: query
+  - text: ${condition_negative_term} ${query.1} ${cc} ${query.2}
+    code: |
+      ${query.1}
+      ${query.2}
+      ${condition_negative_query:var} = ${query.1:var} ${cc} ${query.2:var}
+      if not ${condition_negative_query:var}:
+    var: test
+    type: query
+    weight: 0.25
+
+condition_command_query:
+  - text: ${command_query}
+    code: |
+      ${command_query}
+      if ${command_query:var}:
+    var: ${command_query:var}
+    type: query
+
+condition_term:
+  - assuming ${that|}
+  - given ${that|}
+  - if
+  - in case ${that|}
+  - in the event ${that|}
+  - provided ${that|}
+
+condition_negative_term:
+  - unless ${that|}
+  - if not 

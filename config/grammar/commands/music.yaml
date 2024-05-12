@@ -1,0 +1,63 @@
+music_play_command:
+  - text: play ${song}
+    code: |
+      ${song}
+      Music.play_music(song=${song:var})
+  - text: play ${songs}
+    code: |
+      ${songs}
+      for song in ${songs:var}:
+        Music.play_music(song=song)
+  - text: play ${all|any} ${artist} ${songs|playlist}
+    code: |
+      ${artist}
+      Music.play_music(artist=${artist:var})
+  - text: play ${songs by|} ${artist}
+    code: |
+      ${artist}
+      Music.play_music(artist=${artist:var})
+  - text: play ${songs by|} ${artists}
+    code: |
+      ${artists}
+      for artist in ${artists:var}:
+        Music.play_music(artist=artist)
+  - text: play ${genre} $songs
+    code: |
+      ${genre}
+      Music.play_music(genre=${genre:var})
+  - text: play my ${genre} playlist
+    code: |
+      ${genre}
+      Music.play_music(genre=${genre:var})
+  - text: play ${genres} songs
+    code: |
+      ${genres}
+      for genre in ${genres:var}:
+        Music.play_music(genre=genre)
+  - text: play ${songs}
+    code: |
+      ${songs}
+      for song in ${songs:var}:
+        Music.play_music(song=song)
+  - text: play ${all|any} ${artist} songs
+    code: |
+      ${artist}
+      Music.play_music(artist=${artist:var})
+  - text: play songs by ${artist}
+    code: |
+      ${artist}
+      Music.play_music(artist=${artist:var})
+  - text: play songs by ${artists}
+    code: |
+      ${artists}
+      for artist in ${artists:var}:
+        Music.play_music(artist=artist)
+  - text: play ${genre} songs
+    code: |
+      ${genre}
+      Music.play_music(genre=${genre:var})
+  - text: play ${genres} songs
+    code: |
+      ${genres}
+      for genre in ${genres:var}:
+        Music.play_music(genre=genre)

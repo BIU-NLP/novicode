@@ -1,0 +1,24 @@
+"""
+entities.resolvable
+"""
+
+
+class Resolvable(Generic[T]):
+
+    # @exception_handler
+    @classmethod
+    def resolve_from_text(T, text: str) -> T:
+        pass
+
+    @classmethod
+    def resolve_many_from_text(T, text: str) -> List[T]:
+        pass
+
+    # @exception_handler
+    @classmethod
+    def resolve_from_entity(
+        T,
+        entity: Union[Entity, List[Entity]],
+        text: Optional[str] = None,
+    ) -> T:
+        pass

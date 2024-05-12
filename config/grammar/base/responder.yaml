@@ -1,0 +1,7 @@
+responder_command:
+  - text: ${responder_query}
+    code: |
+      ${responder_query}
+      Responder.respond(response=${responder_query:var})
+responder_query:
+  - ${navigation_directions_query}

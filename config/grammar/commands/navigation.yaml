@@ -1,0 +1,612 @@
+navigation_command:
+  - ${navigation_command_directions}
+  - ${navigation_command_duration}
+  - ${navigation_command_estimate_arrival}
+  - ${navigation_command_estimate_departure}
+  - ${navigation_command_traffic_info}
+
+navigation_command_sequence:
+  - ${navigation_command_sequence_directions}
+  - ${navigation_command_sequence_duration}
+  - ${navigation_command_sequence_estimate_arrival}
+  - ${navigation_command_sequence_estimate_departure}
+
+navigation_result_command:
+  - text: ${navigation_command_directions}
+    code: ${navigation_command_directions}
+    var: ${navigation_command_directions:var}
+  - text: ${navigation_command_duration}
+    code: ${navigation_command_duration}
+    var: ${navigation_command_duration:var}
+  - text: ${navigation_command_estimate_arrival}
+    code: ${navigation_command_estimate_arrival}
+    var: ${navigation_command_estimate_arrival:var}
+  - text: ${navigation_command_estimate_departure}
+    code: ${navigation_command_estimate_departure}
+    var: ${navigation_command_estimate_departure:var}
+
+navigation_param_result_command:
+  - text: ${map_result_command}
+    code: ${map_result_command}
+    var: ${map_result_command:var}
+
+navigation_command_directions:
+  - text: ${directions_action} ${origin} ${destination}
+    code: |
+      ${origin}
+      ${destination}
+      ${navigation_command_directions:var} = Navigation.find_directions(origin=${origin:var}, destination=${destination:var})
+      Responder.respond(response=${navigation_command_directions:var})
+    var: directions
+  - text: ${directions_action} ${destination} ${origin}
+    code: |
+      ${origin}
+      ${destination}
+      ${navigation_command_directions:var} = Navigation.find_directions(origin=${origin:var}, destination=${destination:var})
+      Responder.respond(response=${navigation_command_directions:var})
+    var: directions
+  - text: ${directions_action} ${destination}
+    code: |
+      ${origin}
+      ${destination}
+      ${navigation_command_directions:var} = Navigation.find_directions(destination=${destination:var})
+      Responder.respond(response=${navigation_command_directions:var})
+    var: directions
+  - text: ${directions_action} ${origin} ${destination} ${if I leave|} ${at_date_time}
+    code: |
+      ${origin}
+      ${destination}
+      ${at_date_time}
+      ${navigation_command_directions:var} = Navigation.find_directions(origin=${origin:var}, destination=${destination:var}, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_directions:var})
+    var: directions
+  - text: ${directions_action} ${destination} ${origin} ${if I leave|} ${at_date_time}
+    code: |
+      ${origin}
+      ${destination}
+      ${at_date_time}
+      ${navigation_command_directions:var} = Navigation.find_directions(origin=${origin:var}, destination=${destination:var}, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_directions:var})
+    var: directions
+  - text: ${directions_action} ${destination} ${if I leave|} ${at_date_time}
+    code: |
+      ${origin}
+      ${destination}
+      ${at_date_time}
+      ${navigation_command_directions:var} = Navigation.find_directions(destination=${destination:var}, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_directions:var})
+    var: directions
+
+navigation_command_sequence_directions:
+  - text: ${navigation_param_result_command} and ${directions_action} ${origin} to there
+    code: |
+      ${navigation_param_result_command}
+      ${origin}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${navigation_command_sequence_directions:var} = Navigation.find_directions(origin=${origin:var}, destination=destination)
+      Responder.respond(response=${navigation_command_sequence_directions:var})
+    var: directions
+  - text: ${navigation_param_result_command} and ${directions_action} to there ${origin}
+    code: |
+      ${navigation_param_result_command}
+      ${origin}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${navigation_command_sequence_directions:var} = Navigation.find_directions(origin=${origin:var}, destination=destination)
+      Responder.respond(response=${navigation_command_sequence_directions:var})
+    var: directions
+  - text: ${navigation_param_result_command} and ${directions_action} from there ${destination}
+    code: |
+      ${navigation_param_result_command}
+      origin = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${destination}
+      ${navigation_command_sequence_directions:var} = Navigation.find_directions(origin=origin, destination=${destination:var})
+      Responder.respond(response=${navigation_command_sequence_directions:var})
+    var: directions
+  - text: ${navigation_param_result_command} and ${directions_action} ${destination} from there
+    code: |
+      ${navigation_param_result_command}
+      origin = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${destination}
+      ${navigation_command_sequence_directions:var} = Navigation.find_directions(origin=origin, destination=${destination:var})
+      Responder.respond(response=${navigation_command_sequence_directions:var})
+    var: directions
+  - text: ${navigation_param_result_command} and ${directions_action} ${origin} to there ${if I leave|} ${at_date_time}
+    code: |
+      ${navigation_param_result_command}
+      ${origin}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${at_date_time}
+      ${navigation_command_sequence_directions:var} = Navigation.find_directions(origin=${origin:var}, destination=destination, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_sequence_directions:var})
+    var: directions
+  - text: ${navigation_param_result_command} and ${directions_action} to there ${origin} ${if I leave|} ${at_date_time}
+    code: |
+      ${navigation_param_result_command}
+      ${origin}
+      ${at_date_time}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${navigation_command_sequence_directions:var} = Navigation.find_directions(origin=${origin:var}, destination=destination, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_sequence_directions:var})
+    var: directions
+  - text: ${navigation_param_result_command} and ${directions_action} from there ${destination} ${if I leave|} ${at_date_time}
+    code: |
+      ${navigation_param_result_command}
+      origin = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${destination}
+      ${at_date_time}
+      ${navigation_command_sequence_directions:var} = Navigation.find_directions(origin=origin, destination=${destination:var}, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_sequence_directions:var})
+    var: directions
+  - text: ${navigation_param_result_command} and ${directions_action} ${destination} from there ${if I leave|} ${at_date_time}
+    code: |
+      ${navigation_param_result_command}
+      origin = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${destination}
+      ${at_date_time}
+      ${navigation_command_sequence_directions:var} = Navigation.find_directions(origin=origin, destination=${destination:var}, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_sequence_directions:var})
+    var: directions
+
+navigation_command_distance:
+  - text: ${query_command_verb} the distance ${destination}
+    code: |
+      ${destination}
+      ${navigation_command_distance:var} = Navigation.find_distance(destination=${destination:var})
+      Responder.respond(response=${navigation_command_distance:var})
+    var: distance
+  - text: ${query_command_verb} the distance ${origin} ${destination}
+    code: |
+      ${origin}
+      ${destination}
+      ${navigation_command_distance:var} = Navigation.find_distance(origin=${origin:var}, destination=${destination:var})
+      Responder.respond(response=${navigation_command_distance:var})
+    var: distance
+  - text: ${query_command_verb} the distance between ${origin} and ${destination}
+    code: |
+      ${origin}
+      ${destination}
+      ${navigation_command_distance:var} = Navigation.find_distance(origin=${origin:var}, destination=${destination:var})
+      Responder.respond(response=${navigation_command_distance:var})
+    var: distance
+
+navigation_command_sequence_distance:
+  - text: ${navigation_param_result_command} and ${query_command_verb} the distance to there
+    code: |
+      ${navigation_param_result_command}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${navigation_command_sequence_distance:var} = Navigation.find_distance(destination=destination)
+      Responder.respond(response=${navigation_command_sequence_distance:var})
+    var: distance
+  - text: ${navigation_param_result_command} and ${query_command_verb} the distance ${origin} to there
+    code: |
+      ${navigation_param_result_command}
+      ${origin}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${navigation_command_sequence_distance:var} = Navigation.find_distance(origin=${origin:var}, destination=destination)
+      Responder.respond(response=${navigation_command_sequence_distance:var})
+    var: distance
+  - text: ${navigation_param_result_command} and ${query_command_verb} the distance between ${origin} to there
+    code: |
+      ${navigation_param_result_command}
+      ${origin}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${navigation_command_sequence_distance:var} = Navigation.find_distance(origin=${origin:var}, destination=destination)
+      Responder.respond(response=${navigation_command_sequence_distance:var})
+    var: distance
+
+navigation_command_duration:
+  - text: ${query_command_verb} how long will it take me to arrive ${destination}
+    code: |
+      ${destination}
+      ${navigation_command_duration:var} = Navigation.find_duration(destination=${destination:var})
+      Responder.respond(response=${navigation_command_duration:var})
+    var: duration
+  - text: ${query_command_verb} how long will it take me to arrive ${destination} ${at_date_time}
+    code: |
+      ${destination}
+      ${at_date_time}
+      ${navigation_command_duration:var} = Navigation.find_duration(destination=${destination:var}, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_duration:var})
+    var: duration
+  - text: ${query_command_verb} how long will it take me to arrive ${destination} ${at_date_times}
+    code: |
+      ${destination}
+      ${at_date_times}
+      ${navigation_command_duration:var} = []
+      for date_time in ${at_date_times:var}:
+        ${navigation_command_duration:var} += Navigation.find_duration(destination=destination, date_time=date_time)
+      Responder.respond(response=${navigation_command_duration:var})
+    var: duration
+  - text: ${query_command_verb} how long will it take me to arrive ${at_date_time} ${destination}
+    code: |
+      ${destination}
+      ${at_date_time}
+      ${navigation_command_duration:var} = Navigation.find_duration(destination=${destination:var}, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_duration:var})
+    var: duration
+  - text: ${query_command_verb} how long will it take me to arrive ${destinations}
+    code: |
+      ${destinations}
+      ${navigation_command_duration:var} = []
+      for destination in ${destinations:var}:
+        ${navigation_command_duration:var} += Navigation.find_duration(destination=destination)
+      Responder.respond(response=${navigation_command_duration:var})
+    var: duration
+  - text: ${query_command_verb} how long will it take me to arrive ${destinations} ${at_date_time}
+    code: |
+      ${destinations}
+      ${at_date_time}
+      ${navigation_command_duration:var} = []
+      for destination in ${destinations:var}:
+        ${navigation_command_duration:var} += Navigation.find_duration(destination=destination, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_duration:var})
+    var: duration
+  - text: ${query_command_verb} how long will it take me to arrive ${destinations} ${at_date_times}
+    code: |
+      ${destinations}
+      ${at_date_times}
+      ${navigation_command_duration:var} = []
+      for destination in ${destinations:var}:
+        for date_time in ${at_date_times:var}:
+          ${navigation_command_duration:var} += Navigation.find_duration(destination=destination, date_time=date_time)
+      Responder.respond(response=${navigation_command_duration:var})
+    var: duration
+  - text: ${query_command_verb} how long will it take me to arrive ${at_date_time} ${destinations}
+    code: |
+      ${destinations}
+      ${at_date_time}
+      ${navigation_command_duration:var} = []
+      for destination in ${destinations:var}:
+        ${navigation_command_duration:var} += Navigation.find_duration(destination=destination, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_duration:var})
+    var: duration
+  - text: ${query_command_verb} how long will it take me to arrive ${at_date_times} ${destinations}
+    code: |
+      ${destinations}
+      ${at_date_times}
+      ${navigation_command_duration:var} = []
+      for date_time in ${at_date_times:var}:
+        for destination in ${destinations:var}:
+          ${navigation_command_duration:var} += Navigation.find_duration(destination=destination, date_time=date_time)
+      Responder.respond(response=${navigation_command_duration:var})
+    var: duration
+
+navigation_command_sequence_duration:
+  - text: ${navigation_param_result_command} and ${query_command_verb} how long will it take me to arrive there
+    code: |
+      ${navigation_param_result_command}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${navigation_command_sequence_duration:var} = Navigation.find_duration(destination=destination)
+      Responder.respond(response=${navigation_command_sequence_duration:var})
+    var: duration
+  - text: ${navigation_param_result_command} and ${query_command_verb} how long will it take me to arrive there ${at_date_time}
+    code: |
+      ${navigation_param_result_command}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${at_date_time}
+      ${navigation_command_sequence_duration:var} = Navigation.find_duration(destination=destination, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_sequence_duration:var})
+    var: duration
+  - text: ${navigation_param_result_command} and ${query_command_verb} how long will it take me to arrive there ${at_date_times}
+    code: |
+      ${navigation_param_result_command}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${at_date_times}
+      ${navigation_command_sequence_duration:var} = []
+      for date_time in ${at_date_times:var}:
+        ${navigation_command_sequence_duration:var} += Navigation.find_duration(destination=destination, date_time=date_time)
+      Responder.respond(response=${navigation_command_sequence_duration:var})
+    var: duration
+  - text: ${navigation_param_result_command} and ${query_command_verb} how long will it take me to arrive ${at_date_time} there
+    code: |
+      ${navigation_param_result_command}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${at_date_time}
+      ${navigation_command_sequence_duration:var} = Navigation.find_duration(destination=destination, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_sequence_duration:var})
+    var: duration
+
+navigation_command_estimate_arrival:
+  - text: ${query_command_verb} when will I arrive ${destination} if I leave ${at_date_time}
+    code: |
+      ${destination}
+      ${at_date_time}
+      ${navigation_command_estimate_arrival:var} = Navigation.find_estimated_arrival(destination=${destination:var}, date_time=date_time)
+      Responder.respond(response=${navigation_command_estimate_arrival:var})
+    var: estimated_arrival
+  - text: ${query_command_verb} when will I arrive ${destination} if I leave ${at_date_time} ${origin}
+    code: |
+      ${destination}
+      ${at_date_time}
+      ${origin}
+      ${navigation_command_estimate_arrival:var} = Navigation.find_estimated_arrival(origin=${origin:var}, destination=${destination:var}, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_estimate_arrival:var})
+    var: estimated_arrival
+  - text: ${query_command_verb} when will I arrive ${destination} if I leave ${origin} ${at_date_time}
+    code: |
+      ${destination}
+      ${origin}
+      ${at_date_time}
+      ${navigation_command_estimate_arrival:var} = Navigation.find_estimated_arrival(origin=${origin:var}, destination=${destination:var}, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_estimate_arrival:var})
+    var: estimated_arrival
+  - text: ${query_command_verb} when will I arrive ${destination} if I leave ${at_date_times}
+    code: |
+      ${destination}
+      ${at_date_times}
+      ${navigation_command_estimate_arrival:var} = []
+      for date_time in ${at_date_times:var}:
+        ${navigation_command_estimate_arrival:var} += Navigation.find_estimated_arrival(destination=${destination:var}, date_time=date_time)
+      Responder.respond(response=${navigation_command_estimate_arrival:var})
+    var: estimated_arrival
+  - text: ${query_command_verb} when will I arrive ${destination} if I leave ${at_date_times} ${origin}
+    code: |
+      ${destination}
+      ${at_date_times}
+      ${origin}
+      ${navigation_command_estimate_arrival:var} = []
+      for date_time in ${at_date_times:var}:
+        ${navigation_command_estimate_arrival:var} += Navigation.find_estimated_arrival(origin=${origin:var}, destination=${destination:var}, date_time=date_time)
+      Responder.respond(response=${navigation_command_estimate_arrival:var})
+    var: estimated_arrival
+  - text: ${query_command_verb} when will I arrive ${destination} if I leave ${origin} ${at_date_times}
+    code: |
+      ${destination}
+      ${origin}
+      ${at_date_times}
+      ${navigation_command_estimate_arrival:var} = []
+      for date_time in ${at_date_times:var}:
+        ${navigation_command_estimate_arrival:var} += Navigation.find_estimated_arrival(origin=${origin:var}, destination=${destination:var}, date_time=date_time)
+      Responder.respond(response=${navigation_command_estimate_arrival:var})
+    var: estimated_arrival
+
+navigation_command_sequence_estimate_arrival:
+  - text: ${navigation_param_result_command} and ${query_command_verb} when will I arrive there if I leave ${at_date_time}
+    code: |
+      ${navigation_param_result_command}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${at_date_time}
+      ${navigation_command_sequence_estimate_arrival:var} = Navigation.find_estimated_arrival(destination=destination, date_time=date_time)
+      Responder.respond(response=${navigation_command_sequence_estimate_arrival:var})
+    var: estimated_arrival
+  - text: ${navigation_param_result_command} and ${query_command_verb} when will I arrive there if I leave ${at_date_time} ${origin}
+    code: |
+      ${navigation_param_result_command}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${at_date_time}
+      ${origin}
+      ${navigation_command_sequence_estimate_arrival:var} = Navigation.find_estimated_arrival(origin=${origin:var}, destination=destination, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_sequence_estimate_arrival:var})
+    var: estimated_arrival
+  - text: ${navigation_param_result_command} and ${query_command_verb} when will I arrive there if I leave ${origin} ${at_date_time}
+    code: |
+      ${navigation_param_result_command}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${origin}
+      ${at_date_time}
+      ${navigation_command_sequence_estimate_arrival:var} = Navigation.find_estimated_arrival(origin=${origin:var}, destination=destination, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_sequence_estimate_arrival:var})
+    var: estimated_arrival
+  - text: ${navigation_param_result_command} and ${query_command_verb} when will I arrive ${destination} if I leave from there ${at_date_time}
+    code: |
+      ${navigation_param_result_command}
+      ${destination}
+      origin = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${at_date_time}
+      ${navigation_command_sequence_estimate_arrival:var} = Navigation.find_estimated_arrival(origin=origin, destination=${destination:var}, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_sequence_estimate_arrival:var})
+    var: estimated_arrival
+  - text: ${navigation_param_result_command} and ${query_command_verb} when will I arrive there if I leave ${at_date_times}
+    code: |
+      ${navigation_param_result_command}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${at_date_times}
+      ${navigation_command_sequence_estimate_arrival:var} = []
+      for date_time in ${at_date_times:var}:
+        ${navigation_command_sequence_estimate_arrival:var} += Navigation.find_estimated_arrival(destination=destination, date_time=date_time)
+      Responder.respond(response=${navigation_command_sequence_estimate_arrival:var})
+    var: estimated_arrival
+  - text: ${navigation_param_result_command} and ${query_command_verb} when will I arrive there if I leave ${at_date_times} ${origin}
+    code: |
+      ${navigation_param_result_command}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${at_date_times}
+      ${origin}
+      ${navigation_command_sequence_estimate_arrival:var} = []
+      for date_time in ${at_date_times:var}:
+        ${navigation_command_sequence_estimate_arrival:var} += Navigation.find_estimated_arrival(origin=${origin:var}, destination=destination, date_time=date_time)
+      Responder.respond(response=${navigation_command_sequence_estimate_arrival:var})
+    var: estimated_arrival
+  - text: ${navigation_param_result_command} and ${query_command_verb} when will I arrive ${destination} if I leave ${at_date_times} from there
+    code: |
+      ${navigation_param_result_command}
+      ${destination}
+      ${at_date_times}
+      origin = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${navigation_command_sequence_estimate_arrival:var} = []
+      for date_time in ${at_date_times:var}:
+        ${navigation_command_sequence_estimate_arrival:var} += Navigation.find_estimated_arrival(origin=origin, destination=${destination:var}, date_time=date_time)
+      Responder.respond(response=${navigation_command_sequence_estimate_arrival:var})
+    var: estimated_arrival
+  - text: ${navigation_param_result_command} and ${query_command_verb} when will I arrive there if I leave ${origin} ${at_date_times}
+    code: |
+      ${navigation_param_result_command}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${origin}
+      ${at_date_times}
+      ${navigation_command_sequence_estimate_arrival:var} = []
+      for date_time in ${at_date_times:var}:
+        ${navigation_command_sequence_estimate_arrival:var} += Navigation.find_estimated_arrival(origin=${origin:var}, destination=destination, date_time=date_time)
+      Responder.respond(response=${navigation_command_sequence_estimate_arrival:var})
+    var: estimated_arrival
+  - text: ${navigation_param_result_command} and ${query_command_verb} when will I arrive ${destination} if I leave from there ${at_date_times}
+    code: |
+      ${navigation_param_result_command}
+      ${destination}
+      origin = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${at_date_times}
+      ${navigation_command_sequence_estimate_arrival:var} = []
+      for date_time in ${at_date_times:var}:
+        ${navigation_command_sequence_estimate_arrival:var} += Navigation.find_estimated_arrival(origin=origin, destination=${destination:var}, date_time=date_time)
+      Responder.respond(response=${navigation_command_sequence_estimate_arrival:var})
+    var: estimated_arrival
+
+navigation_command_estimate_departure:
+  - text: ${query_command_verb} when I should leave to get ${destination} ${at_date_time}
+    code: |
+      ${destination}
+      ${at_date_time}
+      ${navigation_command_estimate_departure:var} = Navigation.find_estimated_departure(destination=${destination:var}, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_estimate_departure:var})
+    var: estimated_departure
+  - text: ${query_command_verb} when I should leave to get ${destination} ${at_date_time} ${origin}
+    code: |
+      ${destination}
+      ${at_date_time}
+      ${origin}
+      ${navigation_command_estimate_departure:var} = Navigation.find_estimated_departure(origin=${origin:var}, destination=${destination:var}, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_estimate_departure:var})
+    var: estimated_departure
+  - text: ${query_command_verb} when I should leave to get ${destination} ${origin} ${at_date_time}
+    code: |
+      ${destination}
+      ${origin}
+      ${at_date_time}
+      ${navigation_command_estimate_departure:var} = Navigation.find_estimated_departure(origin=${origin:var}, destination=${destination:var}, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_estimate_departure:var})
+    var: estimated_departure
+  - text: ${query_command_verb} when I should leave to get ${destination} ${at_date_times}
+    code: |
+      ${destination}
+      ${at_date_times}
+      ${navigation_command_estimate_departure:var} = []
+      for date_time in ${at_date_times:var}:
+        ${navigation_command_estimate_departure:var} += Navigation.find_estimated_departure(destination=${destination:var}, date_time=date_time)
+      Responder.respond(response=${navigation_command_estimate_departure:var})
+    var: estimated_departure
+  - text: ${query_command_verb} when I should leave to get ${destination} ${at_date_times} ${origin}
+    code: |
+      ${destination}
+      ${at_date_times}
+      ${origin}
+      ${navigation_command_estimate_departure:var} = []
+      for date_time in ${at_date_times:var}:
+        ${navigation_command_estimate_departure:var} += Navigation.find_estimated_departure(origin=${origin:var}, destination=${destination:var}, date_time=date_time)
+      Responder.respond(response=${navigation_command_estimate_departure:var})
+    var: estimated_departure
+  - text: ${query_command_verb} when I should leave to get ${destination} ${origin} ${at_date_times}
+    code: |
+      ${destination}
+      ${origin}
+      ${at_date_times}
+      ${navigation_command_estimate_departure:var} = []
+      for date_time in ${at_date_times:var}:
+        ${navigation_command_estimate_departure:var} += Navigation.find_estimated_departure(origin=${origin:var}, destination=${destination:var}, date_time=date_time)
+      Responder.respond(response=${navigation_command_estimate_departure:var})
+    var: estimated_departure
+
+navigation_command_sequence_estimate_departure:
+  - text: ${navigation_param_result_command} and ${query_command_verb} when I should leave to get there ${at_date_time}
+    code: |
+      ${navigation_param_result_command}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${at_date_time}
+      ${navigation_command_sequence_estimate_departure:var} = Navigation.find_estimated_departure(destination=destination, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_sequence_estimate_departure:var})
+    var: estimated_departure
+  - text: ${navigation_param_result_command} and ${query_command_verb} when I should leave to get there ${at_date_time} ${origin}
+    code: |
+      ${navigation_param_result_command}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${at_date_time}
+      ${origin}
+      ${navigation_command_sequence_estimate_departure:var} = Navigation.find_estimated_departure(origin=${origin:var}, destination=destination, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_sequence_estimate_departure:var})
+    var: estimated_departure
+  - text: ${navigation_param_result_command} and ${query_command_verb} when I should leave to get ${destination} ${at_date_time} from there
+    code: |
+      ${navigation_param_result_command}
+      ${destination}
+      ${at_date_time}
+      origin = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${navigation_command_sequence_estimate_departure:var} = Navigation.find_estimated_departure(origin=origin, destination=${destination:var}, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_sequence_estimate_departure:var})
+    var: estimated_departure
+  - text: ${navigation_param_result_command} and ${query_command_verb} when I should leave to get there ${origin} ${at_date_time}
+    code: |
+      ${navigation_param_result_command}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${origin}
+      ${at_date_time}
+      ${navigation_command_sequence_estimate_departure:var} = Navigation.find_estimated_departure(origin=${origin:var}, destination=destination, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_sequence_estimate_departure:var})
+    var: estimated_departure
+  - text: ${navigation_param_result_command} and ${query_command_verb} when I should leave to get ${destination} from there ${at_date_time}
+    code: |
+      ${navigation_param_result_command}
+      ${destination}
+      origin = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${at_date_time}
+      ${navigation_command_sequence_estimate_departure:var} = Navigation.find_estimated_departure(origin=origin, destination=${destination:var}, date_time=${at_date_time:var})
+      Responder.respond(response=${navigation_command_sequence_estimate_departure:var})
+    var: estimated_departure
+  - text: ${navigation_param_result_command} and ${query_command_verb} when I should leave to get there ${at_date_times}
+    code: |
+      ${navigation_param_result_command}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${at_date_times}
+      ${navigation_command_sequence_estimate_departure:var} = []
+      for date_time in ${at_date_times:var}:
+        ${navigation_command_sequence_estimate_departure:var} += Navigation.find_estimated_departure(destination=destination, date_time=date_time)
+      Responder.respond(response=${navigation_command_sequence_estimate_departure:var})
+    var: estimated_departure
+  - text: ${navigation_param_result_command} and ${query_command_verb} when I should leave to get there ${at_date_times} ${origin}
+    code: |
+      ${navigation_param_result_command}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${at_date_times}
+      ${origin}
+      ${navigation_command_sequence_estimate_departure:var} = []
+      for date_time in ${at_date_times:var}:
+        ${navigation_command_sequence_estimate_departure:var} += Navigation.find_estimated_departure(origin=${origin:var}, destination=destination, date_time=date_time)
+      Responder.respond(response=${navigation_command_sequence_estimate_departure:var})
+    var: estimated_departure
+  - text: ${navigation_param_result_command} and ${query_command_verb} when I should leave to get there ${origin} ${at_date_times}
+    code: |
+      ${navigation_param_result_command}
+      destination = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${origin}
+      ${at_date_times}
+      ${navigation_command_sequence_estimate_departure:var} = []
+      for date_time in ${at_date_times:var}:
+        ${navigation_command_sequence_estimate_departure:var} += Navigation.find_estimated_departure(origin=${origin:var}, destination=destination, date_time=date_time)
+      Responder.respond(response=${navigation_command_sequence_estimate_departure:var})
+    var: estimated_departure
+  - text: ${navigation_param_result_command} and ${query_command_verb} when I should leave to get there ${origin} ${at_date_times}
+    code: |
+      ${navigation_param_result_command}
+      ${destination}
+      origin = Location.resolve_from_entity(entity=${navigation_param_result_command:var})
+      ${at_date_times}
+      ${navigation_command_sequence_estimate_departure:var} = []
+      for date_time in ${at_date_times:var}:
+        ${navigation_command_sequence_estimate_departure:var} += Navigation.find_estimated_departure(origin=origin, destination=destination, date_time=date_time)
+      Responder.respond(response=${navigation_command_sequence_estimate_departure:var})
+    var: estimated_departure
+
+navigation_query_command_estimate_departure:
+  - text: ${query_command_verb} if ${navigation_estimate_departure_query}
+    code: |
+      ${navigation_estimate_departure_query}
+      Responder.respond(response=${navigation_estimate_departure_query:var})
+    var: ${navigation_estimate_departure_query:var}
+
+navigation_command_traffic_info:
+  - ${navigation_query_command_traffic_info}
+
+navigation_query_command_traffic_info:
+  - text: ${query_command_verb} if ${navigation_traffic_info_query}
+    code: |
+      ${navigation_traffic_info_query}
+      Responder.respond(response=${navigation_traffic_info_query:var})
+    var: ${navigation_traffic_info_query:var}

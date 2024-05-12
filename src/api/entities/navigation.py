@@ -1,0 +1,87 @@
+from __future__ import annotations
+from entities.entity import Entity
+from entities.resolvable import Resolvable
+
+
+class NavigationDirectionEntity(Entity):
+    """
+    The NavigationDirectionEntity class is used to represent a navigation direction.
+    It is returned by the find_navigation_directions method in the Navigation action class.
+    This class inherits from the Entity class.
+    """
+
+    pass
+
+
+class NavigationDistanceEntity(Entity):
+    """
+    The NavigationDistanceEntity class is used to represent a navigation distance.
+    It is returned by the find_navigation_distance method in the Navigation action class.
+    This class inherits from the Entity class.
+    """
+
+    pass
+
+
+class NavigationDurationEntity(Entity):
+    """
+    The NavigationDurationEntity class is used to represent a navigation duration.
+    It is returned by the find_navigation_duration method in the Navigation action class.
+    This class inherits from the Entity class.
+    """
+
+    pass
+
+
+class NavigationEstimatedArrivalEntity(Entity):
+    """
+    The NavigationEstimatedArrivalEntity class is used to represent a navigation estimated arrival entity.
+    It is returned by the find_estimated_arrival method in the Navigation action class.
+    This class inherits from the Entity class.
+    """
+
+    pass
+
+
+class NavigationEstimatedDepartureEntity(Entity):
+    """
+    The NavigationEstimatedDepartureEntity class is used to represent a navigation departure arrival entity.
+    It is returned by the find_estimated_departure method in the Navigation action class.
+    This class inherits from the Entity class.
+    """
+
+    pass
+
+
+class NavigationTrafficInfoEntity(Entity):
+    """
+    The NavigationTrafficInfoEntity class is used to represent a navigation traffic information.
+    It is returned by the find_traffic_info method in the Navigation action class.
+    This class inherits from the Entity class.
+    """
+
+    pass
+
+
+class NavigationRoadCondition(Entity, Resolvable):
+    """
+    The NavigationRoadCondition class is used to represent a navigation road condition.
+    Road conditions can be for example, "construction", "accident", "road closed", etc.
+    When a user would like to avoid a road condition, the user can specify a road condition to avoid
+    in the Navigation action class.
+    Also, a user can inquire if a road has a specific road condition.
+    This class inherits from the Entity class and the Resolvable class.
+    """
+
+    pass
+
+
+class NavigationTravelMethod(Entity, Resolvable):
+    """
+    The NavigationTravelMethod class is used to represent a navigation travel method.
+    A travel method can be for example, "walking", "driving", "bicycling", etc.
+    It can be added to a navigation request in the Navigation action class.
+    This class inherits from the Entity class and the Resolvable class.
+    """
+
+    pass

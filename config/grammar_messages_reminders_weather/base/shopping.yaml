@@ -1,0 +1,186 @@
+product_name:
+  - text: ${product_name_item}
+    code: |
+      ${product_name:var} = ProductName.resolve_from_text("${product_name_item}")
+    var: product_name
+
+product_names:
+  - text: ${product_names_items}
+    code: |
+      ${product_names:var} = ProductName.resolve_many_from_text("${product_names_items}")
+    var: product_names
+
+shopping_list_name:
+  - text: ${shopping_list_item}
+    code: |
+      ${shopping_list_name:var} = ShoppingListName.resolve_from_text("${shopping_list_item}")
+    var: shopping_list_name
+
+product_attribute_prefix:
+  - text: ${product_attribute_prefix_item}
+    code: |
+      ${product_attribute_prefix:var} = ProductAttribute.resolve_from_text("${product_attribute_prefix_item}")
+    var: product_attribute
+
+product_attribute_suffix:
+  - text: ${product_attribute_suffix_item}
+    code: |
+      ${product_attribute_suffix:var} = ProductAttribute.resolve_from_text("${product_attribute_suffix_item}")
+    var: product_attribute
+
+store:
+  - text: ${store_item}
+    code: |
+      ${store:var} = Location.resolve_from_text("${store_item}")
+    var: location
+
+stores:
+  - text: ${faker_company.1} ${cc} ${faker_company.2}
+    code: |
+      ${stores:var} = Location.resolve_many_from_text("${faker_company.1} ${cc} ${faker_company.2}")
+    var: locations
+
+store_item:
+  - at ${faker_company}
+
+product_name_item:
+  - ${grocery}
+  - ${goods}
+  - ${fashion}
+  - ${shoes}
+
+product_names_items:
+  - all ${product_name_item}
+  - text: ${product_name_item.1} ${cc} ${product_name_item.2}
+    code: ${product_name_item.1} ${cc} ${product_name_item.2}
+    weight: 0.3
+  - text: ${product_name_item.1}, ${product_name_item.2} ${cc} ${product_name_item.3}
+    code: ${product_name_item.1}, ${product_name_item.2} ${cc} ${product_name_item.3}
+    weight: 0.1
+
+product_attribute_prefix_item:
+  - a sale
+  - a clearance
+  - a discount
+
+product_attribute_suffix_item:
+  - on sale
+  - on clearance
+  - on discount
+  - in stock
+
+product_amount:
+  - text: ${product_amount_item}
+    code: ${product_amount:var} = Amount.resolve_from_text("${product_amount_item}")
+    var: amount
+
+shopping_list_item:
+  - my shopping list
+  - the shopping list
+  - my list
+
+grocery:
+  - peanut butter
+  - jelly jams
+  - bread loafs
+  - milk
+  - eggs
+  - cereal
+  - coffee
+  - tea
+  - butter
+  - cheese
+  - chicken breasts
+  - beef steaks
+  - pork chops
+  - fish
+  - beans
+  - potatoes
+  - carrots
+  - lettuce
+  - tomatoes
+  - onions
+  - Oreo cookies
+  - Cheetos bags
+  - Ritz crackers
+  - Goldfish crackers
+  - Pringles
+  - Pop Tarts
+  - Rice Krispies
+  - Froot Loops
+  - Lucky Charms
+  - Cocoa Puffs
+  - M&Ms
+  - Nutella jars
+
+goods:
+  - flat screen tv
+  - laptop
+  - computer
+  - tablet
+  - phone
+  - headphones
+  - speakers
+  - printer
+  - monitor
+  - washing machine
+  - dryer
+  - dishwasher
+  - refrigerator
+  - freezer
+  - oven
+  - microwave
+  - toaster
+  - blender
+  - mixer
+  - vaccuum
+  - iron
+  - fan
+
+fashion:
+  - jeans
+  - dresses
+  - skirts
+  - pants
+  - swimwear
+  - underwear
+  - socks
+  - t-shirts
+  - shirts
+  - blouses
+  - sweaters
+  - jackets
+  - coats
+  - hats
+  - gloves
+  - scarves
+  - belts
+  - shoes
+  - boots
+  - sandals
+  - sneakers
+  - slippers
+  - jewelry
+  - watches
+
+shoes:
+  - ${shoes_item}
+  - ${faker_brand} ${shoes_item}
+
+shoes_item:
+  - shoes
+  - boots
+  - sandals
+  - sneakers
+  - slippers
+  - loafers
+  - heels
+  - flats
+  - wedges
+
+product_amount_item:
+  - ${faker_digit}
+  - a dozen
+  - a few
+  - a couple of
+  - a ${lot|bunch} of

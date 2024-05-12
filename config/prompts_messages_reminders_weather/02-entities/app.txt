@@ -1,0 +1,13 @@
+"""
+entities.app
+"""
+
+
+class AppName(Entity, Resolvable):
+
+    pass
+
+
+class App(Entity):
+
+    pass

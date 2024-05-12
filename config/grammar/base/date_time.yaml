@@ -1,0 +1,443 @@
+at_date_time:
+  - text: at ${exact_date_time}
+    code: ${exact_date_time}
+    var: date_time
+    type: date_time
+    syn:
+      num: sg
+      label: pp
+    coreference_value:
+      - value: at that time
+
+at_date_times:
+  - text: at ${exact_date_times}
+    code: ${exact_date_times}
+    var: date_times
+    type: date_times
+    syn:
+      num: pl
+      label: pp
+    coreference_value:
+      - value: at these times
+
+before_date_time:
+  - text: ${before_date_time_item}
+    code: |
+      ${before_date_time:var} = DateTime.resolve_from_text("${before_date_time_item}")
+    var: date_time
+    type: date_time
+    syn:
+      num: sg
+      label: pp
+    coreference_value:
+      - value: at that time
+
+before_date_times:
+  - text: ${before_date_times_item}
+    code: |
+      ${before_date_times:var} = DateTime.resolve_many_from_text("${before_date_times_item}")
+    var: date_times
+    type: date_times
+    syn:
+      num: sg
+      label: pp
+    coreference_value:
+      - value: at these times
+
+after_date_time:
+  - text: ${after_date_time_item}
+    code: |
+      ${after_date_time:var} = DateTime.resolve_from_text("${after_date_time_item}")
+    var: date_time
+    type: date_time
+    syn:
+      num: sg
+      label: pp
+    coreference_value:
+      - value: at that time
+
+after_date_times:
+  - text: ${after_date_times_item}
+    code: |
+      ${after_date_times:var} = DateTime.resolve_many_from_text("${after_date_times_item}")
+    var: date_times
+    type: date_times
+    syn:
+      num: sg
+      label: pp
+    coreference_value:
+      - value: at these times
+
+every_date_time:
+  - every ${general_date_time_item}
+  - every ${general_date_time_item} this week
+  - every ${general_date_time_item.1} and ${general_date_time_item.2} this ${month|year}
+  - every ${general_date_time_item.1}, ${general_date_time_item.2} and ${general_date_time_item.3} this ${month|year}
+  - every day this week
+
+every_date_times:
+  - text: ${every_date_time}
+    code: |
+      ${every_date_times:var} = DateTime.resolve_many_from_text("${every_date_time}")
+    var: date_times
+    type: date_times
+    syn:
+      num: pl
+      label: pp
+
+for_date_time:
+  - text: for ${relative_date_time}
+    code: ${relative_date_time}
+    var: date_time
+    type: date_time
+    syn:
+      label: pp
+
+for_date_times:
+  - text: for ${relative_date_times}
+    code: ${relative_date_times}
+    var: date_times
+    type: date_times
+    syn:
+      label: pp
+
+from_date_time:
+  - text: ${from_date_time_item}
+    code: |
+      ${from_date_time:var} = DateTime.resolve_from_text("${from_date_time_item}")
+    var: date_time
+    type: date_time
+
+from_date_times:
+  - text: ${from_date_time_item.1} and ${from_date_time_item.2} from now
+    code: |
+      ${from_date_time:var} = DateTime.resolve_from_text("${from_date_time_item.1} and ${from_date_time_item.2} from now")
+    var: date_time
+    type: date_time
+
+from_date_time_item:
+  - ${hours}
+  - ${minutes}
+
+on_date_time:
+  - text: on ${general_date_time}
+    code: ${general_date_time}
+    var: date_time
+    type: date_time
+    syn:
+      label: pp
+
+on_date_times:
+  - text: on ${general_date_times_item}
+    code: |
+      ${on_date_times:var} = DateTime.resolve_many_from_text("on ${general_date_times_item}")
+    var: date_times
+    type: date_times
+    syn:
+      num: pl
+      label: pp
+  - text: on ${general_date_time_item.1} ${cc} ${general_date_time_item.2}
+    code: |
+      ${on_date_times:var} = DateTime.resolve_many_from_text("on ${general_date_time_item.1} ${cc} ${general_date_time_item.2}")
+    var: date_times
+    type: date_times
+    syn:
+      num: pl
+      label: pp
+  - text: on ${general_date_time_item.1}, ${general_date_time_item.2} ${cc} ${general_date_time_item.3}
+    code: |
+      ${on_date_times:var} = DateTime.resolve_many_from_text("on ${general_date_time_item.1}, ${general_date_time_item.2} ${cc} ${general_date_time_item.3}")
+    var: date_times
+    type: date_times
+    syn:
+      num: pl
+      label: pp
+
+date_time:
+  - text: ${relative_date_time}
+    code: ${relative_date_time}
+    var: date_time
+    type: date_time
+  - text: ${general_date_time}
+    code: ${general_date_time}
+    var: date_time
+    type: date_time
+  - text: ${exact_date_time}
+    code: ${exact_date_time}
+    var: date_time
+    type: date_time
+
+date_times:
+  - text: ${relative_date_times}
+    code: ${relative_date_times}
+    var: date_times
+    type: date_times
+  - text: ${general_date_times}
+    code: ${general_date_times}
+    var: date_times
+    type: date_times
+  - text: ${exact_date_times}
+    code: ${exact_date_times}
+    var: date_times
+    type: date_times
+
+relative_date_time:
+  - text: ${relative_date_time_item}
+    code: |
+      ${relative_date_time:var} = DateTime.resolve_from_text("${relative_date_time_item}")
+    var: date_time
+    type: date_time
+    syn:
+      label: NP
+
+relative_date_times:
+  - text: ${relative_date_times_item}
+    code: |
+      ${relative_date_times_item:var} = DateTime.resolve_many_from_text("${relative_date_times_item}")
+    var: date_times
+    type: date_times
+    syn:
+      label: NP
+
+general_date_time:
+  - text: ${general_date_time_item}
+    code: ${general_date_time:var} = DateTime.resolve_from_text("${general_date_time_item}")
+    var: date_time
+    type: date_time
+    syn:
+      num: sg
+      label: pp
+
+general_date_times:
+  - text: ${general_date_times_item}
+    code: ${general_date_times:var} = DateTime.resolve_many_from_text("${general_date_times_item}")
+    var: date_time
+    type: date_time
+    syn:
+      num: pl
+      label: pp
+
+exact_date_time:
+  - text: ${exact_date_time_item}
+    code: ${exact_date_time:var} = DateTime.resolve_from_text("${exact_date_time_item}")
+    var: date_time
+    type: date_time
+    syn:
+      label: NP
+
+exact_date_times:
+  - text: ${exact_date_times_item}
+    code: ${exact_date_times:var} = DateTime.resolve_many_from_text("${exact_date_times_item}")
+    var: date_times
+    type: date_times
+    syn:
+      label: NP
+
+now_date_time:
+  - text: ${now_date_time_item}
+    code: ${now_date_time:var} = DateTime.resolve_from_text("${now_date_time_item}")
+    var: date_time
+    type: date_time
+    syn:
+      label: NP
+
+past_date_time:
+  - text: ${past_date_time_term}
+    code: ${past_date_time:var} = DateTime.resolve_from_text("${past_date_time_term}")
+    var: date_time
+    type: date_time
+    syn:
+      label: NP
+
+past_date_times:
+  - text: ${past_date_times_term}
+    code: ${past_date_times:var} = DateTime.resolve_many_from_text("${past_date_times_term}")
+    var: date_times
+    type: date_times
+    syn:
+      label: NP
+
+relative_date_time_item:
+  - today
+  - tonight
+  - tomorrow
+  - tomorrow ${times_of_day}
+  - the day after tomorrow
+  - the ${times_of_day} of the day after tomorrow
+  - the weekend
+  - ${day_of_week} ${times_of_day}
+
+relative_date_times_item:
+  - ${relative_date_time_item.1} ${cc} ${relative_date_time_item.2}
+  - ${relative_date_time_item.1}, ${relative_date_time_item.2} ${cc} ${relative_date_time_item.3}
+
+general_date_time_item:
+  - ${day_of_week}
+  - text: ${day_of_week} during ${month_name}
+    code: ${day_of_week} during ${month_name}
+    weight: 0.15
+  - text: ${ordinal} of ${month_name}
+    code: ${ordinal} of ${month_name}
+    weight: 0.15
+  - ${holiday}
+
+general_date_times_item:
+  - ${day_of_week}s
+
+now_date_time_item:
+  - now
+  - right now
+  - at this moment
+
+before_date_time_item:
+  - before ${exact_date_time_item}
+  - before ${relative_date_time_item}
+  - before ${general_date_time_item}
+
+before_date_times_item:
+  - before ${exact_date_times_item}
+  - before ${relative_date_times_item}
+  - before ${general_date_times_item}
+
+after_date_time_item:
+  - after ${exact_date_time_item}
+  - after ${relative_date_time_item}
+  - after ${general_date_time_item}
+
+after_date_times_item:
+  - after ${exact_date_times_item}
+  - after ${relative_date_times_item}
+  - after ${general_date_times_item}
+
+exact_date_time_item:
+  - ${date_time_hour}
+
+exact_date_times_item:
+  - ${exact_date_time_item.1} ${cc} ${exact_date_time_item.2}
+  - text: ${exact_date_time_item.1}, ${exact_date_time_item.2} ${cc} ${exact_date_time_item.3}
+    code: ${exact_date_time_item.1}, ${exact_date_time_item.2} ${cc} ${exact_date_time_item.3}
+    weight: 0.1
+  - between ${exact_date_time_item.1} and ${exact_date_time_item.2}
+
+month_name:
+  - ${faker_month_name}
+
+date_time_hour:
+  - ${date_time_hour_term}
+  - ${date_time_hour_term} ${date_time_future}
+
+date_time_future:
+  - tomorrow
+  - next week
+  - next month
+  - the day after tomorrow
+  - in 2 days
+
+date_time_hour_term:
+  - ${faker_time_hour}
+  - ${faker_time_hour_minutes}
+  - mindnight
+  - noon
+
+past_date_time_term:
+  - today
+  - yesterday
+  - ${date_time_hour_term}
+
+past_date_times_term:
+  - ${past_date_time_term.1} ${cc} ${past_date_time_term.2}
+
+day_of_week:
+  - ${faker_day_of_week}
+
+times_of_day:
+  - morning
+  - afternoon
+  - evening
+  - night
+
+holiday:
+  - New Year's Day
+  - Independence Day
+  - Thanksgiving Day
+  - Christmas Day
+  - Martin Luther King, Jr. Day
+  - Washington's Birthday
+  - Memorial Day
+  - Labor Day
+  - Columbus Day
+  - Veterans Day
+  - Halloween
+  - Valentine's Day
+  - St. Patrick's Day
+  - April Fool's Day
+  - Earth Day
+  - Mother's Day
+  - Father's Day
+  - Flag Day
+  - Grandparents Day
+  - Patriot Day
+  - Rosh Hashanah
+  - Yom Kippur
+  - Hanukkah
+  - Kwanzaa
+  - Christmas Eve
+  - New Year's Eve
+
+ordinal:
+  - first
+  - second
+  - third
+  - fourth
+  - fifth
+  - sixth
+  - seventh
+  - eighth
+  - nineth
+  - tenth
+  - eleventh
+
+time_unit_item:
+  - week
+  - month
+  - year
+
+hours:
+  - 1 hour
+  - 2 hours
+  - 3 hours
+  - 4 hours
+  - 5 hours
+  - 6 hours
+  - 7 hours
+  - 8 hours
+  - 9 hours
+  - 10 hours
+  - 11 hours
+  - 12 hours
+  - 13 hours
+  - 14 hours
+  - 15 hours
+  - 16 hours
+  - 17 hours
+  - 18 hours
+  - 19 hours
+  - 20 hours
+  - 21 hours
+  - 22 hours
+  - 23 hours
+  - 24 hours
+
+minutes:
+  - 1 minute
+  - 2 minutes
+  - 3 minutes
+  - 4 minutes
+  - 5 minutes
+  - 10 minutes
+  - 15 minutes
+  - 20 minutes
+  - 30 minutes
+  - 40 minutes
+  - 45 minutes
+  - 50 minutes

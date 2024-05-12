@@ -1,0 +1,37 @@
+sequence:
+  - text: ${command.1} and ${also|} ${command.2}
+    code: |
+      ${command.1}
+
+      ${command.2}
+  - text: after you ${command.1}, ${command.2}
+    code: |
+      ${command.1}
+
+      ${command.2}
+    weight: 0.2
+  - text: before you ${command.1}, ${command.2}
+    code: |
+      ${command.2}
+
+      ${command.1}
+    weight: 0.2
+  - text: ${sequence}, ${command.1} and ${command.2}
+    code: |
+      ${sequence}
+
+      ${command.1}
+
+      ${command.2}
+    weight: 0.05
+  - text: ${sequence_result_command}
+    code: ${sequence_result_command}
+    weight: 0.33
+
+sequence_result_command:
+  - ${messages_command_sequence}
+  - ${navigation_command_sequence}
+  - ${weather_command_sequence}
+
+result_command:
+  - ${navigation_result_command}

@@ -1,0 +1,21 @@
+class Map(Action):
+    """
+    The Map class contains all the methods of a virtual assistant agent in the map domain.
+    """
+
+    @classmethod
+    def find_on_map(cls, location: Location) -> List[MapEntity]:
+        """
+        This class method finds places on the map.
+
+        Parameters
+        ----------
+        location : Location
+            The location to search for
+
+        Returns
+        -------
+        List[MapEntity]
+            A list of places in the form of map entities
+        """
+        pass

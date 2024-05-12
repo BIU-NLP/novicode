@@ -1,0 +1,4 @@
+map_location:
+  - text: ${location}
+    code: ${location}
+    var: location

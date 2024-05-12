@@ -1,0 +1,13 @@
+clock_command:
+  - ${clock_create_alarm_command}
+
+clock_create_alarm_command:
+  - text: set an alarm ${alarm_date_time}
+    code: |
+      ${alarm_date_time}
+      Clock.create_alarm(date_time=${alarm_date_time:var})
+  - text: set an alarm ${alarm_date_times}
+    code: |
+      ${alarm_date_times}
+      for date_time in ${alarm_date_times:var}:
+        Clock.create_alarm(date_time=date_time)

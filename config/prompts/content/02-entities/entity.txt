@@ -1,0 +1,8 @@
+class Entity:
+    """
+    The Entity class is the base class for all entities. Entities are used to represent objects in the API.
+    Any object returned by the API is an entity. 
+    This class is abstract and cannot be instantiated.
+    """
+
+    pass

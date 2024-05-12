@@ -1,0 +1,12 @@
+utterance:
+  - ${condition}
+  - ${sequence}
+  - ${simple}
+
+simple:
+  - ${command}
+
+command:
+  - ${messages_command}
+  - ${reminders_command}
+  - ${weather_command}

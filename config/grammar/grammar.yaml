@@ -1,0 +1,17 @@
+utterance:
+  - ${condition}
+  - ${sequence}
+  - ${simple}
+
+simple:
+  - ${command}
+
+command:
+  - ${calendar_command}
+  - ${home_command}
+  - ${messages_command}
+  - ${music_command}
+  - ${navigation_command}
+  - ${products_command}
+  - ${reminders_command}
+  - ${weather_command}

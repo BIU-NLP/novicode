@@ -1,0 +1,85 @@
+home_device_date_time:
+  - text: ${at_date_time}
+    code: ${at_date_time}
+    var: date_time
+    syn:
+      label: PP
+  - text: ${for_date_time}
+    code: ${for_date_time}
+    var: date_time
+    syn:
+      label: PP
+
+home_device_temperature_action:
+  - text: ${home_device_temperature_action_item}
+    code: |
+      ${home_device_temperature_action:var} = HomeDeviceAction.resolve_from_text("${home_device_temperature_action_item}")
+    var: device_action
+
+home_device_temperature_name:
+  - text: ${home_device_temperature_name_item}
+    code: |
+      ${home_device_temperature_name:var} = HomeDeviceName.resolve_from_text("${home_device_temperature_name_item}")
+    var: device_name
+
+home_device_temperature_value:
+  - text: ${home_device_temperature_value_item}
+    code: |
+      ${home_device_temperature_value:var} = HomeDeviceValue.resolve_from_text("${home_device_temperature_value_item}")
+    var: device_value
+
+home_device_temperature_action_item:
+  - set
+  - change
+  - adjust
+  - turn up
+  - turn down
+
+home_device_temperature_name_item:
+  - the a/c ${unit|}
+  - the air conditioner ${unit|}
+  - the boiler
+  - the central heating ${system|unit|}
+  - the thermostat
+  - the heat
+
+home_device_temperature_value_item:
+  - to ${temperature} ${degrees|} ${c|celsius|f|fahrenheit|}
+  - ${up|down} ${by|} ${faker_random_digit_not_null} ${degrees|} ${c|celsius|f|fahrenheit|}
+
+home_device_states_action:
+  - text: ${home_device_states_action_item}
+    code: |
+      ${home_device_states_action:var} = HomeDeviceAction.resolve_from_text("${home_device_states_action_item}")
+    var: device_action
+
+home_device_states_name:
+  - text: ${home_device_states_name_item}
+    code: |
+      ${home_device_states_name:var} = HomeDeviceName.resolve_from_text("${home_device_states_name_item}")
+    var: device_name
+
+home_device_states_value:
+  - text: ${home_device_states_value_item}
+    code: |
+      ${home_device_states_value:var} = HomeDeviceValue.resolve_from_text("${home_device_states_value_item}")
+    var: device_value
+
+home_device_states_action_item:
+  - set
+  - change
+  - adjust
+
+home_device_states_name_item:
+  - the ${apartment|house|} ${alarm|security|} system
+  - the ${apartment|house|} windows
+  - the ${apartment|house|} doors
+
+home_device_states_value_item:
+  - "on"
+  - "off"
+  - open
+  - closed
+  - locked
+  - unlocked
+  - shut

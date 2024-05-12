@@ -1,0 +1,17 @@
+conditions:
+  - given that
+  - if
+  - in case
+  - in the event
+  - on the condition
+  - only if
+  - unless
+  - with the exception that
+  - having
+  - provided  
+  - providing
+else:
+  - otherwise
+  - else
+  - or else
+  - alternatively

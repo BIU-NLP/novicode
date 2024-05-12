@@ -1,0 +1,159 @@
+event_location:
+  - text: ${in_location}
+    code: ${in_location}
+    var: ${in_location:var}
+
+event_locations:
+  - text: ${in_locations}
+    code: ${in_locations}
+    var: ${in_locations:var}
+
+event_date_time:
+  - text: ${at_date_time}
+    code: ${at_date_time}
+    var: ${at_date_time:var}
+  - text: ${for_date_time}
+    code: ${for_date_time}
+    var: ${for_date_time:var}
+
+event_date_times:
+  - text: ${at_date_times}
+    code: ${at_date_times}
+    var: ${at_date_times:var}
+  - text: ${for_date_times}
+    code: ${for_date_times}
+    var: ${for_date_times:var}
+
+event_calendar:
+  - text: ${event_calendar_item}
+    code: |
+      ${event_calendar:var} = EventCalendar.resolve_from_text("${event_calendar_item}")
+    var: event_calendar
+
+event_calendar_item:
+  - my calendar
+  - my work calendar
+  - my personal calendar
+
+event_ticket_amount:
+  - text: ${faker_digit}
+    code: ${event_ticket_amount:var} = Amount.resolve_from_text("${faker_digit}")
+    var: amount
+
+event_name:
+  - text: ${event_name_item}
+    code: |
+      ${event_name:var} = EventName.resolve_from_text("${event_name_item}")
+    var: event_name
+    type: event_name
+
+event_names:
+  - text: ${event_name_items}
+    code: |
+      ${event_names:var} = EventName.resolve_many_from_text("${event_name_items}")
+    var: event_names
+    type: event_name
+
+event_name_item:
+  - a ${concert}
+  - a ${show}
+  - a ${game}
+  - a ${personal_event}
+  - a ${work_event}
+
+event_name_items:
+  - ${event_name_item.1} ${cc} ${event_name_item.2}
+  - ${event_name_item}s
+
+personal_event:
+  - graduation ceremony
+  - anniversary ${dinner|party|}
+  - birthday ${party|event|brunch|dinner|}
+  - ${name}'s birthday ${party|event|brunch|dinner|}
+  - dinner ${party|}
+  - party
+  - wedding ${ceremony|reception|}
+  - graduation ${party|ceremony|dinner|}
+  - movie ${night|date|}
+
+work_event:
+  - meeting
+  - conference ${call|meeting|}
+
+show:
+  - ${show_genre} event
+
+show_genre:
+  - standup comedy
+  - comedy show
+  - comedy
+  - play
+  - musical
+  - drama
+  - opera
+  - ballet
+  - magic show
+  - circus
+  - burlesque show
+  - drag show
+  - cabaret show
+  - variety show
+  - talent show
+
+concert:
+  - ${music_genre} ${event|concert|show}
+  - ${performer} ${concert|show|event}
+
+music_genre:
+  - heavy metal
+  - rock
+  - pop
+  - country
+  - jazz
+  - classical
+
+game:
+  - ${game_sport} ${game|match|tournament}
+
+game_sport:
+  - football
+  - NFL
+  - NBA
+  - baseball
+  - soccer
+  - hockey
+  - basketball
+  - tennis
+  - golf
+  - cricket
+  - rugby
+
+performer:
+  - Rihana
+  - Beyonce
+  - Ed Sheeran
+  - Taylor Swift
+  - Justin Bieber
+  - Drake
+  - Bruno Mars
+  - Ariana Grande
+  - Katy Perry
+  - Lady Gaga
+  - Maroon 5
+  - The Weeknd
+  - Coldplay
+  - Miley Cyrus
+  - Selena Gomez
+  - Justin Timberlake
+  - Nicki Minaj
+  - One Direction
+  - Adele
+  - Rihanna
+  - Eminem
+  - Taylor Swift
+  - Kanye West
+  - Shakira
+  - Jennifer Lopez
+  - Pitbull
+  - Enrique Iglesias
+  - Bruno Mars

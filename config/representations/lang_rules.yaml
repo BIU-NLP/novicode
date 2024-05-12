@@ -1,0 +1,377 @@
+rules:
+  # [ root [ * ] ] -> [ root [ S [ * ] ] ]
+  - match:
+      root: true
+    transformations:
+      - nest_children:
+          node:
+            current: true
+          node_args:
+            label: "S"
+    enabled: true
+    id: "root -> S"
+
+  # [ S|If|Else|ElseIf [ * ] ] -> [ S|If|Else|ElseIf [ Command [ * ] ] ]
+  - match:
+      label: ["S", "ccomp", "xcomp"]
+    transformations:
+      - nest_children:
+          node:
+            current: true
+          node_args:
+            label: "Command"
+    enabled: true
+    id: "[S|xcomp|ccomp] -> [S|xcomp|ccomp [Command]]"
+
+  # [ccomp|xcomp] -> [ccomp|xcomp [Command_clause]]
+  - match:
+      label: ["ccomp", "xcomp"]
+      skip:
+        - children:
+            - label: "Command_clause"
+        - parent: 
+            label: ["Command_clause"]
+    transformations:
+      - nest_children:
+          node:
+            current: true
+          node_args:
+            label: "Command_clause"
+    enabled: false
+    id: "[ccomp|xcomp] -> [ccomp|xcomp [Command_clause]]"
+
+  # [Action [advcl]] -> [Action [advcl [Command]]]
+  - match:
+      label: ["advcl"]
+      parent: 
+        label: ["Action"]
+      skip:
+        - children:
+            - label: "Command"
+    transformations:
+      - nest_children:
+          node:
+            current: true
+          node_args:
+            label: "Command"
+    enabled: true
+    id: "[Action [advcl]] -> [Action [advcl [Command]]]"
+
+  # [ Command [ * [ advcl|acl|advmod ] * ] ] -> [ Command [ Condition [ * [ advcl|acl|advmod ] * ] ] ]
+  - match:
+      label: ["Command", "Command_conj"]
+      children:
+        - label: ["acl", "advcl", "advmod", "parataxis"]
+          direct: true
+          text:
+            [
+              "^assuming",
+              "^given",
+              "^having",
+              "^if",
+              "^in case",
+              "^in the case",
+              "^provided",
+              "^should",
+              "^so long",
+              "^supposing",
+              "^unless",
+            ]
+      skip:
+        - parent:
+            label: "Test"
+        - children:
+            - label: ["acl", "advcl", "advmod", "parataxis"]
+              direct: true
+              text:
+                [
+                  "^assuming",
+                  "^given",
+                  "^having",
+                  "^if",
+                  "^in case",
+                  "^in the case",
+                  "^provided",
+                  "^should",
+                  "^so long",
+                  "^supposing",
+                  "^unless",
+                ]
+              siblings:
+                - label: "hd"
+                  left: 1
+    transformations:
+      - nest_children:
+          node:
+            current: true
+          node_args:
+            label: "Condition"
+    enabled: true
+    id: "[Command] -> [Command [Condition]]"
+
+  # [ Condition [ * ] ] -> [ Condition [ If [ * ] ] ]
+  - match:
+      label: ["Condition"]
+    transformations:
+      - nest_children:
+          node:
+            current: true
+          node_args:
+            label: "If"
+    enabled: true
+    id: "[Condition] -> [Condition [If]]"
+
+  # [ If [ * [ conj [ [ advcl ] * ] ] ] ] -> [ If [ * ] ElseIf [ [ advcl ] * ] ]
+  # [ If [ * [ parataxis ] ] ] -> [ If [ * ] ElseIf [ * ] ]
+  - match:
+      label: ["If", "ElseIf"]
+    transformations:
+      - add_sibling:
+          node:
+            children:
+              - label: ["acl", "advcl", "advmod", "parataxis"]
+                direct: true
+                text:
+                  [
+                    "^assuming",
+                    "^given",
+                    "^having",
+                    "^if",
+                    "^in case",
+                    "^in the case",
+                    "^provided",
+                    "^should",
+                    "^so long",
+                    "^supposing",
+                    "^unless",
+                  ]
+          parent:
+            label: "Condition"
+          node_args:
+            label: "ElseIf"
+        enabled: false
+      - add_sibling:
+          node:
+            children:
+              - label: ["conj"]
+                children:
+                  - label: ["acl", "advcl", "advmod", "parataxis"]
+                    direct: true
+                    text:
+                      [
+                        "^assuming",
+                        "^given",
+                        "^having",
+                        "^if",
+                        "^in case",
+                        "^in the case",
+                        "^provided",
+                        "^should",
+                        "^so long",
+                        "^supposing",
+                        "^unless",
+                      ]
+          parent:
+            label: "Condition"
+          rename_node:
+            label: "ElseIf"
+        enabled: true
+      - add_sibling:
+          node:
+            children:
+              - label: ["parataxis", "conj"]
+                text: ["^otherwise", "or else"]
+          rename_node:
+            label: "Else"
+    enabled: true
+    id: "[If] -> [IF] [ElseIf] [Else]"
+
+  # [ ElseIf|Else [ [ punct ] [ cc ] * ] ] -> [ punct ] [ cc ] [ ElseIf|Else [ * ] ]
+  - match:
+      label: ["punct", "cc"]
+      parent:
+        label: ["ElseIf", "Else"]
+    transformations:
+      - add_sibling:
+          node:
+            current: true
+
+  # [ If|ElseIf|Else [ * ] ] -> [ If|ElseIf|Else [ Body [ * ] ] ]
+  - match:
+      label: ["If", "ElseIf", "Else"]
+    transformations:
+      - nest_children:
+          node:
+            current: true
+          node_args:
+            label: "Body"
+    enabled: true
+    id: "[If|ElseIf|Else] -> [If|ElseIf|Else [Body]]"
+
+  # [ If|ElseIf [ Body [ * ] ] ] -> [ If|ElseIf [ Test [ * ] Body [ * ] ] ]
+  - match:
+      label: ["Body"]
+    transformations:
+      - add_sibling:
+          node:
+            children:
+              - label: ["acl", "advcl", "advmod", "parataxis"]
+                direct: true
+                text:
+                  [
+                    "^assuming",
+                    "^given",
+                    "^having",
+                    "^if",
+                    "^in case",
+                    "^in the case",
+                    "^provided",
+                    "^should",
+                    "^so long",
+                    "^supposing",
+                    "^unless",
+                  ]
+          parent:
+            label: ["If", "ElseIf"]
+          rename_node:
+            label: Test
+    enabled: true
+    id: "[If [Body]] -> [If [Test] [Body]]"
+
+  # [ If|ElseIf|Else [ Test [ * ] Body [ * ] ] ] -> [ If|ElseIf|(Else) [ Test [ Command [ * ] ] ] [ Body [ Command [ * ] ] ] ]
+  - match:
+      label: ["Body", "Test"]
+      parent:
+        label: ["If", "ElseIf", "Else"]
+        order: 0
+      skip:
+        - children:
+            - label: "Command"
+    transformations:
+      - nest_children:
+          node:
+            current: true
+          node_args:
+            label: "Command"
+    enabled: true
+    id: "[Test|Body] -> [Test|Body [Command]]"
+
+  # [ Test [ Command [ mark ] * ] ]  -> [ Test [ mark ] [ Command * ] ]
+  - match:
+      label: "mark"
+      text:
+        [
+          "^assuming",
+          "^given",
+          "^having",
+          "^if",
+          "^in case",
+          "^in the case",
+          "^provided",
+          "^should",
+          "^so long",
+          "^supposing",
+          "^unless",
+        ]
+      parent:
+        label: ["Command", "Command_conj"]
+        parent:
+          label: ["Test"]
+          order: 0
+    transformations:
+      - add_sibling:
+          node:
+            current: true
+    enabled: true
+    id: "[Test [Command [mark]]] -> [Test [mark] [Command]]"
+
+  # [ Test [ Command [ mark ] * ] ]  -> [ Test [ mark ] [ Command * ] ]
+  - match:
+      label: "mark"
+      parent:
+        label: ["Command", "Command_conj", "Action"]
+        parent:
+          label: ["advcl", "ccomp", "xcomp"]
+          order: 0
+    transformations:
+      - add_sibling:
+          node:
+            current: true
+    enabled: true
+    id: "[advcl|ccomp|xcomp [Command [mark]]] -> [advcl|ccomp|xcomp [mark] [Command]]"
+
+  # [ Command [ * conj ] ] -> [ Command ] [ Command_conj ]
+  - match:
+      label: ["Command", "Command_conj"]
+      children:
+        - label: "conj"
+          direct: true
+    transformations:
+      - add_sibling:
+          node:
+            children:
+              - label: "conj"
+                parent:
+                  label: "Command"
+          rename_node:
+            sibling: true
+            label_postfix: "_conj"
+    enabled: true
+    id: "[<sibling> [conj]] -> [[<sibling>] [<sibling>_conj]]"
+
+  # [ Command [ * ] ] -> [ Command [ Action [ * ] ] ]
+  - match:
+      label: ["Command", "Command_conj"]
+      skip:
+        - children:
+            - label: ["Condition", "Action"]
+    transformations:
+      - nest_children:
+          node:
+            current: true
+          node_args:
+            label: "Action"
+    enabled: true
+    id: "[Command] -> [Command [Action]]"
+
+  # [ Action [ [ nsubj ] * [ obj ] ] ] -> [ Action [ [ Arg [ nsubj ] ] * [ Arg [ obj ] ] ] ]
+  - match:
+      label: ["csubj", "iobj", "obj", "obl", "nsubj", "nmod"]
+      parent:
+        label: "Action"
+      skip:
+        - parent:
+            label: "Arg"
+    transformations:
+      - nest:
+          node:
+            current: true
+          node_args:
+            label: "Arg"
+    enabled: true
+    id: "[Action] -> [Action [Arg]]"
+
+  # [ <label>_conj [ [ punct ] [ cc ] * ] ] -> [ punct ] [ cc ] [ <label>_conj[ * ] ]
+  - match:
+      label: ["punct", "cc"]
+      parent:
+        label: [".*_conj"]
+    transformations:
+      - add_sibling:
+          node:
+            current: true
+    enabled: true
+    id: "[<label>_conj [cc *]] -> [[cc] [<label>_conj [*]]"
+
+  # [ <label>_conj [ [ punct ] [ cc ] * ] ] -> [ punct ] [ cc ] [ <label>_conj[ * ] ]
+  - match:
+      label: ["punct", "cc"]
+      parent:
+        label: ["Command", "Command_conj"]
+      index: 0
+    transformations:
+      - add_sibling:
+          node:
+            current: true
+    enabled: true
+    id: "[Command [* punct]] -> [Command [*]][punct]"

@@ -1,0 +1,59 @@
+class SmartHome(Action):
+    """
+    The SmartHome class contains all the methods of a virtual assistant agent in the smart home domain.
+    """
+    
+    @classmethod
+    def find_home_devices(
+        cls,
+        device_name: Optional[HomeDeviceName] = None,
+        device_action: Optional[HomeDeviceAction] = None,
+        device_value: Optional[HomeDeviceValue] = None,
+    ) -> List[HomeDeviceEntity]:
+        """
+        This class method finds smart home devices.
+
+        Parameters
+        ----------
+        device_name : HomeDeviceName, optional
+            The device name
+        device_action : HomeDeviceAction, optional
+            The action to be performed on the device
+        device_value : HomeDeviceValue, optional
+            The action's value to be set on the device
+
+        Returns
+        -------
+        List[HomeDeviceEntity]
+            A list of home device entities
+        """
+        pass
+
+    @classmethod
+    def execute_home_device_action(
+        cls,
+        date_time: Optional[DateTime] = None,
+        device_name: Optional[HomeDeviceName] = None,
+        device_action: Optional[HomeDeviceAction] = None,
+        device_value: Optional[HomeDeviceValue] = None,
+    ) -> HomeDeviceEntity:
+        """
+        This class method executes given actions on smart home devices.
+
+        Parameters
+        ----------
+        device_name : HomeDeviceName, optional
+            The device name
+        device_action : HomeDeviceAction, optional
+            The action to be performed on the device
+        device_value : HomeDeviceValue, optional
+            The action's value to be set on the device
+        date_time : DateTime, optional
+            The date and time of the action
+
+        Returns
+        -------
+        HomeDeviceEntity
+            Home device entity action is performed on
+        """
+        pass

@@ -1,0 +1,26 @@
+class WeatherAttribute(Entity, Resolvable):
+    """
+    The WeatherAttribute entity class is used to represent an attribute of the weather.
+    An attribute of the weather can be a weather condition (e.g., rain, sunny, cold, etc.).
+    """
+
+    pass
+
+
+class WeatherTemperature(Entity, Resolvable):
+    """
+    The WeatherTemperature entity class is used to represent a temperature of the weather.
+    A temperature of the weather can be a specific temperature, a range of temperatute, or a
+    description of temperature (e.g., less than 80 degrees).
+    """
+
+    pass
+
+
+class WeatherForecastEntity(Entity):
+    """
+    The WeatherForecastEntity class is used to represent a weather forecast. The find_weather_forecasts
+    in the Weather action class returns a list of this entity class.
+    """
+
+    pass

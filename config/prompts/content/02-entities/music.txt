@@ -1,0 +1,55 @@
+class Album(Entity, Resolvable):
+    """
+    The Album class is used to represent an album.
+    """
+
+    pass
+
+
+class Artist(Entity, Resolvable):
+    """
+    The Artist class is used to represent an artist.
+    """
+
+    pass
+
+
+class Genre(Entity, Resolvable):
+    """
+    The Genre class is used to represent a music genre.
+    """
+
+    pass
+
+
+class MusicType(Entity, Resolvable):
+    """
+    The MusicType class is used to represent a music type.
+    """
+
+    pass
+
+
+class MusicEntity(Entity):
+    """
+    The MusicEntity class is used to represent a music entity.
+    This class is returned by the play_music method in the Music action class. It represents the music to play.
+    """
+
+    pass
+
+
+class Playlist(Entity, Resolvable):
+    """
+    The Playlist class is used to represent a playlist.
+    """
+
+    pass
+
+
+class Song(Entity, Resolvable):
+    """
+    The Song class is used to represent a song.
+    """
+
+    pass

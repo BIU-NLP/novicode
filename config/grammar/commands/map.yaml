@@ -1,0 +1,19 @@
+map_commands:
+  - ${map_command_find}
+
+map_result_command:
+  - text: ${map_command_find}
+    code: ${map_command_find}
+    var: ${map_command_find:var}
+
+map_command_find:
+  - text: ${map_command_action} ${map_location}
+    code: |
+      ${map_location}
+      ${map_command_find:var} = Map.find_on_map(location=${map_location:var})
+      Responder.respond(response=${map_command_find:var})
+    var: map_locations
+
+map_command_action:
+  - find
+  - show ${me|}

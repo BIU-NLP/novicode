@@ -1,0 +1,87 @@
+class Messages(Action):
+    """
+    The Messages class contains all the methods of a virtual assistant agent in the messages domain.
+    """
+
+    @classmethod
+    def find_messages(
+        cls,
+        date_time: Optional[DateTime] = None,
+        sender: Optional[Contact] = None,
+        recipient: Optional[Contact] = None,
+        content: Optional[Content] = None,
+        message_status: Optional[MessageStatus] = None,
+        message_content_type: Optional[MessageContentType] = None,
+    ) -> List[MessageEntity]:
+        """
+        This class method find messages based on the given parameters.
+
+        Parameters
+        ----------
+        date_time : DateTime, optional
+            The date and time the message will be sent
+        sender : Contact, optional
+            The sender of the message
+        recipient : Contact, optional
+            The recipient of the message
+        content : Content, optional
+            The content of the message
+        message_status : MessageStatus, optional
+            The status of the message (e.g., open, send, read, unread)
+        message_content_type : MessageContentType, optional
+            The content type of the message
+
+        Returns
+        -------
+        List[MessageEntity]
+            The list of messages that were found
+        """
+        pass
+
+    @classmethod
+    def send_message(
+        cls,
+        recipient: Optional[Contact] = None,
+        content: Optional[Content] = None,
+        date_time: Optional[DateTime] = None,
+        message_content_type: Optional[MessageContentType] = None,
+    ) -> MessageEntity:
+        """
+        This class method send messages.
+
+        Parameters
+        ----------
+        recipient : Contact, optional
+            The recipient of the message
+        content : Content, optional
+            The content of the message
+        date_time : DateTime, optional
+            The date and time the message will be sent
+        message_content_type : MessageContentType, optional
+            The content type of the message
+
+        Returns
+        -------
+        MessageEntity
+            The message that was sent
+        """
+        pass
+
+    @classmethod
+    def delete_messages(
+        cls, messages: Union[MessageEntity, List[MessageEntity]]
+    ) -> List[MessageEntity]:
+        """
+        This class method deletes messages.
+
+        Parameters
+        ----------
+        messages : MessageEntity|List[MessageEntity], optional
+            The messages to be deleted. If a single message is passed, it will be converted to a list.
+
+        Returns
+        -------
+        List[MessageEntity]
+            a list of MessageEntity objects that were deleted
+        """
+        pass

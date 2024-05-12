@@ -1,0 +1,85 @@
+reminders_possession_verb:
+  - got
+  - have
+
+person_reminded_i:
+  - text: ${contact_i}
+    code: ${contact_i}
+    var: person_reminded
+
+person_reminded_me:
+  - text: for ${contact_me}
+    code: ${contact_me}
+    var: person_reminded
+
+person_reminded_my:
+  - text: ${contact_my}
+    code: ${contact_my}
+    var: person_reminded
+
+reminder_date_time:
+  - text: ${at_date_time}
+    code: ${at_date_time}
+    var: date_time
+    syn:
+      label: PP
+  - text: ${for_date_time}
+    code: ${for_date_time}
+    var: date_time
+    syn:
+      label: PP
+
+reminder_date_times:
+  - text: for ${date_times}
+    code: ${date_times}
+    var: date_times
+    syn:
+      label: PP
+
+reminder_content:
+  - text: ${reminder_content_item}
+    code: |
+      ${reminder_content:var} = Content.resolve_from_text("${reminder_content_item}")
+    var: content
+
+reminder_contents:
+  - text: ${reminder_content_item.1} ${cc} ${reminder_content_item.2}
+    code: |
+      ${reminder_contents:var} = Content.resolve_many_from_text("${reminder_content_item.1} ${cc} ${reminder_content_item.2}")
+    var: contents
+
+reminder_content_item:
+  - text: to bring a coat
+    code: bring a coat
+  - text: to leave 15 minutes earlier
+    code: leave 15 minutes earlier
+  - text: to walk the dog
+    code: walk the dog
+  - text: to call my mom
+    code: call my mom
+  - text: to call my dad
+    code: call my dad
+  - text: to feed the cat
+    code: feed the cat
+  - text: to close the window
+    code: close the window
+  - text: to lock the door
+    code: lock the door
+  - text: to turn off the lights
+    code: turn off the lights
+  - text: to bring the keys
+    code: bring the keys
+  - text: to message ${first_name_male} for his birthday
+    code: message ${first_name_male} for his birthday
+  - text: that I have a meeting at 3pm
+    code: I have a meeting at 3pm
+  - text: that the key is under the mat
+    code: the key is under the mat
+  - text: that the a/c is broken
+    code: the a/c is broken
+  - text: that the cake is in the fridge
+    code: the cake is in the fridge
+  - text: that the car is low on gas
+    code: the car is low on gas
+  - text: that the plants need water
+    code: the plants need water

@@ -1,0 +1,33 @@
+"""
+entities.generic
+"""
+
+
+class Content(Entity, Resolvable):
+
+    pass
+
+
+class Contact(Entity, Resolvable):
+
+    pass
+
+
+class DateTime(Entity, Resolvable):
+
+    pass
+
+
+class Location(Entity, Resolvable):
+
+    pass
+
+
+class Amount(Entity, Resolvable):
+
+    pass
+
+
+class TimeDuration(Entity, Resolvable):
+
+    pass

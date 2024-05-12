@@ -1,0 +1,378 @@
+products_command:
+  - text: ${products_command_find}
+    code: ${products_command_find}
+    var: ${products_command_find:var}
+  - text: ${products_command_shopping_list}
+    code: ${products_command_shopping_list}
+    var: ${products_command_shopping_list:var}
+  - text: ${products_command_order}
+    code: ${products_command_order}
+    var: ${products_command_order:var}
+  - text: ${products_command_query}
+    code: ${products_command_query}
+    var: ${products_command_query:var}
+
+products_command_find:
+  - text: ${products_find_action} ${products_comp_list}
+    code: |
+      ${products_comp_list}
+      Responder.respond(response=${products_comp_list:var})
+    var: ${products_comp_list:var}
+  - text: ${products_find_action} ${products_xcomp_list}
+    code: |
+      ${products_xcomp_list}
+      Responder.respond(response=${products_xcomp_list:var})
+    var: ${products_xcomp_list:var}
+
+products_command_query:
+  - text: ${query_command_verb} if ${products_comp_list}
+    code: |
+      ${products_comp_list}
+      Responder.respond(response=${products_comp_list:var})
+    var: ${products_comp_list:var}
+
+products_comp_list:
+  - text: ${product_name} that are ${product_attribute_suffix}
+    code: |
+      ${product_name}
+      ${product_attribute_suffix}
+      ${products_comp_list:var} = Shopping.find_products(product_name=${product_name:var}, product_attribute=${product_attribute_suffix:var})
+    var: products
+  - text: ${product_name} that are ${product_attribute_suffix} ${store}
+    code: |
+      ${product_name}
+      ${product_attribute_suffix}
+      ${store}
+      ${products_comp_list:var} = Shopping.find_products(product_name=${product_name:var}, product_attribute=${product_attribute_suffix:var}, location=${store:var})
+    var: products
+  - text: ${product_name} that are ${product_attribute_suffix} ${stores}
+    code: |
+      ${product_name}
+      ${product_attribute_suffix}
+      ${stores}
+      ${products_comp_list:var} = []
+      for location in ${stores:var}:
+        ${products_comp_list:var} += Shopping.find_products(product_name=${product_name:var}, product_attribute=${product_attribute_suffix:var}, location=location)
+    var: products
+  - text: ${product_name.1} that are ${product_attribute_suffix} ${cc} ${product_name.2} that are ${product_attribute_suffix}
+    code: |
+      ${product_name.1}
+      ${product_name.2}
+      ${product_attribute_suffix}
+      ${products_comp_list:var} = []
+      for product_name in [${product_name.1:var}, ${product_name.2:var}]:
+        ${products_comp_list:var} += Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_suffix:var})
+    var: products
+  - text: ${product_name.1} that are ${product_attribute_suffix} ${cc} ${product_name.2} that are ${product_attribute_suffix} ${store}
+    code: |
+      ${product_name.1}
+      ${product_name.2}
+      ${product_attribute_suffix}
+      ${store}
+      ${products_comp_list:var} = []
+      for product_name in [${product_name.1:var}, ${product_name.2:var}]:
+        ${products_comp_list:var} += Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_suffix:var}, location=${store:var})
+    var: products
+  - text: ${product_name.1} that are ${product_attribute_suffix} ${cc} ${product_name.2} that are ${product_attribute_suffix} ${stores}
+    code: |
+      ${product_name.1}
+      ${product_name.2}
+      ${product_attribute_suffix}
+      ${stores}
+      ${products_comp_list:var} = []
+      for product_name in [${product_name.1:var}, ${product_name.2:var}]:
+        for location in ${stores:var}:
+          ${products_comp_list:var} += Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_suffix:var}, location=location)
+    var: products
+  - text: ${product_names} that are ${product_attribute_suffix}
+    code: |
+      ${product_names}
+      ${product_attribute_suffix}
+      ${products_comp_list:var} = []
+      for product_name in ${product_names:var}:
+        ${products_comp_list:var} += Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_suffix:var})
+    var: products
+  - text: ${product_names} that are ${product_attribute_suffix} ${store}
+    code: |
+      ${product_names}
+      ${product_attribute_suffix}
+      ${store}
+      ${products_comp_list:var} = []
+      for product_name in ${product_names:var}:
+        ${products_comp_list:var} += Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_suffix:var}, location=${store:var})
+    var: products
+  - text: ${product_names} that are ${product_attribute_suffix} ${stores}
+    code: |
+      ${product_names}
+      ${product_attribute_suffix}
+      ${stores}
+      ${products_comp_list:var} = []
+      for product_name in ${product_names:var}:
+        for location in ${stores:var}:
+          ${products_comp_list:var} += Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_suffix:var}, location=location)
+    var: products
+
+products_xcomp_list:
+  - text: ${product_attribute_prefix} on ${product_name}
+    code: |
+      ${product_name}
+      ${product_attribute_prefix}
+      ${products_xcomp_list:var} = Shopping.find_products(product_name=${product_name:var}, product_attribute=${product_attribute_prefix:var})
+    var: products
+  - text: ${product_attribute_prefix} on ${product_names}
+    code: |
+      ${product_attribute_prefix}
+      ${product_names}
+      ${products_xcomp_list:var} = []
+      for product_name in ${product_names:var}:
+        ${products_xcomp_list:var} += Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_prefix:var})
+    var: products
+  - text: ${product_attribute_prefix} on ${product_name} ${store}
+    code: |
+      ${product_name}
+      ${product_attribute_prefix}
+      ${store}
+      ${products_xcomp_list:var} = Shopping.find_products(product_name=${product_name:var}, product_attribute=${product_attribute_prefix:var}, location=${store:var})
+    var: products
+  - text: ${product_attribute_prefix} on ${product_name.1} ${cc} ${product_attribute_prefix} on ${product_name.2}
+    code: |
+      ${product_attribute_prefix}
+      ${product_name.1}
+      ${product_name.2}
+      ${products_xcomp_list:var} = []
+      for product_name in [${product_name.1:var}, ${product_name.2:var}]:
+        ${products_xcomp_list:var} += Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_prefix:var})
+    var: products
+  - text: ${product_attribute_prefix} on ${product_name.1} ${cc} ${product_attribute_prefix} on ${product_name.2} ${store}
+    code: |
+      ${product_attribute_prefix}
+      ${product_name.1}
+      ${product_name.2}
+      ${store}
+      ${products_xcomp_list:var} = []
+      for product_name in [${product_name.1:var}, ${product_name.2:var}]:
+        ${products_xcomp_list:var} += Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_prefix:var}, location=${store:var})
+    var: products
+  - text: ${product_attribute_prefix} on ${product_name.1} ${cc} ${product_attribute_prefix} on ${product_name.2} ${stores}
+    code: |
+      ${product_attribute_prefix}
+      ${product_name.1}
+      ${product_name.2}
+      ${stores}
+      ${products_xcomp_list:var} = []
+      for product_name in [${product_name.1:var}, ${product_name.2:var}]:
+        for location in ${stores:var}:
+          ${products_xcomp_list:var} += Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_prefix:var}, location=location)
+    var: products
+  - text: ${product_attribute_prefix} on ${product_names} ${stores}
+    code: |
+      ${product_attribute_prefix}
+      ${product_names}
+      ${stores}
+      ${products_xcomp_list:var} = []
+      for product_name in ${product_names:var}:
+        for location in ${stores:var}:
+          ${products_xcomp_list:var} += Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_prefix:var}, location=location)
+    var: products
+
+products_command_shopping_list:
+  - text: add ${product_name} to ${shopping_list_name}
+    code: |
+      ${product_name}
+      ${shopping_list_name}
+      ${products_command_shopping_list:var} = Shopping.add_to_shopping_list(product_name=${product_name:var}, shopping_list_name=${shopping_list_name:var})
+    var: shopping_list
+  - text: add ${product_amount} ${product_name} to ${shopping_list_name}
+    code: |
+      ${product_amount}
+      ${product_name}
+      ${shopping_list_name}
+      ${products_command_shopping_list:var} = Shopping.add_to_shopping_list(product_name=${product_name:var}, amount=${product_amount:var}, shopping_list_name=${shopping_list_name:var})
+    var: shopping_list
+  - text: add ${product_names} to ${shopping_list_name}
+    code: |
+      ${product_names}
+      ${shopping_list_name}
+      ${products_command_shopping_list:var} = []
+      for product_name in ${product_names:var}:
+        ${products_command_shopping_list:var} += Shopping.add_to_shopping_list(product_name=product_name, shopping_list_name=${shopping_list_name:var})
+    var: shopping_list
+  - text: add ${product_amount.1} ${product_name.1} and ${product_amount.2} ${product_name.2} to ${shopping_list_name}
+    code: |
+      ${product_amount.1}
+      ${product_name.1}
+      ${product_amount.2}
+      ${product_name.2}
+      ${shopping_list_name}
+      ${products_command_shopping_list:var} = []
+      for product_name, amount in zip([${product_amount.1:var}, ${product_amount.2:var}], [${product_amount.1:var}, ${product_amount.2:var}]):
+        ${products_command_shopping_list:var} += Shopping.add_to_shopping_list(product_name=product_name, amount=amount, shopping_list_name=${shopping_list_name:var})
+    var: shopping_list
+
+shopping_command_shopping_list:
+  - text: ${products_find_action} shopping lists for ${date_time}
+    code: |
+      ${date_time}
+      ${shopping_command_shopping_list:var} = Shopping.find_shopping_lists(date_time=${date_time:var})
+  - text: ${products_find_action} shopping lists for ${date_time} ${store}
+    code: |
+      ${date_time}
+      ${store}
+      ${shopping_command_shopping_list:var} = Shopping.find_shopping_lists(date_time=${date_time:var}, location=${store:var})
+  - text: ${products_find_action} shopping lists for ${date_times}
+    code: |
+      ${date_times}
+      for date_time in ${date_times:var}:
+        ${shopping_command_shopping_list:var} = Shopping.find_shopping_lists(date_time=date_times)
+  - text: ${products_find_action} shopping lists for ${date_times} ${store}
+    code: |
+      ${date_times}
+      for date_time in ${date_times:var}:
+        ${shopping_command_shopping_list:var} = Shopping.find_shopping_lists(date_time=date_time, location=${store:var})
+
+products_command_order:
+  - text: ${order_action} ${product_name}
+    code: |
+      ${product_name}
+      ${products_command_order:var} = Shopping.order(product_name=product_name)
+    var: order
+  - text: ${order_action} ${product_amount} ${product_name}
+    code: |
+      ${product_name}
+      ${product_amount}
+      ${products_command_order:var} = Shopping.order(product_name=product_name, amount=${product_amount:var})
+    var: order
+  - text: ${order_action} ${product_names}
+    code: |
+      ${product_names}
+      ${products_command_order:var} = []
+      for product_name in ${product_names:var}:
+        ${products_command_order:var} += Shopping.order(product_name=product_name)
+    var: order
+  - text: ${order_action} ${product_amount.1} ${product_name.1} and ${product_amount.2} ${product_name.2}
+    code: |
+      ${product_amount.1}
+      ${product_name.1}
+      ${product_amount.2}
+      ${product_name.2}
+      ${products_command_order:var} = []
+      for product_name, amount in zip([${product_name.1:var}, ${product_name.2:var}], [${product_amount.1:var}, ${product_amount.2:var}]):
+        ${products_command_order:var} += Shopping.order(product_name=product_name, amount=amount)
+    var: order
+  - text: ${order_action} ${product_name} ${date_time}
+    code: |
+      ${product_name}
+      ${date_time}
+      ${products_command_order:var} = Shopping.order(product_name=product_name, date_time=${date_time:var})
+    var: order
+  - text: ${order_action} ${product_amount} ${product_name} ${date_time}
+    code: |
+      ${product_name}
+      ${product_amount}
+      ${date_time}
+      ${products_command_order:var} = Shopping.order(product_name=product_name, amount=${product_amount:var}, date_time=${date_time:var})
+    var: order
+  - text: ${order_action} ${product_names} ${date_time}
+    code: |
+      ${product_names}
+      ${date_time}
+      ${products_command_order:var} = []
+      for product_name in ${product_names:var}:
+        ${products_command_order:var} += Shopping.order(product_name=product_name, date_time=${date_time:var})
+    var: order
+  - text: ${order_action} ${product_amount.1} ${product_name.1} and ${product_amount.2} ${product_name.2} ${date_time}
+    code: |
+      ${product_amount.1}
+      ${product_name.1}
+      ${product_amount.2}
+      ${product_name.2}
+      ${date_time}
+      ${products_command_order:var} = []
+      for product_name, amount in zip([${product_name.1:var}, ${product_name.2:var}], [${product_amount.1:var}, ${product_amount.2:var}]):
+        ${products_command_order:var} += Shopping.order(product_name=product_name, amount=amount, date_time=${date_time:var})
+    var: order
+
+  - text: ${order_action} ${product_name} ${store}
+    code: |
+      ${product_name}
+      ${store}
+      ${products_command_order:var} = Shopping.order(product_name=product_name, location=${store:var})
+    var: order
+  - text: ${order_action} ${product_amount} ${product_name} ${store}
+    code: |
+      ${product_name}
+      ${product_amount}
+      ${store}
+      ${products_command_order:var} = Shopping.order(product_name=product_name, amount=${product_amount:var}, location=${store:var})
+    var: order
+  - text: ${order_action} ${product_names} ${store}
+    code: |
+      ${product_names}
+      ${store}
+      ${products_command_order:var} = []
+      for product_name in ${product_names:var}:
+        ${products_command_order:var} += Shopping.order(product_name=product_name, location=${store:var})
+    var: order
+  - text: ${order_action} ${product_amount.1} ${product_name.1} and ${product_amount.2} ${product_name.2} ${store}
+    code: |
+      ${product_amount.1}
+      ${product_name.1}
+      ${product_amount.2}
+      ${product_name.2}
+      ${store}
+      ${products_command_order:var} = []
+      for product_name, amount in zip([${product_name.1:var}, ${product_name.2:var}], [${product_amount.1:var}, ${product_amount.2:var}]):
+        ${products_command_order:var} += Shopping.order(product_name=product_name, amount=amount, location=${store:var})
+    var: order
+  - text: ${order_action} ${product_name} ${date_time} ${store}
+    code: |
+      ${product_name}
+      ${date_time}
+      ${store}
+      ${products_command_order:var} = Shopping.order(product_name=product_name, date_time=${date_time:var}, location=${store:var})
+    var: order
+  - text: ${order_action} ${product_amount} ${product_name} ${date_time} ${store}
+    code: |
+      ${product_name}
+      ${product_amount}
+      ${date_time}
+      ${store}
+      ${products_command_order:var} = Shopping.order(product_name=product_name, amount=${product_amount:var}, date_time=${date_time:var}, location=${store:var})
+    var: order
+  - text: ${order_action} ${product_names} ${date_time} ${store}
+    code: |
+      ${product_names}
+      ${date_time}
+      ${store}
+      ${products_command_order:var} = []
+      for product_name in ${product_names:var}:
+        ${products_command_order:var} += Shopping.order(product_name=product_name, date_time=${date_time:var}, location=${store:var})
+    var: order
+  - text: ${order_action} ${product_amount.1} ${product_name.1} and ${product_amount.2} ${product_name.2} ${date_time} ${store}
+    code: |
+      ${product_amount.1}
+      ${product_name.1}
+      ${product_amount.2}
+      ${product_name.2}
+      ${date_time}
+      ${store}
+      ${products_command_order:var} = []
+      for product_name, amount in zip([${product_name.1:var}, ${product_name.2:var}], [${product_amount.1:var}, ${product_amount.2:var}]):
+        ${products_command_order:var} += Shopping.order(product_name=product_name, amount=amount, date_time=${date_time:var}, location=${store:var})
+    var: order
+
+products_find_action:
+  - check for
+  - check the availability of
+  - show me
+  - find
+  - list
+  - search
+  - look for
+
+order_action:
+  - ${can you|} place an order for
+  - ${can you|} order
+  - ${can you|} buy
+  - ${can you|} purchase
+  - ${can you|} get ${me|}

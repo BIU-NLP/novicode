@@ -1,0 +1,165 @@
+class Calendar(Action):
+    """
+    The Calendar class contains all the methods of a virtual assistant agent in the calendar domain.
+    """
+
+    @classmethod
+    def delete_events(
+        cls,
+        date_time: Optional[DateTime] = None,
+        location: Optional[Location] = None,
+        event_name: Optional[EventName] = None,
+        event_calendar: Optional[EventCalendar] = None,
+        event_category: Optional[EventType] = None,
+    ) -> List[EventEntity]:
+        """
+        This class method deletes an event in the calendar.
+
+        Parameters
+        ----------
+        date_time : DateTime, optional
+            The date and time of the event
+        location : Location, optional
+            The location of the event
+        event_name : EventName, optional
+            The name of the event
+        event_calendar : EventCalendar, optional
+            The calendar to search for the event
+        event_category : EventType, optional
+            The category of the event
+
+        Returns
+        -------
+        List[EventEntity]
+            a list of EventEntity objects that were deleted
+        """
+        pass
+
+    @classmethod
+    def find_events(
+        cls,
+        date_time: Optional[DateTime] = None,
+        location: Optional[Location] = None,
+        event_name: Optional[EventName] = None,
+        event_calendar: Optional[EventCalendar] = None,
+        event_category: Optional[EventType] = None,
+    ) -> List[EventEntity]:
+        """
+        This class method finds events in the calendar.
+
+        Parameters
+        ----------
+        date_time : DateTime, optional
+            The date and time of the event
+        location : Location, optional
+            The location of the event
+        event_name : EventName, optional
+            The name of the event
+        event_calendar : EventCalendar, optional
+            The calendar to search for the event
+        event_category : EventType, optional
+            The category of the event
+
+        Returns
+        -------
+        List[EventEntity]
+            A list of EventEntity objects
+        """
+        pass
+
+    @classmethod
+    def find_events_tickets(
+        cls,
+        date_time: Optional[Union[DateTime, List[DateTime]]] = None,
+        location: Optional[Location] = None,
+        event_name: Optional[EventName] = None,
+        event_category: Optional[EventType] = None,
+        amount: Optional[Amount] = None,
+    ) -> List[EventTicketEntity]:
+        """
+        This class method finds tickets for events in the calendar.
+        It can be used to indicate the availablability of tickets for an event.
+
+        Parameters
+        ----------
+        date_time : DateTime, optional
+            The date and time of the event
+        location : Location, optional
+            The location of the event
+        event_name : EventName, optional
+            The name of the event
+        event_category : EventType, optional
+            The category of the event
+        amount : Amount, optional
+            The amount of tickets requested for the event
+
+        Returns
+        -------
+        List[EventTicketEntity]
+            A list of EventTicketEntity objects that are available for the event
+        """
+        pass
+
+    @classmethod
+    def purchase_tickets(
+        cls,
+        date_time: Optional[DateTime] = None,
+        location: Optional[Location] = None,
+        event_name: Optional[EventName] = None,
+        event_category: Optional[EventType] = None,
+        amount: Optional[Amount] = None,
+    ) -> EventTicketEntity:
+        """
+        This class method purchase tickets for events in the calendar.
+
+        Parameters
+        ----------
+        date_time : DateTime, optional
+            The date and time of the event
+        location : Location, optional
+            The location of the event
+        event_name : EventName, optional
+            The name of the event
+        event_category : EventType, optional
+            The category of the event
+        amount : Amount, optional
+            The amount of tickets requested for the event
+
+        Returns
+        -------
+        List[EventTicketEntity]
+            A list of EventTicketEntity objects that were purchased
+        """
+        pass
+
+    @classmethod
+    def schedule_event(
+        cls,
+        date_time: Optional[DateTime] = None,
+        location: Optional[Location] = None,
+        event_name: Optional[EventName] = None,
+        event_calendar: Optional[EventCalendar] = None,
+        event_category: Optional[EventType] = None,
+    ) -> EventEntity:
+        """
+        This class method schedules an event in the calendar.
+
+        Parameters
+        ----------
+        date_time : DateTime, optional
+            The date and time of the event
+        location : Location, optional
+            The location of the event
+        event_name : EventName, optional
+            The name of the event
+        event_calendar : EventCalendar, optional
+            The calendar to search for the event
+        event_category : EventType, optional
+            The category of the event
+
+        Returns
+        -------
+        EventEntity
+            The event that was scheduled
+        """ 
+        pass

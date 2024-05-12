@@ -1,0 +1,18 @@
+"""
+entities.messages
+"""
+
+
+class MessageEntity(Entity):
+
+    pass
+
+
+class MessageStatus(Entity, Resolvable):
+
+    pass
+
+
+class MessageContentType(Entity, Resolvable):
+
+    pass

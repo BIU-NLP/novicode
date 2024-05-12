@@ -1,0 +1,75 @@
+class Reminders(Action):
+    """
+    The Reminders class contains all the methods of a virtual assistant agent in the reminders domain.
+    """
+
+    @classmethod
+    def create_reminder(
+        cls,
+        content: Content,
+        person_reminded: Optional[Contact] = None,
+        date_time: Optional[DateTime] = None,
+    ) -> ReminderEntity:
+        """
+        This class method creates a reminder.
+
+        Parameters
+        ----------
+        content : Content
+            The content of the reminder.
+        person_reminded : Contact, optional
+            The person to be reminded.
+        date_time : DateTime, optional
+            The date and time of the reminder.
+
+        Returns
+        -------
+        ReminderEntity
+            The reminder entity object that was created
+        """
+        pass
+
+    @classmethod
+    def find_reminders(
+        cls,
+        person_reminded: Optional[Contact] = None,
+        date_time: Optional[DateTime] = None,
+        content: Optional[Content] = None,
+    ) -> List[ReminderEntity]:
+        """
+        This class method finds existing reminders.
+
+        Parameters
+        ----------
+        content : Content
+            The content of the reminder.
+        person_reminded : Contact, optional
+            The person to be reminded.
+        date_time : DateTime, optional
+            The date and time of the reminder.
+
+        Returns
+        -------
+        List[ReminderEntity]
+            A list of reminder entity objects that were found
+        """
+        pass
+
+    @classmethod
+    def delete_reminders(
+        cls, reminders: Union[ReminderEntity, List[ReminderEntity]]
+    ) -> List[ReminderEntity]:
+        """
+        This class method delete reminders.
+
+        Parameters
+        ----------
+        reminders : Union[ReminderEntity, List[ReminderEntity]]
+            The reminders to be deleted. Can be a single reminder or a list of reminders.
+
+        Returns
+        -------
+        List[ReminderEntity]
+            The list of reminders that were deleted
+        """
+        pass

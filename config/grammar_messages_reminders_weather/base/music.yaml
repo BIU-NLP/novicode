@@ -1,0 +1,152 @@
+artist:
+  - text: ${artist_name}
+    code: |
+      ${artist:var} = Artist.resolve_from_text("${artist_name}")
+    var: artist
+
+artists:
+  - text: ${artist_name.1} ${cc} ${artist_name.2}
+    code: |
+      ${artists:var} = Artist.resolve_many_from_text("${artist_name.1} ${cc} ${artist_name.2}")
+    var: artists
+
+artist_name:
+  - The Beatles
+  - The Rolling Stones
+  - U2
+  - Bob Dylan
+  - The Who
+  - Elvis Presley
+  - Michael Jackson
+  - Celine Dion
+  - Stevie Wonder
+  - John Lennon
+  - Paul McCartney
+  - Paul Simon
+  - Bruce Springsteen
+  - Madonna
+  - Elton John
+  - David Bowie
+  - Prince
+  - Aretha Franklin
+  - Stevie Nicks
+  - Neil Young
+  - Bob Marley
+  - Frank Sinatra
+  - Janis Joplin
+  - Dolly Parton
+  - Tina Turner
+  - Barbara Streisand
+  - Cher
+  - Whitney Houston
+  - Lady Gaga
+  - Beyonce
+  - Adele
+  - Katy Perry
+  - Britney Spears
+  - Justin Bieber
+  - Miley Cyrus
+  - Taylor Swift
+  - Rihanna
+  - Selena Gomez
+
+genre:
+  - text: ${genre_name}
+    code: |
+      ${genre:var} = Genre.resolve_from_text("${genre_name}")
+    var: genre
+
+genres:
+  - text: ${genre_name.1} ${cc} ${genre_name.2}
+    code: |
+      ${genres:var} = Genre.resolve_from_text("${genre_name.1} ${cc} ${genre_name.2}")
+    var: genres
+
+genre_name:
+  - jazz
+  - pop
+  - rock
+  - country
+  - classical
+  - blues
+  - folk
+  - hip hop
+  - rap
+  - reggae
+  - soul
+  - disco
+  - punk
+  - metal
+  - electronic
+  - alternative
+  - indie
+  - funk
+  - grunge
+  - techno
+  - house
+  - r&b
+  - gospel
+  - romantic
+  - dance
+
+song:
+  - text: ${song_name}
+    code: |
+      ${song:var} = Song.resolve_from_text("${song_name}")
+    var: song
+
+songs:
+  - text: ${song_name.1} ${cc} ${song_name.2}
+    code: |
+      ${songs:var} = Song.resolve_from_text("${song_name.1} ${cc} ${song_name.2}")
+    var: songs
+
+song_name:
+  - Like a Rolling Stone
+  - Satisfaction
+  - Imagine
+  - What's Going On
+  - Respect
+  - Good Vibrations
+  - Johnny B. Goode
+  - Hey Jude
+  - Smells Like Teen Spirit
+  - What'd I Say
+  - My Generation
+  - A Change Is Gonna Come
+  - Yesterday
+  - Blowin' in the Wind
+  - London Calling
+  - I Want to Hold Your Hand
+  - Purple Haze
+  - Maybellene
+  - Hound Dog
+  - Let It Be
+  - Born to Run
+  - Be My Baby
+  - In My Life
+  - People Get Ready
+  - God Only Knows
+  - A Day in the Life
+  - Layla
+  - The Dock of the Bay
+  - Help!
+  - I Walk the Line
+  - Stairway To Heaven
+  - Sympathy for the Devil
+  - River Deep
+  - You've Lost That Lovin' Feelin'
+  - Light My Fire
+  - One
+  - No Woman, No Cry
+  - Gimme Shelter
+  - That'll Be the Day
+  - Dancing in the Street
+  - The Weight
+  - Waterloo Sunset
+  - Tutti-Frutti
+  - Georgia on My Mind
+  - Heartbreak Hotel
+  - Heroes
+  - Bridge Over Troubled Water
+  - All Along the Watchtower

@@ -1,0 +1,498 @@
+to_location:
+  - text: to ${location_exact}
+    code: |
+      ${to_location:var} = Location.resolve_from_text("to ${location_exact}")
+    var: location
+    syn:
+      label: NN
+    type: location
+    coreference_value:
+      - value: there
+  - text: to the ${location_modifier_prefix} ${location_landmark_item}
+    code: |
+      ${to_location:var} = Location.resolve_from_text("to the ${location_modifier_prefix} ${location_landmark_item}")
+      ${to_location:var} = utils.sort(${to_location:var}, "${location_modifier_prefix}")
+      ${to_location:var} = utils.first(${to_location:var})
+    var: location
+    syn:
+      label: NP
+    type: location
+    coreference_value:
+      - value: there
+    weight: 0.25
+  - text: to the ${location_landmark_item} ${location_modifier_suffix}
+    code: |
+      ${to_location:var} = Location.resolve_from_text("to the ${location_landmark_item} ${location_modifier_suffix}")
+      ${to_location:var} = utils.sort(${to_location:var}, "${location_modifier_suffix}")
+      ${to_location:var} = utils.first(${to_location:var})
+    var: location
+    syn:
+      label: NP
+    type: location
+    coreference_value:
+      - value: there
+    weight: 0.1
+
+to_locations:
+  - text: to ${locations_exact}
+    code: |
+      ${to_locations:var} = Location.resolve_many_from_text("to ${locations_exact}")
+    var: location
+    syn:
+      label: NN
+    type: locations
+    coreference_value:
+      - value: there
+  - text: to the ${numbers} ${location_modifier_prefix} ${location_landmark_item}
+    code: |
+      ${to_locations:var} = Location.resolve_from_text("to the ${numbers} ${location_modifier_prefix} ${location_landmark_item}")
+      ${to_locations:var} = utils.sort(${to_locations:var}, "${location_modifier_prefix}")
+      ${to_locations:var} = utils.first(${to_locations:var}, ${numbers})
+    var: locations
+    syn:
+      label: NP
+    type: locations
+    coreference_value:
+      - value: there
+    weight: 0.25
+
+from_location:
+  - text: from ${location_exact}
+    code: |
+      ${from_location:var} = Location.resolve_from_text("from ${location_exact}")
+    var: location
+    syn:
+      label: PP
+    type: location
+    coreference_value:
+      - value: there
+  - text: from the ${location_modifier_prefix} ${location_landmark_item}
+    code: |
+      ${from_location:var} = Location.resolve_from_text("from the ${location_modifier_prefix} ${location_landmark_item}")
+      ${from_location:var} = utils.sort(${from_location:var}, "${location_modifier_prefix}")
+      ${from_location:var} = utils.first(${from_location:var})
+    var: location
+    syn:
+      label: NP
+    type: location
+    coreference_value:
+      - value: there
+    weight: 0.25
+  - text: from the ${location_landmark_item} ${location_modifier_suffix}
+    code: |
+      ${from_location:var} = Location.resolve_from_text("from the ${location_landmark_item} ${location_modifier_suffix}")
+      ${from_location:var} = utils.sort(${from_location:var}, "${location_modifier_suffix}")
+      ${from_location:var} = utils.first(${from_location:var})
+    var: location
+    syn:
+      label: NP
+    type: location
+    coreference_value:
+      - value: there
+    weight: 0.1
+
+from_locations:
+  - text: from ${locations_exact}
+    code: |
+      ${from_locations:var} = Location.resolve_many_from_text("from ${locations_exact}")
+    var: location
+    syn:
+      label: NN
+    type: locations
+    coreference_value:
+      - value: there
+  - text: from the ${numbers} ${location_modifier_prefix} ${location_landmark_item}
+    code: |
+      ${from_locations:var} = Location.resolve_from_text("from the ${numbers} ${location_modifier_prefix} ${location_landmark_item}")
+      ${from_locations:var} = utils.sort(${from_locations:var}, "${location_modifier_prefix}")
+      ${from_locations:var} = utils.first(${from_locations:var}, ${numbers})
+    var: locations
+    syn:
+      label: NP
+    coreference_value:
+      - value: there
+    weight: 0.25
+
+at_location:
+  - text: at ${location_exact}
+    code: |
+      ${at_location:var} = Location.resolve_from_text("at ${location_exact}")
+    var: location
+    syn:
+      label: NN
+    type: location
+    coreference_value:
+      - value: there
+  - text: at the ${location_modifier_prefix} ${location_landmark_item}
+    code: |
+      ${at_location:var} = Location.resolve_from_text("at the ${location_modifier_prefix} ${location_landmark_item}")
+      ${at_location:var} = utils.sort(${at_location:var}, "${location_modifier_prefix}")
+      ${at_location:var} = utils.first(${at_location:var})
+    var: location
+    syn:
+      label: NP
+    type: location
+    coreference_value:
+      - value: there
+    weight: 0.25
+  - text: at the ${location_landmark_item} ${location_modifier_suffix}
+    code: |
+      ${at_location:var} = Location.resolve_from_text("at the ${location_landmark_item} ${location_modifier_suffix}")
+      ${at_location:var} = utils.sort(${at_location:var}, "${location_modifier_suffix}")
+      ${at_location:var} = utils.first(${at_location:var})
+    var: location
+    syn:
+      label: NP
+    coreference_value:
+      - value: there
+    weight: 0.1
+
+at_locations:
+  - text: at ${locations_exact}
+    code: |
+      ${at_locations:var} = Location.resolve_many_from_text("at ${locations_exact}")
+    var: location
+    type: locations
+    syn:
+      label: NN
+    coreference_value:
+      - value: there
+  - text: at the ${numbers} ${location_modifier_prefix} ${location_landmark_item}
+    code: |
+      ${at_locations:var} = Location.resolve_from_text("at the ${numbers} ${location_modifier_prefix} ${location_landmark_item}")
+      ${at_locations:var} = utils.sort(${at_locations:var}, "${location_modifier_prefix}")
+      ${at_locations:var} = utils.first(${at_locations:var}, ${numbers})
+    var: locations
+    syn:
+      label: NP
+    coreference_value:
+      - value: there
+    weight: 0.25
+
+in_location:
+  - text: in ${location_exact}
+    code: |
+      ${in_location:var} = Location.resolve_from_text("in ${location_exact}")
+    var: location
+    type: location
+    syn:
+      label: NN
+    coreference_value:
+      - value: there
+  - text: in the ${location_modifier_prefix} ${location_landmark_item}
+    code: |
+      ${in_location:var} = Location.resolve_from_text("in the ${location_modifier_prefix} ${location_landmark_item}")
+      ${in_location:var} = utils.sort(${in_location:var}, "${location_modifier_prefix}")
+      ${in_location:var} = utils.first(${in_location:var})
+    var: location
+    type: location
+    syn:
+      label: NP
+    coreference_value:
+      - value: there
+    weight: 0.25
+  - text: in the ${location_landmark_item} ${location_modifier_suffix}
+    code: |
+      ${in_location:var} = Location.resolve_from_text("in the ${location_landmark_item} ${location_modifier_suffix}")
+      ${in_location:var} = utils.sort(${in_location:var}, "${location_modifier_suffix}")
+      ${in_location:var} = utils.first(${in_location:var})
+    var: location
+    type: location
+    syn:
+      label: NP
+    coreference_value:
+      - value: there
+    weight: 0.1
+
+in_locations:
+  - text: in ${locations_exact}
+    code: |
+      ${in_locations:var} = Location.resolve_many_from_text("in ${locations_exact}")
+    var: locations
+    syn:
+      label: NN
+    type: location
+    coreference_value:
+      - value: there
+  - text: in the ${numbers} ${location_modifier_prefix} ${location_landmark_item}
+    code: |
+      ${in_locations:var} = Location.resolve_from_text("in the ${numbers} ${location_modifier_prefix} ${location_landmark_item}")
+      ${in_locations:var} = utils.sort(${in_locations:var}, "${location_modifier_prefix}")
+      ${in_locations:var} = utils.first(${in_locations:var}, ${numbers})
+    var: locations
+    syn:
+      label: NP
+    coreference_value:
+      - value: there
+    weight: 0.25
+
+near_location:
+  - text: near ${location_landmark}
+    code: |
+      ${near_location:var} = Location.resolve_from_text("near ${location_landmark}")
+    var: location
+    type: location
+    syn:
+      label: PP
+  - text: near the ${location_modifier_prefix} ${location_landmark_item}
+    code: |
+      ${near_location:var} = Location.resolve_from_text("near the ${location_modifier_prefix} ${location_landmark_item}")
+      ${near_location:var} = utils.sort(${near_location:var}, "${location_modifier_prefix}")
+      ${near_location:var} = utils.first(${near_location:var})
+    var: location
+    type: location
+    syn:
+      label: NP
+    coreference_value:
+      - value: there
+    weight: 0.25
+  - text: near the ${location_landmark_item} ${location_modifier_suffix}
+    code: |
+      ${near_location:var} = Location.resolve_from_text("near the ${location_landmark_item} ${location_modifier_suffix}")
+      ${near_location:var} = utils.sort(${near_location:var}, "${location_modifier_suffix}")
+      ${near_location:var} = utils.first(${near_location:var})
+    var: location
+    type: location
+    syn:
+      label: NP
+    coreference_value:
+      - value: there
+    weight: 0.1
+
+on_location:
+  - text: on ${on_location_item}
+    code: |
+      ${on_location:var} = Location.resolve_from_text("${on_location_item}")
+    var: location
+    type: location
+    syn:
+      num: sg
+      label: PP
+    coreference_value:
+      - value: there
+
+on_locations:
+  - text: on ${on_location_item}
+    code: |
+      ${on_locations:var} = Location.resolve_many_from_text("${on_locations_item}")
+    var: locations
+    type: location
+    syn:
+      num: pl
+      label: PP
+    coreference_value:
+      - value: there
+
+location_proximity:
+  - text: ${location_proximity_item}
+    code: |
+      ${location_proximity:var} = Location.resolve_from_text("${location_proximity_item}")
+    var: location
+    type: location
+    syn:
+      label: PP
+
+locations_proximity:
+  - text: ${locations_proximity_item}
+    code: |
+      ${location_proximity:var} = Location.resolve_from_text("${location_proximity_item}")
+    var: location
+    type: location
+    syn:
+      label: PP
+
+location_path:
+  - text: ${location_path_item}
+    code: |
+      ${location_path_item:var} = Location.resolve_from_text("${location_path_item}")
+    var: location
+    type: location
+
+location:
+  - text: ${location_exact}
+    code: |
+      ${location:var} = Location.resolve_from_text("${location_exact}")
+    var: location
+    type: location
+    syn:
+      label: NN
+    coreference_value:
+      - value: there
+  - text: the ${location_modifier_prefix} ${location_landmark_item}
+    code: |
+      ${location:var} = Location.resolve_from_text("the ${location_modifier_prefix} ${location_landmark_item}")
+      ${location:var} = utils.sort(${location:var}, "${location_modifier_prefix}")
+      ${location:var} = utils.first(${location:var})
+    var: location
+    type: location
+    syn:
+      label: NP
+    coreference_value:
+      - value: there
+    weight: 0.25
+  - text: the ${location_landmark_item} ${location_modifier_suffix}
+    code: |
+      ${location:var} = Location.resolve_from_text("the ${location_landmark_item} ${location_modifier_suffix}")
+      ${location:var} = utils.sort(${location:var}, "${location_modifier_suffix}")
+      ${location:var} = utils.first(${location:var})
+    var: location
+    type: location
+    syn:
+      label: NP
+    coreference_value:
+      - value: there
+    weight: 0.1
+
+locations:
+  - text: ${locations_exact}
+    code: |
+      ${locations:var} = Location.resolve_many_from_text("${locations_exact}")
+    var: location
+    type: location
+    syn:
+      label: NN
+
+    coreference_value:
+      - value: there
+  - text: the ${numbers} ${location_modifier_prefix} ${location_landmark_item}
+    code: |
+      ${locations:var} = Location.resolve_from_text("the ${numbers} ${location_modifier_prefix} ${location_landmark_item}")
+      ${locations:var} = utils.sort(${locations:var}, "${location_modifier_prefix}")
+      ${locations:var} = utils.first(${locations:var}, ${numbers})
+    var: location
+    syn:
+      label: NP
+    coreference_value:
+      - value: there
+    weight: 0.25
+
+location_proximity_item:
+  - near ${location_exact}
+
+locations_proximity_item:
+  - near ${locations_exact}
+
+location_exact:
+  - ${location_general}
+  - ${location_relative}
+  - text: ${location_landmark}
+    code: ${location_landmark}
+    weight: 0.33
+
+locations_exact:
+  - ${location_general.1} ${cc} ${location_general.2}
+  - ${location_relative.1} ${cc} ${location_relative.2}
+  - text: ${location_landmark.1} ${cc} ${location_landmark.2}
+    code: ${location_landmark.1} ${cc} ${location_landmark.2}
+    weight: 0.1
+
+location_exact_micro:
+  - ${location_street_address}
+  - text: ${location_landmark}
+    code: ${location_landmark}
+    weight: 0.1
+
+location_general:
+  - ${faker_country}
+  - ${faker_city}
+  - ${faker_street_name}
+
+location_relative:
+  - my neighborhood
+  - my parents neighborhood
+  - my work place
+  - my office
+
+location_landmark:
+  - the ${location_landmark_item}
+
+location_landmark_item:
+  - airport
+  - bank
+  - bar
+  - beach
+  - bridge
+  - boulevard
+  - city center
+  - harbor
+  - park
+  - river
+  - sea
+  - sea shore
+  - hospital
+  - school
+  - university
+  - hotel
+  - motel
+  - inn
+  - lake
+  - mall
+  - restaurant
+  - cafe
+  - inn
+  - stadium
+  - theater
+  - YMCA
+  - museum
+  - zoo
+  - ${faker_brand} building
+  - ${faker_brand} office
+  - ${faker_brand} headquarters
+  - ${faker_brand} factory
+  - ${faker_brand} warehouse
+  - ${faker_brand} plant
+  - ${faker_brand} school
+  - ${faker_brand} hospital
+  - ${faker_brand} stadium
+  - ${faker_brand} theater
+  - ${faker_brand} mall
+  - ${faker_brand} store
+  - ${faker_brand} ${hotel|motel|inn}
+  - ${faker_brand} ${restaurant|cafe|bar}
+
+on_location_item:
+  - ${faker_street_name} ${road|street|avenue}
+
+on_locations_item:
+  - ${on_location_item.1} ${cc} ${on_location_item.2}
+
+location_path_item:
+  - text: highway ${faker_digit}
+    code: "highway ${faker_digit}"
+  - text: highway ${faker_two_digits}
+    code: "highway ${faker_two_digits}"
+  - text: hwy ${faker_digit}
+    code: "hwy ${faker_digit}"
+  - text: hwy ${faker_two_digits}
+    code: "hwy ${faker_two_digits}"
+  - text: I-${faker_digit}
+    code: "I-${faker_digit}"
+  - text: I-${faker_two_digits}
+    code: "I-${faker_two_digits}"
+  - text: Route ${faker_two_digits}
+    code: "Route ${faker_two_digits}"
+  - text: the freeway
+    code: "the freeway"
+  - text: the highway
+    code: "the highway"
+  - text: the tollroad
+    code: "the tollroad"
+
+location_modifier_prefix:
+  - closest
+  - nearest
+  - farthest
+  - furthest
+  - cheapest
+  - most expensive
+  - best
+  - worst
+  - highest rated
+  - lowest rated
+  - most popular
+  - least popular
+
+location_modifier_suffix:
+  - within walking distance
+  - within ${faker_digit} miles
+  - within ${faker_digit} miles of ${location_relative}

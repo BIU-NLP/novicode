@@ -1,0 +1,45 @@
+from __future__ import annotations
+from entities.entity import Entity
+from entities.resolvable import Resolvable
+
+
+class HomeDeviceName(Entity, Resolvable):
+    """
+    The HomeDeviceName is used to represent a home device name.
+    A home device name can be a specific name or a generic name. For example, "my front porch lights" or "the a/c".
+    It inherits from the Entity class and the Resolvable class.
+    """
+
+    pass
+
+
+class HomeDeviceAction(Entity, Resolvable):
+    """
+    The HomeDeviceAction is used to represent a home device action.
+    A home device action specify the action to perform on a home device. For example, "turn", "open" or "enable".
+    It is possible to have an unary HomeDeviceAction without any value.
+    It inherits from the Entity class and the Resolvable class.
+    """
+
+    pass
+
+
+class HomeDeviceValue(Entity, Resolvable):
+    """
+    The HomeDeviceValue is used to represent the value of an action on an home device.
+    A home device value specify the action to perform on a home device. For example, "on", "to 72 degrees"
+    or "shut".
+    It inherits from the Entity class and the Resolvable class.
+    """
+
+    pass
+
+
+class HomeDeviceEntity(Entity):
+    """
+    The HomeDeviceEntity class is used to represent a home device.
+    It is returned by the find_home_devices method in the Home action class.
+    It inherits from the Entity class.
+    """
+
+    pass

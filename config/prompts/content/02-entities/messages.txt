@@ -1,0 +1,30 @@
+class MessageEntity(Entity):
+    """
+    The MessageEntity class is used to represent a message. 
+    Messages are sent to a recipient, from a sender, at a specific date and time. The messages can be sent
+    from a specific application (like email, the messages app in the smart phone, or Whatsapp). Messages
+    include a content, an attachment and a content type (text, image, video, etc.). Messages can have a
+    status (sent, open).
+    It is returned by the send_message method in the Message action class.
+    """
+
+    pass
+
+
+class MessageStatus(Entity, Resolvable):
+    """
+    The MessageStatus class is used to represent a message status. A message status can be read or unread.
+    It is used in order to filter messages by status in the find_messages method in the Message action class.
+    """
+
+    pass
+
+
+class MessageContentType(Entity, Resolvable):
+    """
+    The MessageContentType class is used to represent a message content type. A message content type can be text or voice.
+    It is used in order to filter messages by content type in the find_messages method in the Message action class. Also,
+    it is used in order to specify the content type of a message in the send_message method in the Message action class.
+    """
+
+    pass

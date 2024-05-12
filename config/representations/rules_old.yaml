@@ -1,0 +1,181 @@
+# Description: Rules for the language model tree builder
+skip:
+  - label: ["ccomp", "scomp", "xcomp"]
+rules:
+  # root rules
+  - match:
+      root: true
+      skip:
+        - child:
+            label: "action"
+    nodes:
+      - nest:
+          node: true
+        node_args:
+          label: "action"
+    id: "root-0"
+  # sequence rules
+  - match:
+      head: true
+      parent:
+        label: "action"
+        direct: true
+      sibling:
+        - label: ["cc", "conj"]
+        - child:
+            node: true
+            label: ["cc", "conj"]
+      skip:
+        # - parent:
+        #     label: "prep"
+        - parent:
+            label: "action"
+            order: 1
+    nodes:
+      - node:
+          node: true
+        nest:
+          parent:
+            label: "action"
+        node_args:
+          label: "action"
+    enabled: true
+    id: "seq-0"
+  - match:
+      label: ["cc", "punct"]
+      sibling:
+        - label: ["conj"]
+    nodes:
+      - node:
+          node: true
+        add_child:
+          parent:
+            label: "action"
+            order: 1
+    enabled: true
+    id: "seq-1"
+  - match:
+      label: ["cc", "punct"]
+      parent:
+        label: "action"
+        direct: true
+      skip:
+        - sibling:
+            - label: "action"
+    nodes:
+      - node:
+          node: true
+        add_child:
+          parent:
+            label: "action"
+            order: 1
+    enabled: false
+    id: "seq-2"
+  - match:
+      label: ["conj"]
+      parent:
+        label: "action"
+        order: 1
+    nodes:
+      - node:
+          node: true
+        add_child:
+          parent:
+            label: "action"
+            order: 1
+          replace:
+            label: "action"
+    enabled: true
+    id: "seq-3"
+  - match:
+      label: ["conj"]
+      parent:
+        label: "action"
+        direct: true
+      skip:
+        - sibling:
+            - label: "action"
+    nodes:
+      - node:
+          node: true
+        add_child:
+          parent:
+            label: "action"
+            order: 1
+          replace:
+            label: "action"
+    enabled: false
+    id: "seq-4"
+
+  # condition rules
+  - match:
+      head: true
+      parent:
+        label: "action"
+      sibling:
+        - label: "advcl"
+        - child:
+            label: ["mark"]
+      skip:
+        - parent:
+            label: "action"
+            order: 2
+        - label: ["ccomp", "scomp", "xcomp"]
+        - child:
+            label: ["ccomp", "scomp", "xcomp"]
+        - sibling:
+            - label: ["ccomp", "scomp", "xcomp"]
+            - parent:
+                - label: ["ccomp", "scomp", "xcomp"]
+    nodes:
+      - node:
+          node: true
+        nest:
+          parent:
+            label: "action"
+        node_args:
+          label: "action"
+    enabled: false
+    id: "cond-0"
+
+  - match:
+      label: ["advcl"]
+      parent:
+        label: "action"
+      skip:
+        - label: ["ccomp", "scomp", "xcomp"]
+        - child:
+            label: ["ccomp", "scomp", "xcomp"]
+    nodes:
+      - node:
+          node: true
+        nest:
+          parent:
+            label: "action"
+        node_args:
+          label: "action"
+      - node:
+          node: true
+        add_child:
+          parent:
+            label: "action"
+            order: 1
+        node_args:
+          label: "trigger"
+      - node:
+          child:
+            label: "mark"
+        add_child:
+          sibling:
+            - parent:
+                - label: "trigger"
+      - node:
+          node: true
+        add_child:
+          sibling:
+            - parent:
+                - label: "trigger"
+        replace:
+          label: "action:test"
+    enabled: true
+    id: "cond-1"

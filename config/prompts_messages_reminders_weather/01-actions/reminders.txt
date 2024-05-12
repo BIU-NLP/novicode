@@ -1,0 +1,30 @@
+"""
+actions.reminders
+"""
+
+
+class Reminders(Action):
+
+    @classmethod
+    def create_reminder(
+        cls,
+        content: Content,
+        person_reminded: Optional[Contact] = None,
+        date_time: Optional[DateTime] = None,
+    ) -> ReminderEntity:
+        pass
+
+    @classmethod
+    def find_reminders(
+        cls,
+        person_reminded: Optional[Contact] = None,
+        date_time: Optional[DateTime] = None,
+        content: Optional[Content] = None,
+    ) -> List[ReminderEntity]:
+        pass
+
+    @classmethod
+    def delete_reminders(
+        cls, reminders: Union[ReminderEntity, List[ReminderEntity]]
+    ) -> List[ReminderEntity]:
+        pass

@@ -1,0 +1,39 @@
+text2code:
+  system_prompt: "You are a skilled programmer. You will be provided with a text description and your task is to convert it into Python code. You must use the provided API specifications and examples to guide your implementation."
+  user_prompt_examples: "Below are examples of text descriptions and their corresponding Python code implementations.\n"
+  user_prompt_spec: "Below are API specifications for implementing the description in code."
+  prediction_prompt: "convert the following text description into Python code:\n"
+  input_column: "text"
+  input_label: "Text"
+  output_column: "code"
+  output_label: "Code"
+
+text2rep:
+  system_prompt: "You are a skilled programmer. You will be provided with a text description and your task is to convert it into a dense variation of an Abstract Syntax Tree (AST) suitable for Python code. You must use the provided API specifications and examples to guide your implementation."
+  user_prompt_examples: "Below are examples of text descriptions and their corresponding dense ASTs for Python code.\n"
+  user_prompt_spec: "Below are API specifications for implementing the corresponding dense AST for Python code."
+  prediction_prompt: "convert the following text description into Python densed AST form:\n"
+  input_column: "text"
+  input_label: "Text"
+  output_column: "code_rep"
+  output_label: "Dense AST"
+
+rep2code: 
+  system_prompt: "You are a skilled programmer. You will be provided with a variation of a Universal Dependencies (UD) tree and your task is to convert it into Python code. You must use the provided API specifications and examples to guide your implementation."
+  user_prompt_examples: "Below are examples of variations of a Universal Dependencies (UD) trees and their corresponding Python code implementations.\n"
+  user_prompt_spec: "Below are the API specifications for implementing the description in code."
+  prediction_prompt: "convert the following variation of UD tree representation into Python code:\n"
+  input_column: "lang_rep"
+  input_label: "UD Tree variation"
+  output_column: "code"
+  output_label: "Code"
+  
+rep2rep:
+  system_prompt: "You are a skilled programmer. You will be provided with a variation of a Universal Dependencies (UD) tree and your task is to convert it into a dense variation of an Abstract Syntax Tree (AST) suitable for Python code. You must use the provided API specifications and examples to guide your implementation."
+  user_prompt_examples: "Below are examples of variations of a Universal Dependencies (UD) trees and their corresponding dense ASTs for Python code.\n"
+  user_prompt_spec: "Below are API specifications for implementing the corresponding dense AST for Python code."
+  prediction_prompt: "convert the following variation of UD tree representation into dense AST for Python code:\n"
+  input_column: "lang_rep"
+  input_label: "UD Tree variation"
+  output_column: "code_rep"
+  output_label: "Dense AST"

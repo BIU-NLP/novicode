@@ -1,0 +1,21 @@
+maps_query:
+  - text: ${maps_location_query}
+    code: ${maps_location_query}
+    var: ${maps_location_query:var}
+    type: query
+
+maps_location_query:
+  - text: there is ${map_location}
+    code: |
+      ${map_location}
+      map_entities = Map.find_on_map(location=${map_location:var})
+      ${maps_location_query:var} = bool(map_entities)
+    var: test_map_location
+  - text: find ${map_modifier} ${map_location} 
+    code: |
+      ${map_location}
+      map_entities = Map.find_on_map(location=${map_location:var})
+      map_entities = utils.sort(map_entities, "${map_modifier}")
+      map_entities = $(destinations)
+      ${maps_location_query:var} = bool(map_entities)
+    var: test_map_location

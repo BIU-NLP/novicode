@@ -1,0 +1,8 @@
+"""
+entities.reminders
+"""
+
+
+class ReminderEntity(Entity):
+
+    pass

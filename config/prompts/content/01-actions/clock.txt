@@ -1,0 +1,171 @@
+class Timer(Action):
+    """
+    The Timer class contains all the methods of a virtual assistant agent for using a timer in the clock domain.
+    """
+
+    @classmethod
+    def create_timer(
+        cls,
+        duration: Optional[TimeDuration] = None,
+        date_time: Optional[DateTime] = None,
+    ) -> TimerEntity:
+        """
+        This class method creates a timer.
+        A timer can be defined with a duration or a date and time.
+        If date and time are not specified, the timer will start immediately.
+
+        Parameters
+        ----------
+        duration : TimeDuration, optional
+            The duration of the timer.
+        date_time : DateTime, optional
+            The date and time of the timer.
+
+        Returns
+        -------
+        TimerEntity
+            The timer entity object
+        """
+        pass
+
+    @abstractclassmethod
+    def pause(
+        cls,
+        timer: Optional[TimerEntity] = None,
+    ) -> TimerEntity:
+        """
+        This class method pauses a timer.
+
+        Parameters
+        ----------
+        timer : Timer, optional
+            The timer to be paused
+
+        Returns
+        -------
+        TimerEntity
+            The timer object that was paused
+        """
+        pass
+
+    @classmethod
+    def restart(
+        cls,
+        timer: Optional[TimerEntity] = None,
+    ) -> bool:
+        """
+        This class method restarts a timer.
+
+        Parameters
+        ----------
+        timer : Timer, optional
+            The timer to be restarted
+
+        Returns
+        -------
+        TimerEntity
+            The timer object that was paused
+        """
+        pass
+
+    @classmethod
+    def stop(
+        cls,
+        timer: Optional[TimerEntity] = None,
+    ) -> bool:
+        """
+        This class method stops a timer.
+
+        Parameters
+        ----------
+        timer : Timer, optional
+            The timer to be stopped
+
+        Returns
+        -------
+        TimerEntity
+            The timer object that was paused
+        """
+        pass
+
+
+class Alarm:
+    """
+    The Alarm class contains all the methods of a virtual assistant agent for using a timer in the clock domain.
+    """
+
+    @classmethod
+    def create_alarm(
+        cls,
+        alarm_name: Optional[AlarmName] = None,
+        date_time: Optional[DateTime] = None,
+        song: Optional[Song] = None,
+        content: Optional[Content] = False,
+    ) -> AlarmEntity:
+        """
+        This class method creates an alarm.
+        An alarm is defined with a date and time and can optionally play a song or present a content.
+
+        Parameters
+        ----------
+        alarm_name: AlarmName, optional
+            The name of the alarm.
+        date_time : DateTime, optional
+            The date and time of the alarm.
+        song : Song, optional
+            The song to be played when the alarm is triggered.
+        content : Content, optional
+            The content to be presented when the alarm is triggered.
+
+        Returns
+        -------
+        AlarmEntity
+            The alarm entity object
+        """
+        pass
+
+    @classmethod
+    def update_alarm(
+        cls,
+        date_time: Optional[DateTime] = None,
+        alarm_name: Optional[AlarmName] = None,
+    ) -> AlarmEntity:
+        """
+        This class method updates an alarm.
+
+        Parameters
+        ----------
+        date_time : DateTime, optional
+            The date and time of the alarm.
+        alarm_name : AlarmName, optional
+            The alarm name.
+
+        Returns
+        -------
+        AlarmEntity
+            The alarm entity object that was updated
+        """
+        pass
+
+    @classmethod
+    def find_alarms(
+        cls,
+        date_time: Optional[DateTime],
+        alarm_name: Optional[AlarmName],
+    ) -> List[AlarmEntity]:
+        """
+        This class method finds existing alarms based on the provided parameters.
+
+        Parameters
+        ----------
+        date_time : DateTime, optional
+            The date and time of the alarm.
+        alarm_name : AlarmName, optional
+            The alarm name.
+
+        Returns
+        -------
+        List[AlarmEntity]
+            The alarm entity object that was updated
+        """
+        pass

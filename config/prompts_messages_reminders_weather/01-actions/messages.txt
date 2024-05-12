@@ -1,0 +1,49 @@
+"""
+actions.messages
+"""
+
+
+class Messages(Action):
+    """
+    The Messages class contains all the methods of a virtual assistant agent in the messages domain.
+    This class define a specific API for the messages domain and inherits from the markup Action class.
+    This class defines an API to:
+
+        * Find messages
+        * Send messages
+        * Delete messages
+
+    Messages are sent to a recipient, from a sender, at a specific date and time. The messages can be sent
+    from a specific application (like email, the messages app in the smart phone, or Whatsapp). Messages
+    include a content, an attachment and a content type (text, image, video, etc.). Messages can have a
+    status (sent, open).
+    """
+
+    @classmethod
+    def find_messages(
+        cls,
+        date_time: Optional[DateTime] = None,
+        sender: Optional[Contact] = None,
+        recipient: Optional[Contact] = None,
+        content: Optional[Content] = None,
+        message_status: Optional[MessageStatus] = None,
+        message_content_type: Optional[MessageContentType] = None,
+        app: Optional[App] = None,
+    ) -> List[MessageEntity]:
+        pass
+
+    @classmethod
+    def send_message(
+        cls,
+        recipient: Optional[Contact] = None,
+        content: Optional[Content] = None,
+        date_time: Optional[DateTime] = None,
+        message_content_type: Optional[MessageContentType] = None,
+    ) -> MessageEntity:
+        pass
+
+    @classmethod
+    def delete_messages(
+        cls, messages: Union[MessageEntity, List[MessageEntity]]
+    ) -> List[MessageEntity]:
+        pass

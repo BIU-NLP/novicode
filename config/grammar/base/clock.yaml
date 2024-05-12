@@ -1,0 +1,7 @@
+alarm_date_time:
+  - for ${exact_date_time}
+  - for ${from_date_time}
+
+alarm_date_times:
+  - for ${exact_date_times}
+  - for ${from_date_times}

@@ -1,0 +1,169 @@
+weather_attribute:
+  - text: it ${weather_attribute_term}
+    code: |
+      ${weather_attribute:var} = WeatherAttribute.resolve_from_text("${weather_attribute_term}")
+    var: weather_attribute
+    syn:
+      label: VP
+  - text: it is expected to be ${weather_attribute_gerund_term}
+    code: |
+      ${weather_attribute:var} = WeatherAttribute.resolve_from_text("${weather_attribute_term}")
+    var: weather_attribute
+    syn:
+      label: VP
+
+weather_attributes:
+  - text: it ${weather_attribute_terms}
+    code: |
+      ${weather_attributes:var} = WeatherAttribute.resolve_many_from_text("${weather_attribute_terms}")
+    var: weather_attributes
+    syn:
+      label: VP
+  - text: it ${weather_attribute_gerund_terms}
+    code: |
+      ${weather_attributes:var} = WeatherAttribute.resolve_many_from_text("${weather_attribute_gerund_terms}")
+    var: weather_attributes
+    syn:
+      label: VP
+
+weather_temperature:
+  - text: it is ${expected to be|} ${weather_temperature_item}
+    code: |
+      ${weather_temperature:var} = WeatherTemperature.resolve_from_text("${weather_temperature_item}")
+    var: weather_temperature
+    syn:
+      label: VP
+
+weather_attribute_term:
+  - rains
+  - snows
+  - freezes
+  - hails
+  - sleets
+  - drizzles
+  - pours
+  - will be sunny
+  - will be nice
+  - will be warm
+  - will be cold
+  - will be chilly
+  - will be hot
+  - will be cool
+  - will be breezy
+  - will be stormy
+  - will be thundering
+  - will be lightning
+  - will be hazy
+  - will be smoggy
+  - will be dusty
+  - will be foggy
+  - will be cloudy
+  - will be humid
+  - will be dry
+  - will be windy
+
+weather_attribute_terms:
+  - ${weather_attribute_term.1} ${cc} ${weather_attribute_term.2}
+
+weather_attribute_gerund_term:
+  - raining
+  - snowing
+  - freezing
+  - nice
+  - warm
+  - sunny
+  - windy
+  - foggy
+  - cloudy
+  - chilly
+  - humid
+  - dry
+  - hot
+  - cold
+  - cool
+  - breezy
+  - stormy
+  - hailing
+  - sleeting
+  - drizzling
+  - pouring
+  - misting
+  - sprinkling
+  - blizzarding
+  - thundering
+  - lightning
+  - hazy
+  - smoggy
+  - dusty
+
+weather_attribute_gerund_terms:
+  - ${weather_attribute_gerund_term.1} ${cc} ${weather_attribute_gerund_term.2}
+
+weather_location:
+  - text: ${at_location}
+    code: ${at_location}
+    var: location
+    weight: 0.25
+  - text: ${in_location}
+    code: ${in_location}
+    var: location
+  - text: ${on_location}
+    code: ${on_location}
+    var: location
+    weight: 0.25
+
+weather_locations:
+  - text: ${at_locations}
+    code: ${at_locations}
+    var: location
+    weight: 0.25
+  - text: ${in_locations}
+    code: ${in_locations}
+    var: location
+  - text: ${on_locations}
+    code: ${on_locations}
+    var: location
+    weight: 0.25
+
+weather_date_time:
+  - text: ${at_date_time}
+    code: ${at_date_time}
+    var: date_time
+    type: date_time
+    coreference_value:
+      - value: at that time
+  - text: ${on_date_time}
+    code: ${on_date_time}
+    var: date_time
+    type: date_time
+    coreference_value:
+      - value: at that time
+  - text: ${now_date_time}
+    code: ${now_date_time}
+    var: date_time
+    type: date_time
+    coreference_value:
+      - value: at that time
+    weight: 0.25
+
+weather_date_times:
+  - text: ${every_date_times}
+    code: ${every_date_times}
+    var: date_times
+    coreference_value:
+      - value: at that time
+  - text: ${on_date_times}
+    code: ${on_date_times}
+    var: date_times
+    coreference_value:
+      - value: at that time
+
+weather_temperature_item:
+  - ${above|below|exactly|around} ${temperature} ${degrees|degrees fahrenheit|degrees celsius|}
+  - between ${temperature.1} and ${temperature.2} ${degrees|degrees fahrenheit|degrees celsius|}
+  - ${temperature.1} or ${temperature.2}
+  - above ${temperature.1} ${but|and} below ${temperature.2} ${degrees|degrees fahrenheit|degrees celsius|}
+  - below ${temperature.1} ${but|and} above ${temperature.2} ${degrees|degrees fahrenheit|degrees celsius|}
+
+temperature:
+  - ${faker_random_digit_not_null.1}${faker_random_digit_not_null.2}

@@ -1,0 +1,667 @@
+weather_query:
+  - text: ${weaather_query_simple}
+    code: ${weaather_query_simple}
+    var: ${weaather_query_simple:var}
+    type: query
+  - text: ${weather_query_command}
+    code: ${weather_query_command}
+    var: ${weather_query_command:var}
+    type: query
+    weight: 0.25
+
+weather_query_simple:
+  - text: ${weather_attribute} ${weather_date_time}
+    code: |
+      ${weather_attribute}
+      ${weather_date_time}
+      weather_forecasts = Weather.find_weather_forecasts(date_time=${weather_date_time:var}, weather_attribute=${weather_attribute:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_attributes} ${weather_date_time}
+    code: |
+      ${weather_attributes}
+      ${weather_date_time}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=${weather_date_time:var}, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_attribute} ${weather_date_times}
+    code: |
+      ${weather_attribute}
+      ${weather_date_times}
+      weather_forecasts = []
+      for date_time in ${weather_date_times:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, weather_attribute=${weather_attribute:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_attributes} ${weather_date_times}
+    code: |
+      ${weather_attributes}
+      ${weather_date_times}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        for date_time in ${weather_date_times:var}:
+          weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_attribute} ${weather_date_time} ${weather_location}
+    code: |
+      ${weather_attribute}
+      ${weather_date_time}
+      ${weather_location}
+      weather_forecasts = Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=${weather_location:var}, weather_attribute=${weather_attribute:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_attributes} ${weather_date_time} ${weather_location}
+    code: |
+      ${weather_attributes}
+      ${weather_date_time}
+      ${weather_location}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=${weather_location:var}, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_attribute} ${weather_date_times} ${weather_location}
+    code: |
+      ${weather_attribute}
+      ${weather_date_times}
+      ${weather_location}
+      weather_forecasts = []
+      for date_time in ${weather_date_times:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=${weather_location:var}, weather_attribute=${weather_attribute:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_attribute} ${weather_date_time} ${weather_locations}
+    code: |
+      ${weather_attribute}
+      ${weather_date_time}
+      ${weather_locations}
+      weather_forecasts = []
+      for location in ${weather_locations:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=location, weather_attribute=${weather_attribute:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_attributes} ${weather_date_times} ${weather_location}
+    code: |
+      ${weather_attributes}
+      ${weather_date_times}
+      ${weather_location}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        for date_time in ${weather_date_times:var}:
+          weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=${weather_location:var}, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_attributes} ${weather_date_time} ${weather_locations}
+    code: |
+      ${weather_attributes}
+      ${weather_date_time}
+      ${weather_locations}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        for location in ${weather_locations:var}:
+          weather_forecasts += Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=location, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_attribute} ${weather_date_times} ${weather_locations}
+    code: |
+      ${weather_attribute}
+      ${weather_date_times}
+      ${weather_locations}
+      weather_forecasts = []
+      for date_times in ${weather_date_times:var}:
+        for location in ${weather_locations:var}:
+          weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=location, weather_attribute=${weather_attribute:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_attributes} ${weather_date_times} ${weather_locations}
+    code: |
+      ${weather_attributes}
+      ${weather_date_times}
+      ${weather_locations}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        for date_time in ${weather_date_times:var}:
+          for location in ${weather_locations:var}:
+            weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=location, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_attribute} ${weather_location} ${weather_date_time}
+    code: |
+      ${weather_attribute}
+      ${weather_location}
+      ${weather_date_time}
+      weather_forecasts = Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=${weather_location:var}, weather_attribute=${weather_attribute:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_attributes} ${weather_location} ${weather_date_time}
+    code: |
+      ${weather_attributes}
+      ${weather_location}
+      ${weather_date_time}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=${weather_location:var}, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_attribute} ${weather_locations} ${weather_date_time}
+    code: |
+      ${weather_attribute}
+      ${weather_locations}
+      ${weather_date_time}
+      weather_forecasts = []
+      for location in ${weather_locations:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=location, weather_attribute=${weather_attribute:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_attribute} ${weather_location} ${weather_date_times}
+    code: |
+      ${weather_attribute}
+      ${weather_location}
+      ${weather_date_times}
+      weather_forecasts = []
+      for date_time in ${weather_date_times:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=${weather_location:var}, weather_attribute=${weather_attribute:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_attributes} ${weather_locations} ${weather_date_time}
+    code: |
+      ${weather_attributes}
+      ${weather_locations}
+      ${weather_date_time}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        for location in ${weather_locations:var}:
+          weather_forecasts += Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=location, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_attributes} ${weather_location} ${weather_date_times}
+    code: |
+      ${weather_attributes}
+      ${weather_location}
+      ${weather_date_times}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        for date_time in ${weather_date_times:var}:
+          weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=${weather_location:var}, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_attributes} ${weather_locations} ${weather_date_times}
+    code: |
+      ${weather_attributes}
+      ${weather_locations}
+      ${weather_date_times}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        for location in ${weather_locations:var}:
+          for date_time in ${weather_date_times:var}:
+            weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=location, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_location} ${weather_attribute} ${weather_date_time}
+    code: |
+      ${weather_location}
+      ${weather_attribute}
+      ${weather_date_time}
+      weather_forecasts = Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=${weather_location:var}, weather_attribute=${weather_attribute:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_location} ${weather_attributes} ${weather_date_time}
+    code: |
+      ${weather_location}
+      ${weather_attributes}
+      ${weather_date_time}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=${weather_location:var}, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_locations} ${weather_attribute} ${weather_date_time}
+    code: |
+      ${weather_locations}
+      ${weather_attribute}
+      ${weather_date_time}
+      weather_forecasts = []
+      for location in ${weather_locations:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=location, weather_attribute=${weather_attribute:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_location} ${weather_attribute} ${weather_date_times}
+    code: |
+      ${weather_location}
+      ${weather_attribute}
+      ${weather_date_times}
+      weather_forecasts = []
+      for date_time in ${weather_date_times:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=${weather_location:var}, weather_attribute=${weather_attribute:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_locations} ${weather_attributes} ${weather_date_time}
+    code: |
+      ${weather_locations}
+      ${weather_attributes}
+      ${weather_date_time}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        for location in ${weather_locations:var}:
+          weather_forecasts += Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=location, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_location} ${weather_attributes} ${weather_date_times}
+    code: |
+      ${weather_location}
+      ${weather_attributes}
+      ${weather_date_times}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        for date_time in ${weather_date_times:var}:
+          weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=${weather_location:var}, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_locations} ${weather_attributes} ${weather_date_times}
+    code: |
+      ${weather_locations}
+      ${weather_attributes}
+      ${weather_date_times}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        for location in ${weather_locations:var}:
+          for date_time in ${weather_date_times:var}:
+            weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=location, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_date_time} ${weather_location} ${weather_attribute}
+    code: |
+      ${weather_date_time}
+      ${weather_location}
+      ${weather_attribute}
+      weather_forecasts = Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=${weather_location:var}, weather_attribute=${weather_attribute:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_date_time} ${weather_location} ${weather_attributes}
+    code: |
+      ${weather_date_time}
+      ${weather_location}
+      ${weather_attributes}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=${weather_location:var}, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_date_time} ${weather_locations} ${weather_attribute}
+    code: |
+      ${weather_date_time}
+      ${weather_locations}
+      ${weather_attribute}
+      weather_forecasts = []
+      for location in ${weather_locations:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=location, weather_attribute=${weather_attribute:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_date_times} ${weather_location} ${weather_attribute}
+    code: |
+      ${weather_date_times}
+      ${weather_location}
+      ${weather_attribute}
+      weather_forecasts = []
+      for date_time in ${weather_date_times:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=${weather_location:var}, weather_attribute=${weather_attribute:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_date_time} ${weather_locations} ${weather_attributes}
+    code: |
+      ${weather_date_time}
+      ${weather_locations}
+      ${weather_attributes}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        for location in ${weather_locations:var}:
+          weather_forecasts += Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=location, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_date_times} ${weather_location} ${weather_attributes}
+    code: |
+      ${weather_date_times}
+      ${weather_location}
+      ${weather_attributes}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        for date_time in ${weather_date_times:var}:
+          weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=${weather_location:var}, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_date_times} ${weather_locations} ${weather_attributes}
+    code: |
+      ${weather_date_times}
+      ${weather_locations}
+      ${weather_attributes}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        for location in ${weather_locations:var}:
+          for date_time in ${weather_date_times:var}:
+            weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=location, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_date_time} ${weather_attribute} ${weather_location}
+    code: |
+      ${weather_date_time}
+      ${weather_attribute}
+      ${weather_location}
+      weather_forecasts = Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=${weather_location:var}, weather_attribute=${weather_attribute:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_date_time} ${weather_attributes} ${weather_location}
+    code: |
+      ${weather_date_time}
+      ${weather_attributes}
+      ${weather_location}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=${weather_location:var}, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_date_time} ${weather_attribute} ${weather_locations}
+    code: |
+      ${weather_date_time}
+      ${weather_attribute}
+      ${weather_locations}
+      weather_forecasts = []
+      for location in ${weather_locations:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=location, weather_attribute=${weather_attribute:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_date_times} ${weather_attribute} ${weather_location}
+    code: |
+      ${weather_date_times}
+      ${weather_attribute}
+      ${weather_location}
+      weather_forecasts = []
+      for date_time in ${weather_date_times:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=${weather_location:var}, weather_attribute=${weather_attribute:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_date_time} ${weather_attributes} ${weather_locations}
+    code: |
+      ${weather_date_time}
+      ${weather_attributes}
+      ${weather_locations}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        for location in ${weather_locations:var}:
+          weather_forecasts += Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=location, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_date_times} ${weather_attributes} ${weather_location}
+    code: |
+      ${weather_date_times}
+      ${weather_attributes}
+      ${weather_location}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        for date_time in ${weather_date_times:var}:
+          weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=${weather_location:var}, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_date_times} ${weather_attributes} ${weather_locations}
+    code: |
+      ${weather_date_times}
+      ${weather_attributes}
+      ${weather_locations}
+      weather_forecasts = []
+      for weather_attribute in ${weather_attributes:var}:
+        for location in ${weather_locations:var}:
+          for date_time in ${weather_date_times:var}:
+            weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=location, weather_attribute=weather_attribute)
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_temperature} ${weather_date_time}
+    code: |
+      ${weather_temperature}
+      ${weather_date_time}
+      weather_forecasts = Weather.find_weather_forecasts(date_time=${weather_date_time:var}, weather_temperature=${weather_temperature:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_temperature} ${weather_date_times}
+    code: |
+      ${weather_temperature}
+      ${weather_date_times}
+      weather_forecasts = []
+      for date_time in ${weather_date_times:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, weather_temperature=${weather_temperature:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_temperature} ${weather_date_time} ${weather_location}
+    code: |
+      ${weather_temperature}
+      ${weather_date_time}
+      ${weather_location}
+      weather_forecasts = Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=${weather_location:var}, weather_temperature=${weather_temperature:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_temperature} ${weather_date_times} ${weather_location}
+    code: |
+      ${weather_temperature}
+      ${weather_date_times}
+      ${weather_location}
+      weather_forecasts = []
+      for date_time in ${weather_date_times:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=${weather_location:var}, weather_temperature=${weather_temperature:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_temperature} ${weather_date_time} ${weather_locations}
+    code: |
+      ${weather_temperature}
+      ${weather_date_time}
+      ${weather_locations}
+      weather_forecasts = []
+      for location in ${weather_locations:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=location, weather_temperature=${weather_temperature:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_temperature} ${weather_date_times} ${weather_locations}
+    code: |
+      ${weather_temperature}
+      ${weather_date_times}
+      ${weather_locations}
+      weather_forecasts = []
+      for date_times in ${weather_date_times:var}:
+        for location in ${weather_locations:var}:
+          weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=location, weather_temperature=${weather_temperature:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_temperature} ${weather_location} ${weather_date_time}
+    code: |
+      ${weather_temperature}
+      ${weather_location}
+      ${weather_date_time}
+      weather_forecasts = Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=${weather_location:var}, weather_temperature=${weather_temperature:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_temperature} ${weather_locations} ${weather_date_time}
+    code: |
+      ${weather_temperature}
+      ${weather_locations}
+      ${weather_date_time}
+      weather_forecasts = []
+      for location in ${weather_locations:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=location, weather_temperature=${weather_temperature:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_temperature} ${weather_location} ${weather_date_times}
+    code: |
+      ${weather_temperature}
+      ${weather_location}
+      ${weather_date_times}
+      weather_forecasts = []
+      for date_time in ${weather_date_times:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=${weather_location:var}, weather_temperature=${weather_temperature:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_location} ${weather_temperature} ${weather_date_time}
+    code: |
+      ${weather_location}
+      ${weather_temperature}
+      ${weather_date_time}
+      weather_forecasts = Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=${weather_location:var}, weather_temperature=${weather_temperature:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_locations} ${weather_temperature} ${weather_date_time}
+    code: |
+      ${weather_locations}
+      ${weather_temperature}
+      ${weather_date_time}
+      weather_forecasts = []
+      for location in ${weather_locations:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=location, weather_temperature=${weather_temperature:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_location} ${weather_temperature} ${weather_date_times}
+    code: |
+      ${weather_location}
+      ${weather_temperature}
+      ${weather_date_times}
+      weather_forecasts = []
+      for date_time in ${weather_date_times:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=${weather_location:var}, weather_temperature=${weather_temperature:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_date_time} ${weather_location} ${weather_temperature}
+    code: |
+      ${weather_date_time}
+      ${weather_location}
+      ${weather_temperature}
+      weather_forecasts = Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=${weather_location:var}, weather_temperature=${weather_temperature:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_date_time} ${weather_locations} ${weather_temperature}
+    code: |
+      ${weather_date_time}
+      ${weather_locations}
+      ${weather_temperature}
+      weather_forecasts = []
+      for location in ${weather_locations:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=location, weather_temperature=${weather_temperature:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_date_times} ${weather_location} ${weather_temperature}
+    code: |
+      ${weather_date_times}
+      ${weather_location}
+      ${weather_temperature}
+      weather_forecasts = []
+      for date_time in ${weather_date_times:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=${weather_location:var}, weather_temperature=${weather_temperature:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_date_time} ${weather_temperature} ${weather_location}
+    code: |
+      ${weather_date_time}
+      ${weather_temperature}
+      ${weather_location}
+      weather_forecasts = Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=${weather_location:var}, weather_temperature=${weather_temperature:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_date_time} ${weather_temperature} ${weather_locations}
+    code: |
+      ${weather_date_time}
+      ${weather_temperature}
+      ${weather_locations}
+      weather_forecasts = []
+      for location in ${weather_locations:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=${weather_date_time:var}, location=location, weather_temperature=${weather_temperature:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_date_times} ${weather_temperature} ${weather_location}
+    code: |
+      ${weather_date_times}
+      ${weather_temperature}
+      ${weather_location}
+      weather_forecasts = []
+      for date_time in ${weather_date_times:var}:
+        weather_forecasts += Weather.find_weather_forecasts(date_time=date_time, location=${weather_location:var}, weather_temperature=${weather_temperature:var})
+      ${weather_query_simple:var} = bool(weather_forecasts)
+    var: test_weather_forecasts
+    type: query
+
+weather_query_command:
+  - text: ${weather_command_forecasts} and if it is
+    code: |
+      ${weather_command_forecasts}
+      ${weather_query_command:var} = bool(${weather_command_forecasts:var})
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_command_forecasts} and if ${weather_attribute}
+    code: |
+      ${weather_command_forecasts}
+      ${weather_attribute}
+      ${weather_command_forecasts:var} = utils.filter(${weather_command_forecasts:var}, weather_attribute=${weather_attribute:var})
+      ${weather_query_command:var} = bool(${weather_command_forecasts:var})
+    var: test_weather_forecasts
+    type: query
+  - text: ${weather_command_forecasts} and if ${weather_temperature}
+    code: |
+      ${weather_command_forecasts}
+      ${weather_temperature}
+      ${weather_command_forecasts:var} = utils.filter(${weather_command_forecasts:var}, weather_temperature=${weather_temperature:var})
+      ${weather_query_command:var} = bool(${weather_command_forecasts:var})
+    var: test_weather_forecasts
+    type: query

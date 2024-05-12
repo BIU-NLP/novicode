@@ -1,0 +1,133 @@
+message_content_type_verb:
+  - text: ${message_content_type_verb_item}
+    code: ${message_content_type_verb:var} = MessageMessageContentType.resolve_from_text("${message_content_type_verb_item}")
+    var: message_content_type
+
+message_content_type_verb_item:
+  - text
+  - email
+  - message
+  - shoot
+
+messages_possession_verb:
+  - have
+  - got
+  - recieved
+
+sender:
+  - text: ${contact}
+    code: ${contact}
+    var: sender
+  - text: ${faker_brand}
+    code: |
+      ${sender:var} = Contact.resolve_from_text("${faker_brand}")
+    var: sender
+
+senders:
+  - text: ${contacts}
+    code: ${contacts}
+    var: senders
+  - text: ${faker_brand.1} ${cc} ${faker_brand.2}
+    code: |
+      ${senders:var} = Contact.resolve_many_from_text("${faker_brand.1} ${cc} ${faker_brand.2}")
+    var: senders
+
+recipient:
+  - text: ${contact}
+    code: ${contact}
+    var: recipient
+
+recipients:
+  - text: ${contacts}
+    code: ${contacts}
+    var: recipients
+
+message_date_time:
+  - text: ${date_time}
+    code: ${date_time}
+    var: ${date_time:var}
+
+message_date_times:
+  - text: ${date_times}
+    code: ${date_times}
+    var: ${date_times:var}
+
+message_content_type:
+  - text: ${message_content_type_item}
+    code: ${message_content_type:var} = MessageContentType.resolve_from_text("${message_content_type_item}")
+    var: message_content_type
+
+message_content_type_item:
+  - an email
+  - a message
+  - a text
+
+message_content:
+  - text: ${containing|saying|letting her know|} ${message_content_item}
+    code: |
+      ${message_content:var} = Content.resolve_from_text("${message_content_item}")
+    var: content
+    coreference_value:
+      - value: that message
+
+message_contents:
+  - text: ${message_content_item.1} and ${message_content_item.2}
+    code: |
+      ${message_contents:var} = Content.resolve_many_from_text("${message_content_item.1} and ${message_content_item.2}")
+    var: contents
+    coreference_value:
+      - value: that message
+
+message_content_item:
+  - text: to meet us inside the restaurant
+    code: meet us inside the restaurant
+  - text: to cancel my ${product_name_item} order
+    code: cancel my ${product_name_item} order
+  - text: "to see if ${recipient[{'syn': {'form': 'subj'}}]} is there"
+    code: "see if ${recipient[{'syn': {'form': 'subj'}}]:text} is there"
+  - text: to tell ${name} that I'll be out of the office for the next two hours
+    code: I'll be out of the office for the next two hours
+  - text: that I will be on time
+    code: I will be on time
+  - text: that I will be late
+    code: I will be late
+  - text: that I will be there in 10 minutes
+    code: I will be there in 10 minutes
+  - text: that I will be in in 10 minutes
+    code: I will be in in 10 minutes
+  - text: "and let ${recipient[{'syn': {'form': 'subj'}}]} know that I will be there in 10 minutes"
+    code: "I will be there in 10 minutes"
+  - text: where I am staying ${at|}
+    code: where I am staying ${at|}
+  - text: when I will ${arrive|be there}
+    code: when I will ${arrive|be there}
+  - text: "and ask ${recipient[{'syn': {'form': 'subj'}}]} to meet for coffee"
+    code: "ask ${recipient[{'syn': {'form': 'subj'}}]:text} to meet for coffee"
+  - text: asking if ${product_name_item} is cheaper on ${faker_company}
+    code: asking if ${product_name_item} is cheaper on ${faker_company}
+  - text: asking if it's going to be ${weather_attribute_gerund_term} on ${day_of_week}
+    code: asking if it's going to be ${weather_attribute_gerund_term} on ${day_of_week}
+
+message_content_attachment:
+  - text: ${message_content_attachment_item}
+    code: |
+      ${message_content_attachment:var} = Content.resolve_from_text("${message_content_attachment_item}")
+    var: content
+    coreference_value:
+      - value: that message
+
+message_content_attachment_item:
+  - an ${faker_brand} gift cart
+  - a PDF file
+  - an image
+  - a video
+  - a link
+  - a reset password link
+  - ${personal_event} invitation
+  - ${work_event} invite
+  - ${concert} tickets
+  - ${show} tickets
+  - ${game} tickets
+  - flight itinerary
+  - hotel reservation
+  - email tracking confirmation

@@ -1,0 +1,54 @@
+rules:
+  # [ root [ Module [ * ] ] ] -> [ root_ [ * ] ]
+  - match:
+      label: "Module"
+      parent:
+        label: "root"
+    transformations:
+      - compaction:
+          node:
+            current: true
+          node_args:
+            label_postfix: "_"
+    enabled: true
+    id: "[ root [ Module [ * ] ] ] -> [ root_ [ * ] ]"
+
+  #
+  - match:  
+      label: "Call"
+      children:
+        - label: "func"
+    transformations:
+      - compaction:
+          node:
+            current: true
+          node_args:
+            label_postfix: "_"
+    enabled: true
+    id: "[ root [ Module [ * ] ] ] -> [ root_ [ * ] ]"
+
+  # [ X [ name [ * ] ] ] -> [ X_ [ * ] ]
+  - match:
+      label: "Name"
+    transformations:
+      - compaction:
+          node:
+            current: true
+          node_args:
+            label_postfix: "_"
+    enabled: true
+    id: "[ X [ name [ * ] ] ] -> [ X_ [ * ] ]"
+
+  # [ X [ name [ * ] ] ] -> [ X_ [ * ] ]
+  - match:
+      label: "arg"
+      parent:
+        label: "Keyword"
+    transformations:
+      - compaction:
+          node:
+            current: true
+          node_args:
+            label_postfix: "_"
+    enabled: true
+    id: "[ X [ name [ * ] ] ] -> [ X_ [ * ] ]"

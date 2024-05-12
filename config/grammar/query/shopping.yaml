@@ -1,0 +1,251 @@
+products_query:
+  - text: ${products_query_simple}
+    code: ${products_query_simple}
+    var: ${products_query_simple:var}
+    type: query
+  - text: ${products_query_command}
+    code: ${products_query_command}
+    var: ${products_query_command:var}
+    type: query
+    weight: 0.25
+
+products_query_simple:
+  - text: ${product_name} are ${product_attribute_suffix}
+    code: |
+      ${product_name}
+      ${product_attribute_suffix}
+      products = Shopping.find_products(product_name=${product_name:var}, product_attribute=${product_attribute_suffix:var})
+      ${products_query_simple:var} = bool(products)
+    var: test_products
+    type: query
+  - text: ${product_name} are ${product_attribute_suffix} ${store}
+    code: |
+      ${product_name}
+      ${product_attribute_suffix}
+      ${store}
+      products = Shopping.find_products(product_name=${product_name:var}, product_attribute=${product_attribute_suffix:var}, location=${store:var})
+      ${products_query_simple:var} = bool(products)
+    var: test_products
+    type: query
+  - text: ${product_name} are ${product_attribute_suffix} ${stores}
+    code: |
+      ${product_name}
+      ${product_attribute_suffix}
+      ${stores}
+      products = []
+      for location in ${stores:var}:
+        products += Shopping.find_products(product_name=${product_name:var}, product_attribute=${product_attribute_suffix:var}, location=location)
+      ${products_query_simple:var} = bool(products)
+    var: test_products
+    type: query
+  - text: ${product_name.1} are ${product_attribute_suffix} ${cc} ${product_name.2} are ${product_attribute_suffix}
+    code: |
+      ${product_name.1}
+      ${product_name.2}
+      ${product_attribute_suffix}
+      products = []
+      for product_name in [${product_name.1:var}, ${product_name.2:var}]:
+        products = products ${cc} Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_suffix:var})
+      ${products_query_simple:var} = bool(products)
+    var: test_products
+    type: query
+  - text: ${product_name.1} are ${product_attribute_suffix} ${cc} ${product_name.2} are ${product_attribute_suffix} ${store}
+    code: |
+      ${product_name.1}
+      ${product_name.2}
+      ${product_attribute_suffix}
+      ${store}
+      products = []
+      for product_name in [${product_name.1:var}, ${product_name.2:var}]:
+        products = products ${cc} Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_suffix:var}, location=${store:var})
+      ${products_query_simple:var} = bool(products)
+    var: test_products
+    type: query
+  - text: ${product_name.1} are ${product_attribute_suffix} ${cc} ${product_name.2} are ${product_attribute_suffix} ${stores}
+    code: |
+      ${product_name.1}
+      ${product_name.2}
+      ${product_attribute_suffix}
+      ${stores}
+      products = []
+      for product_name in [${product_name.1:var}, ${product_name.2:var}]:
+        for store in ${stores:var}:
+          products = products ${cc} Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_suffix:var}, location=store)
+      ${products_query_simple:var} = bool(products)
+    var: test_products
+    type: query
+  - text: ${product_names} are ${product_attribute_suffix}
+    code: |
+      ${product_names}
+      ${product_attribute_suffix}
+      products = []
+      for product_name in ${product_names:var}:
+        products += Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_suffix:var})
+      ${products_query_simple:var} = bool(products)
+    var: test_products
+    type: query
+  - text: ${product_names} are ${product_attribute_suffix} ${store}
+    code: |
+      ${product_names}
+      ${product_attribute_suffix}
+      ${store}
+      products = []
+      for product_name in ${product_names:var}:
+        products += Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_suffix:var}, location=${store:var})
+      ${products_query_simple:var} = bool(products)
+    var: test_products
+    type: query
+  - text: ${product_names} are ${product_attribute_suffix} ${stores}
+    code: |
+      ${product_names}
+      ${product_attribute_suffix}
+      ${stores}
+      products = []
+      for product_name in ${product_names:var}:
+        for location in ${stores:var}:
+          products += Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_suffix:var}, location=location)
+      ${products_query_simple:var} = bool(products)
+    var: test_products
+    type: query
+  - text: there is ${product_attribute_prefix} on ${product_name}
+    code: |
+      ${product_name}
+      ${product_attribute_prefix}
+      products = Shopping.find_products(product_name=${product_name:var}, product_attribute=${product_attribute_prefix:var})
+      ${products_query_simple:var} = bool(products)
+    var: test_products
+    type: query
+  - text: there is ${product_attribute_prefix} on ${product_names}
+    code: |
+      ${product_attribute_prefix}
+      ${product_names}
+      products = []
+      for product_name in ${product_names:var}:
+        products += Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_prefix:var})
+      ${products_query_simple:var} = bool(products)
+    var: test_products
+    type: query
+  - text: there is ${product_attribute_prefix} on ${product_name} ${store}
+    code: |
+      ${product_name}
+      ${product_attribute_prefix}
+      ${store}
+      products = Shopping.find_products(product_name=${product_name:var}, product_attribute=${product_attribute_prefix:var}, location=${store:var})
+      ${products_query_simple:var} = bool(products)
+    var: test_products
+    type: query
+  - text: there is ${product_attribute_prefix} on ${product_name.1} ${cc} ${product_attribute_prefix} on ${product_name.2}
+    code: |
+      ${product_attribute_prefix}
+      ${product_name.1}
+      ${product_name.2}
+      products = []
+      for product_name in [${product_name.1:var}, ${product_name.2:var}]:
+        products = products ${cc} Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_prefix:var})
+      ${products_query_simple:var} = bool(products)
+    var: test_products
+    type: query
+  - text: there is ${product_attribute_prefix} on ${product_name.1} ${cc} ${product_attribute_prefix} on ${product_name.2} ${store}
+    code: |
+      ${product_attribute_prefix}
+      ${product_name.1}
+      ${product_name.2}
+      ${store}
+      products = []
+      for product_name in [${product_name.1:var}, ${product_name.2:var}]:
+        products = products ${cc} Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_prefix:var}, location=${store:var})
+      ${products_query_simple:var} = bool(products)
+    var: test_products
+    type: query
+  - text: there is ${product_attribute_prefix} on ${product_name.1} ${cc} ${product_attribute_prefix} on ${product_name.2} ${stores}
+    code: |
+      ${product_attribute_prefix}
+      ${product_name.1}
+      ${product_name.2}
+      ${stores}
+      products = []
+      for product_name in [${product_name.1:var}, ${product_name.2:var}]:
+        for location in ${stores:var}:
+          products = products ${cc} Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_prefix:var}, location=location)
+      ${products_query_simple:var} = bool(products)
+    var: test_products
+    type: query
+  - text: there is ${product_attribute_prefix} on ${product_names} ${stores}
+    code: |
+      ${product_attribute_prefix}
+      ${product_names}
+      ${stores}
+      products = []
+      for product_name in ${product_names:var}:
+        for location in ${stores:var}:
+          products += Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_prefix:var}, location=location)
+      ${products_query_simple:var} = bool(products)
+    var: test_products
+    type: query
+  - text: ${store} has ${product_name} ${product_attribute_suffix}
+    code: |
+      ${store}
+      ${product_name}
+      ${product_attribute_suffix}
+      products = Shopping.find_products(product_name=${product_name:var}, product_attribute=${product_attribute_suffix:var}, location=${store:var})
+      ${products_query_simple:var} = bool(products)
+    var: test_products
+    type: query
+  - text: ${stores} have ${product_name} ${product_attribute_suffix}
+    code: |
+      ${stores}
+      ${product_name}
+      ${product_attribute_suffix}
+      products = []
+      for location in ${stores:var}:
+        products += Shopping.find_products(product_name=${product_name:var}, product_attribute=${product_attribute_suffix:var}, location=location)
+      ${products_query_simple:var} = bool(products)
+    var: test_products
+    type: query
+  - text: ${store} has ${product_names} ${product_attribute_suffix}
+    code: |
+      ${store}
+      ${product_names}
+      ${product_attribute_suffix}
+      products = []
+      for product_name in ${product_names:var}:
+        products += Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_suffix:var}, location=${store:var})
+      ${products_query_simple:var} = bool(products)
+    var: test_products
+    type: query
+  - text: ${stores} have ${product_names} ${product_attribute_suffix}
+    code: |
+      ${stores}
+      ${product_names}
+      ${product_attribute_suffix}
+      products = []
+      for location in ${stores:var}:
+        for product_name in ${product_names:var}:
+          products += Shopping.find_products(product_name=product_name, product_attribute=${product_attribute_suffix:var}, location=location)
+      ${products_query_simple:var} = bool(products)
+    var: test_products
+    type: query
+
+products_query_command:
+  - text: ${products_command_find} and if there are
+    code: |
+      ${products_command_find}
+      ${products_query_command:var} = bool(${products_command_find:var})
+    var: test_products
+    type: query
+  - text: ${products_command_find} and if they are ${product_attribute_suffix}
+    code: |
+      ${products_command_find}
+      ${product_attribute_suffix}
+      ${products_command_find:var} = utils.filter(${products_command_find:var}, product_attribute=${product_attribute_suffix:var})
+      ${products_query_command:var} = bool(${products_command_find:var})
+    var: test_products
+    type: query
+  - text: ${products_command_find} and if they are ${store}
+    code: |
+      ${products_command_find}
+      ${store}
+      ${products_command_find:var} = utils.filter(${products_command_find:var}, location=${store:var})
+      ${products_query_command:var} = bool(${products_command_find:var})
+    var: test_products
+    type: query

@@ -1,0 +1,169 @@
+class Navigation(Action):
+    """
+    The Navigation class contains all the methods of a virtual assistant agent in the navigation domain.
+    """
+
+    @classmethod
+    def find_directions(
+        cls,
+        destination: Optional[Location],
+        origin: Optional[Location] = None,
+        departure_date_time: Optional[DateTime] = None,
+        avoid_nav_road_condition: Optional[NavigationRoadCondition] = None,
+        nav_travel_method: Optional[NavigationTravelMethod] = None,
+    ) -> List[NavigationDirectionEntity]:
+        """
+        This class method find directions based on the given parameters.
+
+        Parameters
+        ----------
+        destination: Location, optional
+            The destination of the navigation
+        origin: Location, optional
+            The origin of the navigation
+        departure_date_time: DateTime, optional
+            The date and time the navigation will start
+        avoid_nav_road_condition: NavigationRoadCondition, optional
+            The road conditions to avoid
+        nav_travel_method: NavigationTravelMethod, optional
+            The travel method to use
+
+        Returns
+        -------
+        List[NavigationDirectionEntity]
+            A list of directions that were found
+        """
+        pass
+
+    @classmethod
+    def find_distance(
+        cls,
+        origin: Optional[Location] = None,
+        destination: Optional[Location] = None,
+        departure_date_time: Optional[DateTime] = None,
+        avoid_nav_road_condition: Optional[NavigationRoadCondition] = None,
+        nav_travel_method: Optional[NavigationTravelMethod] = None,
+    ) -> List[NavigationDistanceEntity]:
+        """
+        This class method find the distance between two locations.
+
+        Parameters
+        ----------
+        origin: Location, optional
+            The origin of the navigation
+        destination: Location, optional
+            The destination of the navigation
+        departure_date_time: DateTime, optional
+            The date and time the navigation will start
+        avoid_nav_road_condition: NavigationRoadCondition, optional
+            The road conditions to avoid
+        nav_travel_method: NavigationTravelMethod, optional
+            The travel method to use
+
+        Returns
+        -------
+        List[NavigationDistanceEntity]
+            A list of distances that were found
+        """
+        pass
+
+    @classmethod
+    def find_duration(
+        cls,
+        origin: Optional[Location],
+        destination: Optional[Location],
+        departure_date_time: Optional[DateTime],
+        avoid_nav_road_condition: Optional[NavigationRoadCondition],
+        nav_travel_method: Optional[NavigationTravelMethod],
+    ) -> List[NavigationDurationEntity]:
+        """
+        This class method find the the duration of a travel between two locations.
+
+        Parameters
+        ----------
+        origin: Location, optional
+            The origin of the navigation
+        destination: Location, optional
+            The destination of the navigation
+        departure_date_time: DateTime, optional
+            The date and time the navigation will start
+        avoid_nav_road_condition: NavigationRoadCondition, optional
+            The road conditions to avoid
+        nav_travel_method: NavigationTravelMethod, optional
+            The travel method to use
+
+        Returns
+        -------
+        List[NavigationDurationEntity]
+            A list of durations that were found
+        """
+        pass
+
+    @classmethod
+    def find_estimated_arrival(
+        cls,
+        origin: Optional[Location] = None,
+        destination: Optional[Location] = None,
+        arrival_date_time: Optional[DateTime] = None,
+        avoid_nav_road_condition: Optional[NavigationRoadCondition] = None,
+        nav_travel_method: Optional[NavigationTravelMethod] = None,
+    ) -> List[NavigationEstimatedArrivalEntity]:
+        """
+        This class method gets an estimated arrival information between two locations.
+
+        Parameters
+        ----------
+        origin: Location, optional
+            The origin of the navigation
+        destination: Location, optional
+            The destination of the navigation
+        departure_date_time: DateTime, optional
+            The date and time the navigation will start
+        avoid_nav_road_condition: NavigationRoadCondition, optional
+            The road conditions to avoid
+        nav_travel_method: NavigationTravelMethod, optional
+            The travel method to use
+
+        Returns
+        -------
+        List[NavigationEstimatedArrivalEntity]
+            A list of estimated arrival information objects that were found
+        """
+        pass
+
+    @classmethod
+    def find_traffic_info(
+        cls,
+        location: Optional[Location] = None,
+        origin: Optional[Location] = None,
+        destination: Optional[Location] = None,
+        date_time: Optional[DateTime] = None,
+        departure_date_time: Optional[DateTime] = None,
+        nav_road_condition: Optional[NavigationRoadCondition] = None,
+        nav_travel_method: Optional[NavigationTravelMethod] = None,
+    ) -> List[NavigationTrafficInfoEntity]:
+        """
+        This class method returns the traffic information on a specific route, location (like road) or a planned
+        travel between two locations.
+
+        Parameters
+        ----------
+        location: Location, optional
+            The location along the route to get the traffic information for
+        origin: Location, optional
+            The origin of the navigation
+        destination: Location, optional
+            The destination of the navigation
+        departure_date_time: DateTime, optional
+            The date and time the navigation will start
+        nav_road_condition: NavigationRoadCondition, optional
+            The road conditions to look for
+        nav_travel_method: NavigationTravelMethod, optional
+            The travel method to use
+
+        Returns
+        -------
+        List[NavigationTrafficInfoEntity]
+            A list of traffic information objects that were found
+        """
+        pass

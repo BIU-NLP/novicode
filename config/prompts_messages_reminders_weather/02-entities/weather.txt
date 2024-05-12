@@ -1,0 +1,18 @@
+"""
+entities.weather
+"""
+
+
+class WeatherAttribute(Entity, Resolvable):
+
+    pass
+
+
+class WeatherTemperature(Entity, Resolvable):
+
+    pass
+
+
+class WeatherForecastEntity(Entity):
+
+    pass
