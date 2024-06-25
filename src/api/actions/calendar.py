@@ -24,13 +24,9 @@ class Calendar(Action):
     """
 
     @classmethod
-    def delete_events(
+    def delete_event(
         cls,
-        date_time: Optional[DateTime] = None,
-        location: Optional[Location] = None,
-        event_name: Optional[EventName] = None,
-        event_calendar: Optional[EventCalendar] = None,
-        event_category: Optional[EventType] = None,
+        event: Optional[EventEntity] = None,
     ) -> List[EventEntity]:
         """
         This class method deletes an event in the calendar.
@@ -39,14 +35,8 @@ class Calendar(Action):
         ----------
         date_time : DateTime, optional
             The date and time of the event
-        location : Location, optional
-            The location of the event
-        event_name : EventName, optional
-            The name of the event
-        event_calendar : EventCalendar, optional
-            The calendar to search for the event
-        event_category : EventType, optional
-            The category of the event
+        event : EventEntity, optional
+            The event to delete
 
         Returns
         -------
@@ -54,17 +44,9 @@ class Calendar(Action):
             a list of EventEntity objects that were deleted
         """
         data_model = DataModel()
-        events = cls.find_events(
-            date_time=date_time,
-            location=location,
-            event_name=event_name,
-            event_calendar=event_calendar,
-            event_category=event_category,
-        )
-        for event in events:
-            data_model.delete(event)
+        data_model.delete(event)
 
-        return events
+        return event
 
     @classmethod
     def find_events(
@@ -174,10 +156,7 @@ class Calendar(Action):
     @classmethod
     def purchase_tickets(
         cls,
-        date_time: Optional[DateTime] = None,
-        location: Optional[Location] = None,
-        event_name: Optional[EventName] = None,
-        event_category: Optional[EventType] = None,
+        event: Optional[EventEntity] = None,
         amount: Optional[Amount] = None,
     ) -> EventTicketEntity:
         """
@@ -185,14 +164,8 @@ class Calendar(Action):
 
         Parameters
         ----------
-        date_time : DateTime, optional
-            The date and time of the event
-        location : Location, optional
-            The location of the event
-        event_name : EventName, optional
-            The name of the event
-        event_category : EventType, optional
-            The category of the event
+        event_entity : EventEntity, optional
+            The event to purchase tickets for
         amount : Amount, optional
             The amount of tickets requested for the event
 
@@ -202,10 +175,7 @@ class Calendar(Action):
             A list of EventTicketEntity objects that were purchased
         """
         event_ticket = EventTicketEntity(
-            date_time=date_time,
-            location=location,
-            event_name=event_name,
-            event_category=event_category,
+            event=event,
             amount=amount,
         )
         data_model = DataModel()

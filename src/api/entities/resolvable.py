@@ -1,5 +1,5 @@
 from __future__ import annotations
-from abc import abstractclassmethod, abstractmethod
+from abc import abstractmethod
 from typing import TypeVar, Generic, Optional, Union, List
 import numpy as np
 import os
@@ -10,6 +10,7 @@ from entities.entity import Entity
 from exceptions.exceptions import exception_handler
 from providers.data_model import DataModel
 from utils.lang_utils import compute_bleu_score
+from utils.utils import get_entity_value
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -156,13 +157,18 @@ class Resolvable(Generic[T]):
             if not isinstance(entity, list)
             else [T(value=[entity]) for entity in entity]
         )
+        # items = (
+        #     [get_entity_value(entity, T) for entity in entities]
+        #     if not isinstance(entity, list)
+        #     else [get_entity_value(entity, T) for entity in entity]
+        # )
 
-        if text:
-            items = [
-                x
-                for x in data
-                if hasattr(x, "text") and compute_bleu_score(text, x.text) > 0.333
-            ]
+        # if text:
+        #     items = [
+        #         x
+        #         for x in items
+        #         if hasattr(x.value, "text") and compute_bleu_score(text, x.value.text) > 0.333
+        #     ]
 
         if len(items) == 0:
             if os.environ.get("TEST_RESOLVE_FAIL", False):
@@ -172,5 +178,3 @@ class Resolvable(Generic[T]):
         else:
             result = items[0]
             return result
-
-

@@ -15,15 +15,6 @@ class Content(Entity, Resolvable):
     It inherits from the Entity class and the Resolvable class.
     """
 
-    # @classmethod
-    # def resolve_from_entity(
-    #     cls,
-    #     entity: Union[Entity, List[Entity]],
-    #     text: Optional[str] = None,
-    #     recovered_entity: Optional[Union[Entity, List[Entity]]] = None,
-    # ) -> Content:
-    #     content = Content(value=entity)
-    #     return content
     pass
 
 

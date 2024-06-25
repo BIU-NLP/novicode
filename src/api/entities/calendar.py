@@ -29,7 +29,7 @@ class EventCalendar(Entity, Resolvable):
 
 class EventType(Entity, Resolvable):
     """
-    The EventType class is used to represent an event type. It should not be used and is kept for backward compatibility.
+    The EventType class is used to represent an event type. It is kept for future use.
     """
 
     pass
