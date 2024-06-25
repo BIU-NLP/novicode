@@ -69,7 +69,7 @@ exec(program_code)
 
 If you use NoviCode in a scientific publication, we would appreciate references to the following paper:
 
-**NoviCode: NoviCode: Generating Programs from Natural Language Utterances by Novices. Asaf Achi Mordechai, Yoav Goldberg, Reut Tsarfaty. [arXiv:1708.07747](http://arxiv.org/abs/1708.07747)**
+**NoviCode: NoviCode: Generating Programs from Natural Language Utterances by Novices. Asaf Achi Mordechai, Yoav Goldberg, Reut Tsarfaty. [arXiv:](http://arxiv.org/)**
 
 Biblatex entry:
 ```latex
