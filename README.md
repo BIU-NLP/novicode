@@ -73,10 +73,13 @@ If you use NoviCode in a scientific publication, we would appreciate references 
 
 Biblatex entry:
 ```latex
-@online{asafam/novicode,
-  author       = {Asaf Achi Mordechai and Yoav Goldberg and Reut Tsarfaty},
-  title        = {NoviCode: Generating Programs from Natural Language Utterances by Novices},
-  date         = {2024-05-28},
-  year         = {2024},
+@misc{mordechai2024novicodegeneratingprogramsnatural,
+      title={NoviCode: Generating Programs from Natural Language Utterances by Novices}, 
+      author={Asaf Achi Mordechai and Yoav Goldberg and Reut Tsarfaty},
+      year={2024},
+      eprint={2407.10626},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2407.10626}, 
 }
 ```
